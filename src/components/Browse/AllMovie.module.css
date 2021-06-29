@@ -1,0 +1,5 @@
+.browse {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left:30px;
+}
