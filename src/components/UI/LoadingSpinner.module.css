@@ -1,0 +1,33 @@
+.section {
+  display: inline-block;
+  margin: 0 auto;
+}
+.section div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 6rem;
+  width: 6rem;
+  border: 2px solid red;
+  border-color: red transparent transparent transparent;
+  border-radius: 50%;
+  animation: spinner 1.1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+:nth-child(1) {
+  animation-delay: -0.45s;
+}
+:nth-child(2) {
+  animation-delay: -0.3s;
+}
+:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

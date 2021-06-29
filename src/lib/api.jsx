@@ -1,11 +1,13 @@
 import { BASE_URL, ENDPOINTS } from "../data/endpoints";
+import { GENRE_ID } from "../data/genre";
 
-export async function fetchMovies(genre){
-    const endpoint =  ENDPOINTS.section.find((genre) => genre.title === genre);
+export async function fetchAllMovies(genre){
+    const endpoint =  ENDPOINTS.sections.find((gen) => gen.title === genre);
     const url = BASE_URL + endpoint.endpoint;
 
     const response = await fetch(url);
     const data = await response.json();
+    //console.log(data);
 
     if (!response.ok){
         throw new Error(data.message || "Movies not found!");
@@ -38,4 +40,14 @@ export async function fetchOneMovieCredits(id){
     }
 
     return creditsData;
+}
+
+export function getGenres(genre_ids){
+    const genres = [];
+
+    for (const id of genre_ids){
+        const { name } = GENRE_ID.find((genre) => id === genre.id);
+        genres.push(name);
+    }
+    return genres;
 }
