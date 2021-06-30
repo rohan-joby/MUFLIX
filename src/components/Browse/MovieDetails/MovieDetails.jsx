@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
@@ -10,7 +10,9 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
+  const history = useHistory();
   const params = useParams();
+
   const {
     sendRequest: getDetails,
     status: detailsStatus,
@@ -57,10 +59,11 @@ const MovieDetails = () => {
       return index === 3 ? actor.name : `${actor.name},  `;
     });
 
-    const director = crew.find((member) => member.job === "Director");
-    const writer = crew.find((member) => member.job === "Screenplay");
+    // const director = crew.find((member) => member.job === "Director");
+    // const writer = crew.find((member) => member.job === "Screenplay");
     
     const addToMyListHandler = () => {
+ 
       const details = {
         id: id,
         title: title,
@@ -70,9 +73,15 @@ const MovieDetails = () => {
       };
       addToMyList(details);
     };
+
+    const closePageHandler = () => {
+      history.push("/");
+    }
+
     return (
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
+        <button className={`${classes[`close-button`]}`} onClick={closePageHandler}>❌</button>
         <button className={classes.wishlist} onClick={addToMyListHandler}>➕ My List</button>
         <div className={classes.details}>
           <div className={classes.about}>

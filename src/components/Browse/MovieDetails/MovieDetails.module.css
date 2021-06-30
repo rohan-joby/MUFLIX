@@ -10,6 +10,17 @@
   display: block;
   object-fit: cover;
 }
+
+.close-button{
+    background: rgba(0, 0, 0, 0.575);
+    border-radius: 50%;
+    border:1pxx solid white;
+    padding: 7px 4px;
+    position:absolute;
+    top:5%;
+    right:21%;
+    cursor: pointer;
+}
 .wishlist{
     font-size:1.3rem;
     font-weight: 700;
