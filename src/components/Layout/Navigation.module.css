@@ -1,0 +1,28 @@
+.nav{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:white;
+    background: transparent;
+    position:fixed;
+    height:3rem;
+    width:100vw;
+    display: flex;
+    justify-content: space-between;
+    z-index:10;
+}
+a{
+    text-decoration: none;
+}
+
+a h2{
+    font-weight:400;
+    letter-spacing:1.2px;
+    margin:0 3rem 0 1rem;
+    cursor:pointer;
+}
+.logo{
+    color:maroon;
+}
+.active{
+    font-weight:800;
+    background: rgba(56, 56, 56, 0.075);
+}
