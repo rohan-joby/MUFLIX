@@ -3,6 +3,7 @@
   height: 14.5rem;
   width: 17.5rem;
   margin-right: 10px;
+  transition: transform 750ms ease;
 }
 img.poster {
   width: 100%;
@@ -12,7 +13,7 @@ img.poster {
 .details {
   color: rgb(255, 255, 255);
   display: none;
-  letter-spacing:1px;
+  letter-spacing:.9px;
 }
 .title {
   margin: 0;

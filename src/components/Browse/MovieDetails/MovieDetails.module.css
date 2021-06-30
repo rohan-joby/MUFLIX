@@ -1,0 +1,71 @@
+.container {
+  font-family: "Roboto", sans-serif;
+  width: 60%;
+  color: white;
+  background: #141414;
+  margin: 1.5rem auto;
+}
+.poster {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+.wishlist{
+    font-size:1.3rem;
+    font-weight: 700;
+    text-align:center;
+    letter-spacing: 1.2px;
+    background: rgb(255, 249, 238);
+    position:relative;
+    display: inline-block;
+    width:92%;
+    border:none;
+    padding:8px 0;
+    margin:5px 4%;
+    transition: transform 500ms ease;
+}
+.wishlist:focus,
+.wishlist:hover{
+    transform: scale(1.05);
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 2rem;
+}
+.about > *{
+    display: inline-block;
+    margin-right:10px;
+}
+.title{
+    font-size: 1.8rem;
+    letter-spacing: 1.3px;
+    margin-bottom:5px;
+}
+.rating{
+    color:rgb(236, 220, 220);
+    background-color:#027716;
+    padding:3px 8px 1px 8px;
+    border-radius: 5px;
+
+}
+.summary{
+    font-size:1.2rem;
+    font-weight:400;
+    max-width:35em;
+    line-height: 1.2;
+    margin-top:0;
+}
+.crew{
+    margin-top:1.2em;
+}
+.crew>h4{
+    font-size:1rem ;
+    font-weight:400;
+    margin-left:1rem;
+}
+.crew span{
+    color:grey;
+}

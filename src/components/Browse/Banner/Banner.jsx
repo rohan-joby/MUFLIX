@@ -26,9 +26,13 @@ const Banner = () => {
 
     return (
       <div className={classes.banner}>
-          <img src={imagePath} alt={title} />
+        <img src={imagePath} alt={title} />
         <h1 className={classes.title}>{title}</h1>
         <p className={classes.summary}>{overview}</p>
+        <div className={classes.actions}>
+          <button type="button" className={`${classes.btn} ${classes["btn-primary"]}`}>➕  WishList</button>
+          <button typ="button" className={`${classes.btn} ${classes["btn-secondary"]}`}>ℹ   More info</button>
+        </div>
       </div>
     );
   }
@@ -37,3 +41,4 @@ const Banner = () => {
 };
 
 export default Banner;
+// {classes["btn btn-primary"]}  {classes["btn btn-secondary"]}
