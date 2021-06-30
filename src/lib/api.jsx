@@ -106,16 +106,29 @@ export async function getMyList() {
   const loadedMovies = [];
   for (const key in data) {
     const genreList = data[key].genre;
-    const genres = genreList.map(genre => genre.id);
+    const genres = genreList.map((genre) => genre.id);
     console.log(genres);
 
     loadedMovies.push({
       id: data[key].id,
       title: data[key].title,
       backdrop_path: data[key].backdrop,
-      genre_ids:genres,
+      genre_ids: genres,
       vote_average: data[key].rating,
     });
   }
-  return loadedMovies;
+ const seen = new Set();
+ const uniqueMovies = loadedMovies.filter(el => {
+  const duplicate = seen.has(el.id);
+  seen.add(el.id);
+  return !duplicate;
+});
+
+  console.log(uniqueMovies);
+  return uniqueMovies;
 }
+
+// const uniqueMovies = Array.from(new Set(loadedMovies.map(a => a.id)))
+//   .map(id => {
+//     return loadedMovies.find(a => a.id === id)
+//   })
