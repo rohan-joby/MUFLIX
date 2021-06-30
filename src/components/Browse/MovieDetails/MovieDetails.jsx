@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
+import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
 
@@ -58,11 +59,21 @@ const MovieDetails = () => {
 
     const director = crew.find((member) => member.job === "Director");
     const writer = crew.find((member) => member.job === "Screenplay");
-
+    
+    const addToMyListHandler = () => {
+      const details = {
+        id: id,
+        title: title,
+        backdrop: backdrop_path,
+        genre: genres,
+        rating: vote_average,
+      };
+      addToMyList(details);
+    };
     return (
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
-        <button className={classes.wishlist}>➕ WishList</button>
+        <button className={classes.wishlist} onClick={addToMyListHandler}>➕ My List</button>
         <div className={classes.details}>
           <div className={classes.about}>
             <h2 className={classes.title}>{title}</h2>

@@ -13,8 +13,6 @@ const Movie = (props) => {
     backdrop_path,
     genre_ids,
     title,
-    overview,
-    release_date,
     vote_average,
   } = props.data;
 

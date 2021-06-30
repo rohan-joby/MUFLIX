@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 30px;
+  margin: 2rem;
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-size:3rem;
+  text-align: center;
+  color: white;
+}

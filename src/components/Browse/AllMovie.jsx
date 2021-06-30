@@ -30,7 +30,7 @@ const AllMovie = () => {
     console.log("completed");
 
   }
-  //console.log(loadedMovies)
+
   return <div className={classes.browse}>{movieList}</div>;
 };
 export default AllMovie;

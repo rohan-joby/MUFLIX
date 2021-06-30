@@ -15,18 +15,18 @@
     font-weight: 700;
     text-align:center;
     letter-spacing: 1.2px;
-    background: rgb(255, 249, 238);
+    background: rgb(248, 244, 236);
     position:relative;
     display: inline-block;
     width:92%;
     border:none;
     padding:8px 0;
     margin:5px 4%;
-    transition: transform 200ms ease;
 }
 .wishlist:focus,
 .wishlist:hover{
-    transform: scale(1.02);
+    background:white;
+    box-shadow:0 15px 50px -12px rgba(77, 76, 76, 0.493)
 }
 
 .details {
