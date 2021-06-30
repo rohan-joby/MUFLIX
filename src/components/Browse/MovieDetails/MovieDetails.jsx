@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+import { useParams } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
@@ -8,6 +9,7 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
+  const params = useParams();
   const {
     sendRequest: getDetails,
     status: detailsStatus,
@@ -18,13 +20,13 @@ const MovieDetails = () => {
     status: creditsStatus,
     data: loadedCredits,
   } = useHttp(fetchOneMovieCredits);
-  
-  const id = 793723;
+
+  const id = params.movie;
 
   useEffect(() => {
     getDetails(id);
     getCredits(id);
-  }, [getDetails, getCredits]);
+  }, [getDetails, getCredits,id]);
 
   if (detailsStatus === "pending" || creditsStatus === "pending") {
     return <LoadingSpinner />;
@@ -60,7 +62,7 @@ const MovieDetails = () => {
     return (
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
-        <button className={classes.wishlist}>➕  WishList</button>
+        <button className={classes.wishlist}>➕ WishList</button>
         <div className={classes.details}>
           <div className={classes.about}>
             <h2 className={classes.title}>{title}</h2>

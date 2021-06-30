@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import{ useHistory } from "react-router-dom";
 
 import useHttp from "../../../hooks/use-http";
 import { fetchBanner } from "../../../lib/api";
@@ -8,6 +9,7 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./Banner.module.css";
 
 const Banner = () => {
+  const history = useHistory();
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
 
   useEffect(() => {
@@ -20,10 +22,13 @@ const Banner = () => {
     return <LoadingSpinner />;
   }
   if (status === "completed" && banner) {
-    const { backdrop_path, title, overview } = banner;
+    const { id, backdrop_path, title, overview } = banner;
     //console.log(id, backdrop_path, title, overview );
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
 
+    const clickHandler = () => {
+      history.push(`/${id}`)
+    }
     return (
       <div className={classes.banner}>
         <img src={imagePath} alt={title} />
@@ -31,7 +36,7 @@ const Banner = () => {
         <p className={classes.summary}>{overview}</p>
         <div className={classes.actions}>
           <button type="button" className={`${classes.btn} ${classes["btn-primary"]}`}>➕  WishList</button>
-          <button typ="button" className={`${classes.btn} ${classes["btn-secondary"]}`}>ℹ   More info</button>
+          <button typ="button" className={`${classes.btn} ${classes["btn-secondary"]}`} onClick={clickHandler}>ℹ   More info</button>
         </div>
       </div>
     );

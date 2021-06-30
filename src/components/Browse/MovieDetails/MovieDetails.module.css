@@ -22,11 +22,11 @@
     border:none;
     padding:8px 0;
     margin:5px 4%;
-    transition: transform 500ms ease;
+    transition: transform 200ms ease;
 }
 .wishlist:focus,
 .wishlist:hover{
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .details {
