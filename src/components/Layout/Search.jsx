@@ -22,7 +22,7 @@ const Search = () => {
   return (
     <form onSubmit={searchHandler} className={classes.search}>
       <label htmlFor="query"></label>
-      <input autocomplete="off" type="search" ref={inputRef} id="query" />
+      <input autoComplete="off" type="search" ref={inputRef} id="query" />
       <button className={classes.search__btn}>
         <BsSearch size={25} style={{ fill: "white" }} />
       </button>

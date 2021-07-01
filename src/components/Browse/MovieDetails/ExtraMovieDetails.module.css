@@ -1,0 +1,27 @@
+.container {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  letter-spacing: 1.1px;
+  width: 92%;
+  margin: 0 auto;
+}
+.container > * {
+  font-weight: 400;
+}
+.label__title {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 2rem;
+  margin-right:5px;
+}
+.container h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+.label {
+  color: grey;
+  font-size:1.1rem;
+}
+.container h3{
+  font-size:1.1rem;
+}

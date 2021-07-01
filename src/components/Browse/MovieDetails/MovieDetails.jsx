@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
-import { VscChromeClose } from "react-icons/vsc";
-import { FaPlus, FaChevronDown } from "react-icons/fa";
-
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
+
+import { FaPlus, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { VscChromeClose } from "react-icons/vsc";
+
 import useHttp from "../../../hooks/use-http";
 import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
-import Muflix from "../../../assets/muflix.PNG";
 
+import ExtraMovieDetails from "./ExtraMovieDetails";
+
+import Muflix from "../../../assets/muflix.PNG";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
@@ -17,7 +20,7 @@ const MovieDetails = () => {
   const location = useLocation();
   const params = useParams();
 
-  console.log(history);
+  const [loadMore, setLoadMore] = useState(false);
   const {
     sendRequest: getDetails,
     status: detailsStatus,
@@ -66,8 +69,7 @@ const MovieDetails = () => {
       return index === 3 ? actor.name : `${actor.name},  `;
     });
 
-    // const director = crew.find((member) => member.job === "Director");
-    // const writer = crew.find((member) => member.job === "Screenplay");
+
 
     const addToMyListHandler = () => {
       const details = {
@@ -78,6 +80,10 @@ const MovieDetails = () => {
         rating: vote_average,
       };
       addToMyList(details);
+    };
+
+    const loadMoreHandler = () => {
+      setLoadMore((prev) => !prev);
     };
 
     const closePageHandler = () => {
@@ -126,9 +132,18 @@ const MovieDetails = () => {
             </h4>
           </div>
         </div>
-        <div className={classes.load}>
-          <FaChevronDown size={30} />
-        </div>
+        <button
+          type="button"
+          className={classes.load}
+          onClick={loadMoreHandler}
+        >
+          {!loadMore ? (
+            <FaChevronDown size={30} style={{ fill: "white" }} />
+          ) : (
+            <FaChevronUp size={30} style={{ fill: "white" }} />
+          )}
+        </button>
+        {loadMore && <ExtraMovieDetails title={title} cast={cast} crew={crew} genre={genres}/>}
 
         {/* <h4>{director.name}</h4>
                 <h4>{writer.name}</h4> */}
