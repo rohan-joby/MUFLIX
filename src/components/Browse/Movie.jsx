@@ -2,6 +2,7 @@ import React from "react";
 import{ useHistory } from "react-router-dom";
 import { FaPlus, FaChevronDown } from "react-icons/fa";
 
+import Muflix from "../../assets/muflix.PNG"
 import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
 
@@ -17,10 +18,12 @@ const Movie = (props) => {
     vote_average,
   } = props.data;
 
-  const imagePath = IMAGE_URL + "/w500" + backdrop_path;
+  const isInValid = backdrop_path === null;
+  const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
+
   const genres = getGenres(genre_ids);
-  
   const reducedGenres = genres.slice(0,3);
+
   const shortTitle = title.length < 18 ? title : title.slice(0,18) + "...";
 
   const clickHandler = () => {
@@ -29,6 +32,7 @@ const Movie = (props) => {
 
   return (
     <div className={classes.movie} onClick={clickHandler}>
+      
       <img className={classes.poster} src={imagePath} alt={title} />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>

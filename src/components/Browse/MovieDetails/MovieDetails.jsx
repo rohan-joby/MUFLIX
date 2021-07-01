@@ -7,6 +7,7 @@ import useHttp from "../../../hooks/use-http";
 import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
+import Muflix from "../../../assets/muflix.PNG"
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
@@ -54,7 +55,9 @@ const MovieDetails = () => {
     } = loadedDetails;
     const { cast, crew } = loadedCredits;
 
-    const imagePath = IMAGE_URL + "/w780" + backdrop_path;
+    const isInValid = backdrop_path === null;
+  const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
+
     const date = new Date(release_date).getFullYear();
 
     const actors = cast.slice(0, 4).map((actor, index) => {
