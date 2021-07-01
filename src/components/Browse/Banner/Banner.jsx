@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { IoMdInformationCircleOutline } from 'react-icons/io';
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import useHttp from "../../../hooks/use-http";
 import { fetchBanner, addToMyList } from "../../../lib/api";
@@ -26,7 +26,7 @@ const Banner = () => {
     const { id, backdrop_path, title, overview } = banner;
 
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
-    const shortOverview = overview.slice(0,180) + "...";
+    const shortOverview = overview.slice(0, 180) + "...";
 
     const clickHandler = () => {
       history.push(`/${id}`);
@@ -45,7 +45,10 @@ const Banner = () => {
 
     return (
       <div className={classes.banner}>
-        <img src={imagePath} alt={title} />
+        <div>
+          <div className={classes.shadow} />
+          <img src={imagePath} alt={title} />
+        </div>
         <h1 className={classes.title}>{title}</h1>
         <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>
@@ -62,7 +65,10 @@ const Banner = () => {
             className={`${classes.btn} ${classes["btn-primary"]}`}
             onClick={clickHandler}
           >
-            <span><IoMdInformationCircleOutline size={23}/></span> More info
+            <span>
+              <IoMdInformationCircleOutline size={23} />
+            </span>{" "}
+            More info
           </button>
         </div>
       </div>

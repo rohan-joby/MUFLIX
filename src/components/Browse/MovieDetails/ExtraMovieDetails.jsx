@@ -4,13 +4,13 @@ import classes from "./ExtraMovieDetails.module.css";
 
 const ExtraMovieDetails = ({ title, cast, crew, genre }) => {
   const director = crew.find((member) => member.job === "Director");
-  const directorName = director.name;
+  const directorName = director ? director.name: "unavailable :(";
 
   const writer = crew.find((member) =>(member.job === "Screenplay"|| member.job ==="Writer"));
-  const writerName = writer.name;
+  const writerName = writer ? writer.name: "unavailable :(";
   
   let actors = cast.slice(0,15).map((actor, index) => {
-    return index === 15 ? actor.name : `${actor.name},  `;
+    return index === 14 ? actor.name : `${actor.name},  `;
   });
   const genreList = genre.map((element, index) => {
     return index === genre.length - 1 ? element.name : `${element.name},  `;

@@ -61,3 +61,18 @@ button span{
   padding: 13px 15px;
   margin-left: 0;
 }
+
+.shadow {
+  position: absolute;
+  z-index:-1;
+  bottom: -7%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(14, 14, 14, 0.6),
+    #080808
+  );
+}

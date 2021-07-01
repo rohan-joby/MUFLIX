@@ -63,13 +63,13 @@ const MovieDetails = () => {
     const isInValid = backdrop_path === null;
     const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
 
-    const date = new Date(release_date).getFullYear();
+    const date = release_date
+      ? new Date(release_date).getFullYear()
+      : "unavailable";
 
     const actors = cast.slice(0, 4).map((actor, index) => {
       return index === 3 ? actor.name : `${actor.name},  `;
     });
-
-
 
     const addToMyListHandler = () => {
       const details = {
@@ -143,7 +143,14 @@ const MovieDetails = () => {
             <FaChevronUp size={30} style={{ fill: "white" }} />
           )}
         </button>
-        {loadMore && <ExtraMovieDetails title={title} cast={cast} crew={crew} genre={genres}/>}
+        {loadMore && (
+          <ExtraMovieDetails
+            title={title}
+            cast={cast}
+            crew={crew}
+            genre={genres}
+          />
+        )}
 
         {/* <h4>{director.name}</h4>
                 <h4>{writer.name}</h4> */}

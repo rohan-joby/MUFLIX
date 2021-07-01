@@ -22,11 +22,17 @@ input{
     padding-left:10px;
 
 }
-
 input:hover,
 input:focus{
-    background: rgba(255, 255, 255, 0.5);
+    color:white;
+    background: rgba(212, 211, 211, 0.61);
     outline:none;
     box-shadow:3px 3px 3px 2px rgba(0,0,0,0.5);
-
+}
+::placeholder{
+    color:rgb(70, 70, 70);
+}
+input:hover::placeholder,
+input:focus::placeholder{
+    color:black;
 }
