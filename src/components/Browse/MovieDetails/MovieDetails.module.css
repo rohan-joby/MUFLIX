@@ -3,43 +3,55 @@
   width: 75%;
   color: white;
   background: #141414;
-  margin: .5rem auto;
+  margin: 0.5rem auto;
+  border-radius:10px;
   position: relative;
-  z-index:10;
+  z-index: 10;
 }
 .poster {
   width: 100%;
   display: block;
   object-fit: cover;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
 }
 
-.close-button{
-    background: #181818;
-    border-radius: 50%;
-    border:1pxx solid #181818;
-    padding: 7px 6px;
-    position:absolute;
-    top:2%;
-    right:2%;
-    cursor: pointer;
+.close-button {
+  background: #3c2d2e9c;
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 8px 10px;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
 }
-.wishlist{
-    font-size:1.3rem;
-    font-weight: 700;
-    text-align:center;
-    letter-spacing: 1.2px;
-    color:#f2f2f2;
-    background: #e41a24;
-    position:relative;
-    display: inline-block;
-    width:92%;
-    border:none;
-    padding:8px 0;
-    margin:5px 4%;
+.close-button:hover {
+  background: #c7bebf88;
+}
+.wishlist {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1.2px;
+  color: #f2f2f2;
+  background: #e41a24;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92%;
+  border: none;
+  padding: 10px 0;
+  margin: 5px 4%;
+  border-radius: 6px;
+}
+.wishlist span{
+    margin-right: 5px;
 }
 .wishlist:focus,
-.wishlist:hover{
-    background:#be0811;
+.wishlist:hover {
+  background: #be0811;
 }
 
 .details {
@@ -48,37 +60,36 @@
   align-items: flex-start;
   padding: 0 2rem;
 }
-.about > *{
-    display: inline-block;
-    margin-right:10px;
+.about > * {
+  display: inline-block;
+  margin-right: 10px;
 }
-.title{
-    font-size: 1.8rem;
-    letter-spacing: 1.3px;
-    margin-bottom:5px;
+.title {
+  font-size: 1.8rem;
+  letter-spacing: 1.3px;
+  margin-bottom: 5px;
 }
-.rating{
-    color:rgb(236, 220, 220);
-    background-color:#027716;
-    padding:3px 8px 1px 8px;
-    border-radius: 5px;
-
+.rating {
+  color: rgb(236, 220, 220);
+  background-color: #027716;
+  padding: 3px 8px 1px 8px;
+  border-radius: 5px;
 }
-.summary{
-    font-size:1.2rem;
-    font-weight:400;
-    max-width:35em;
-    line-height: 1.2;
-    margin-top:0;
+.summary {
+  font-size: 1.2rem;
+  font-weight: 400;
+  max-width: 35em;
+  line-height: 1.2;
+  margin-top: 0;
 }
-.crew{
-    margin-top:1.2em;
+.crew {
+  margin-top: 1.2em;
 }
-.crew>h4{
-    font-size:1rem ;
-    font-weight:400;
-    margin-left:1rem;
+.crew > h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 1rem;
 }
-.crew span{
-    color:grey;
+.crew span {
+  color: grey;
 }

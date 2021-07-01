@@ -1,5 +1,6 @@
 import React from "react";
 import{ useHistory } from "react-router-dom";
+import { FaPlus, FaChevronDown } from "react-icons/fa";
 
 import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
@@ -30,6 +31,8 @@ const Movie = (props) => {
       <img className={classes.poster} src={imagePath} alt={title} />
       <div className={classes.details}>
         <h3>{title}</h3>
+        <button><FaPlus style={{ fill: 'white' }}/></button>
+        <button><FaChevronDown style={{ fill: 'white' }}/></button>
         <div className={classes.info}>
           <h4>
             {reducedGenres.map((element, index) => {

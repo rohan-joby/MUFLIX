@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { VscChromeClose } from "react-icons/vsc";
+import { FaPlus } from "react-icons/fa";
 
 import { useParams, useHistory } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
@@ -81,8 +83,8 @@ const MovieDetails = () => {
     return (
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
-        <button className={`${classes[`close-button`]}`} onClick={closePageHandler}>❌</button>
-        <button className={classes.wishlist} onClick={addToMyListHandler}>➕ My List</button>
+        <button className={`${classes[`close-button`]}`} onClick={closePageHandler}><VscChromeClose size={20} style={{ fill: 'white' }}/></button>
+        <button className={classes.wishlist} onClick={addToMyListHandler}><span><FaPlus size={17}/></span> My List</button>
         <div className={classes.details}>
           <div className={classes.about}>
             <h2 className={classes.title}>{title}</h2>

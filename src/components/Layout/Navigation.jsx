@@ -12,7 +12,7 @@ const Navigation = () => {
                 <h2 className={classes.logo}>MUFLIX</h2>
             </NavLink>
             <NavLink to="/mylist" activeClassName={classes.active}>
-                <h2>My List</h2>
+                <h2>My list</h2>
             </NavLink>
         </nav>
     )

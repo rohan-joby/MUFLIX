@@ -12,6 +12,7 @@ img.poster {
   display: block;
   object-fit: cover;
   border-radius: 10px;
+  margin-bottom:-5px;
 }
 .details {
   color: rgb(255, 255, 255);
@@ -24,12 +25,29 @@ img.poster {
   margin-bottom: 8px;
 }
 .details h3 {
+  display: inline-block;
   font-size: 1rem;
   padding: 0;
-  padding: 0;
+  padding-right: 10px;
   margin-left: 7px;
   margin-bottom: 6px;
 }
+.details>button{
+  display: inline-block;
+  background: transparent;
+  border:1px solid white;
+  border-radius: 50%;
+  padding:3px 5px 1px;
+  margin-right:5px;
+  cursor: pointer;
+}
+.details>button:hover,
+.details>button:focus {
+  background: #c7bebf88;
+}
+/* .details>button>svg:hover,
+.details>button>svg:focus {
+} */
 .info {
   display: flex;
   justify-content: space-between;

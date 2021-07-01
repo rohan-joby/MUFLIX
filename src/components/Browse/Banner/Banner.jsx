@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { IoMdInformationCircleOutline } from 'react-icons/io';
 
 import useHttp from "../../../hooks/use-http";
 import { fetchBanner, addToMyList } from "../../../lib/api";
@@ -22,9 +23,10 @@ const Banner = () => {
     return <LoadingSpinner />;
   }
   if (status === "completed" && banner) {
-    const { id, backdrop_path, title, overview } =
-      banner;
+    const { id, backdrop_path, title, overview } = banner;
+
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
+    const overview_short = overview.slice(0,180) + "...";
 
     const clickHandler = () => {
       history.push(`/${id}`);
@@ -45,7 +47,7 @@ const Banner = () => {
       <div className={classes.banner}>
         <img src={imagePath} alt={title} />
         <h1 className={classes.title}>{title}</h1>
-        <p className={classes.summary}>{overview}</p>
+        <p className={classes.summary}>{overview_short}</p>
         <div className={classes.actions}>
           {/* <button
             type="button"
@@ -60,7 +62,7 @@ const Banner = () => {
             className={`${classes.btn} ${classes["btn-primary"]}`}
             onClick={clickHandler}
           >
-            ℹ More info
+            <span><IoMdInformationCircleOutline size={23}/></span> More info
           </button>
         </div>
       </div>
@@ -71,4 +73,3 @@ const Banner = () => {
 };
 
 export default Banner;
-// {classes["btn btn-primary"]}  {classes["btn btn-secondary"]}
