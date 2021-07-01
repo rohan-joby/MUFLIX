@@ -1,28 +1,47 @@
-.nav{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color:white;
-    background: transparent;
-    position:fixed;
-    height:3rem;
-    width:100vw;
-    display: flex;
-    justify-content: space-between;
-    z-index:10;
+.nav {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: white;
+  height: 4.5rem;
+  width: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 10%,
+    rgba(0, 0, 0, 0)
+  );
+  position: fixed;
+  top:0;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 10;
 }
-a{
-    text-decoration: none;
+.nav__fixed{
+    background: #0a0a0a;
+    color:white;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    height: 4.5rem;
+    width: 100%;
+    position: fixed;
+    top:0;
+    display: flex;
+    justify-content: flex-start;
+    z-index: 10;
+}
+a {
+  text-decoration: none;
 }
 
-a h2{
-    font-weight:400;
-    letter-spacing:1.2px;
-    margin:0 3rem 0 1rem;
-    cursor:pointer;
+a h2 {
+  font-size: 1.33rem;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  margin: 0 1rem 0 1.875rem;
+  cursor: pointer;
+  padding-top: 1.6rem;
 }
-.logo{
-    color:maroon;
+.logo {
+  color: #e50914;
 }
-.active{
-    font-weight:800;
-    background: rgba(56, 56, 56, 0.075);
+.active {
+  font-weight: 800;
+  text-decoration: underline #e50914;
 }
