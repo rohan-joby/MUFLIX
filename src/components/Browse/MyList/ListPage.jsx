@@ -27,7 +27,7 @@ const ListPage = () => {
   }
   return (
     <div>
-      <h2>MY LIST</h2>
+      {/* <h2>MY LIST</h2> */}
       <div className={classes.list}>{movieList}</div>
       <Link to="/">
         <button className={classes.return}>Return to Home</button>

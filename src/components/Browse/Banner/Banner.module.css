@@ -3,21 +3,20 @@
   margin: 0;
   padding: 0;
 }
-.banner img {
+.banner img{
   position: absolute;
-  z-index: -1;
+  z-index: -5;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   object-fit: cover;
 }
 .title {
   color: rgb(255, 255, 255);
   position: relative;
-  font-size: 5rem;
-  font-weight: 700;
-  margin: 2rem;
-  margin-top: 0;
-  padding-top: 11%;
+  font-size: 3rem;
+  font-weight: 900;
+  padding-top: 16vw;
+  padding-left:30px;
 }
 .summary {
   color: rgb(255, 255, 255);
@@ -27,32 +26,31 @@
   letter-spacing: 1px;
   line-height: 1.5;
   margin: 2rem;
-  margin-top: 0.5rem;
 }
 
 .btn {
-  padding: 10px 25px;
-  font-size: 1rem;
+  padding: 14px 60px;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-left: 2rem;
   margin-right: 0.4rem;
-  /* margin-bottom:5rem; */
+  margin-bottom: calc(4rem + 40px);
   border: none;
   border-radius: 6px;
-  cursor:pointer;
+  cursor: pointer;
 }
 .btn:hover,
-.btn:focus{
-  transform:scale(1.05);
+.btn:focus {
+  color: white;
+  background: #be0811;
 }
 .btn-primary {
-  color: rgb(37, 37, 37);
-  background-color: white;
+  color: #f2f2f2;
+  background-color: #e50914;
 }
 .btn-secondary {
   color: white;
-  background-color: rgba(150, 148, 148, 0.842);
+  background-color: #3c2d2e;
   padding: 13px 15px;
-  margin-left:0;
-  
+  margin-left: 0;
 }

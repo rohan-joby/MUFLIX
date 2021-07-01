@@ -10,13 +10,13 @@ import MyList from "./pages/MyList";
 const App = () => {
   return (
     <Fragment>
+      <Header />
       <Switch>
         <Route path="/" exact>
-          <Header />
           <Banner />
           <AllGenre />
         </Route>
-        <Route path="/my-list" exact>
+        <Route path="/mylist" exact>
           <MyList />
         </Route>
         <Route path="/:movie" exact>
