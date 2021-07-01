@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import useHttp from "../../hooks/use-http";
 import { fetchAllMovies } from "../../lib/api";
-import { GENRE } from "../../data/genre";
 
 import classes from "./AllMovie.module.css";
 import Movie from "./Movie";
@@ -11,7 +10,8 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const AllMovie = (props) => {
   const genre = props.type;
   const { sendRequest, status, data: loadedMovies } = useHttp(fetchAllMovies);
-  console.log(genre);
+  //console.log(genre);
+  
   useEffect(() => {
     sendRequest(genre);
   }, [genre, sendRequest]);

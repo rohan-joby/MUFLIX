@@ -31,9 +31,10 @@ export const GENRE = [
     id: 10751,
     name: "Family",
   },
+
   {
-    id: 10752,
-    name: "War",
+    id: 18,
+    name: "Drama",
   },
   {
     id: 36,
@@ -47,11 +48,7 @@ export const GENRE = [
   //   id: 10402,
   //   name: "Music",
   // },
-  {
-    id: 18,
-    name: "Drama",
-  },
- 
+
   // {
   //   id: 10749,
   //   name: "Romance",
@@ -71,6 +68,10 @@ export const GENRE = [
   {
     id: 14,
     name: "Fantasy",
+  },
+  {
+    id: 10752,
+    name: "War",
   },
   {
     id: 37,

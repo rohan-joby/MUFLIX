@@ -80,6 +80,21 @@ export async function fetchOneMovieCredits(id) {
   return creditsData;
 }
 
+export async function searchMovies(query) {
+  const searchEndpoint = ENDPOINTS.helpers.searchMovie.replace("_query", query);
+  const url = BASE_URL + searchEndpoint;
+
+  const searchResponse = await fetch(url);
+  const searchData = await searchResponse.json();
+
+  if (!searchResponse.ok) {
+    throw new Error("search not found!");
+  }
+
+  return searchData;
+}
+
+
 export async function addToMyList({ id, title, backdrop, genre, rating }) {
   fetch(FIREBASE_URL + "/movies.json", {
     method: "POST",
@@ -118,12 +133,12 @@ export async function getMyList() {
     });
   }
 
- const seen = new Set();
- const uniqueMovies = loadedMovies.filter(el => {
-  const duplicate = seen.has(el.id);
-  seen.add(el.id);
-  return !duplicate;
-});
+  const seen = new Set();
+  const uniqueMovies = loadedMovies.filter((el) => {
+    const duplicate = seen.has(el.id);
+    seen.add(el.id);
+    return !duplicate;
+  });
 
   console.log(uniqueMovies);
   return uniqueMovies;
@@ -133,3 +148,4 @@ export async function getMyList() {
 //   .map(id => {
 //     return loadedMovies.find(a => a.id === id)
 //   })
+

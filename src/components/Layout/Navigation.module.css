@@ -11,8 +11,15 @@
   position: fixed;
   top:0;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   z-index: 10;
+}
+.primary__nav{
+  display: flex;
+  align-items: center;
+}
+.secondary__nav{
+  margin-right:50px;
 }
 .nav__fixed{
     background: #0a0a0a;
@@ -23,7 +30,7 @@
     position: fixed;
     top:0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     z-index: 10;
 }
 a {

@@ -21,6 +21,7 @@ const Movie = (props) => {
   const genres = getGenres(genre_ids);
   
   const reducedGenres = genres.slice(0,3);
+  const shortTitle = title.length < 18 ? title : title.slice(0,18) + "...";
 
   const clickHandler = () => {
     history.push(`/${id}`)
@@ -30,7 +31,7 @@ const Movie = (props) => {
     <div className={classes.movie} onClick={clickHandler}>
       <img className={classes.poster} src={imagePath} alt={title} />
       <div className={classes.details}>
-        <h3>{title}</h3>
+        <h3>{shortTitle}</h3>
         <button><FaPlus style={{ fill: 'white' }}/></button>
         <button><FaChevronDown style={{ fill: 'white' }}/></button>
         <div className={classes.info}>

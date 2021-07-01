@@ -26,7 +26,7 @@ const Banner = () => {
     const { id, backdrop_path, title, overview } = banner;
 
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
-    const overview_short = overview.slice(0,180) + "...";
+    const shortOverview = overview.slice(0,180) + "...";
 
     const clickHandler = () => {
       history.push(`/${id}`);
@@ -47,7 +47,7 @@ const Banner = () => {
       <div className={classes.banner}>
         <img src={imagePath} alt={title} />
         <h1 className={classes.title}>{title}</h1>
-        <p className={classes.summary}>{overview_short}</p>
+        <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>
           {/* <button
             type="button"
