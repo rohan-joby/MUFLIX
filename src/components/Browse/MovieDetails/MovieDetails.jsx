@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { VscChromeClose } from "react-icons/vsc";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaChevronDown } from "react-icons/fa";
 
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
-import Muflix from "../../../assets/muflix.PNG"
+import Muflix from "../../../assets/muflix.PNG";
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
   const history = useHistory();
+  const location = useLocation();
   const params = useParams();
 
+  console.log(history);
   const {
     sendRequest: getDetails,
     status: detailsStatus,
@@ -32,7 +34,7 @@ const MovieDetails = () => {
   useEffect(() => {
     getDetails(id);
     getCredits(id);
-  }, [getDetails, getCredits,id]);
+  }, [getDetails, getCredits, id]);
 
   if (detailsStatus === "pending" || creditsStatus === "pending") {
     return <LoadingSpinner />;
@@ -56,7 +58,7 @@ const MovieDetails = () => {
     const { cast, crew } = loadedCredits;
 
     const isInValid = backdrop_path === null;
-  const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
+    const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
 
     const date = new Date(release_date).getFullYear();
 
@@ -66,9 +68,8 @@ const MovieDetails = () => {
 
     // const director = crew.find((member) => member.job === "Director");
     // const writer = crew.find((member) => member.job === "Screenplay");
-    
+
     const addToMyListHandler = () => {
- 
       const details = {
         id: id,
         title: title,
@@ -80,20 +81,34 @@ const MovieDetails = () => {
     };
 
     const closePageHandler = () => {
-      history.push("/");
-    }
+      history.goBack();
+    };
 
     return (
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
-        <button className={`${classes[`close-button`]}`} onClick={closePageHandler}><VscChromeClose size={20} style={{ fill: 'white' }}/></button>
-        <button className={classes.wishlist} onClick={addToMyListHandler}><span><FaPlus size={17}/></span> My List</button>
+        <button
+          className={`${classes[`close-button`]}`}
+          onClick={closePageHandler}
+        >
+          <VscChromeClose size={20} style={{ fill: "white" }} />
+        </button>
+        <button className={classes.wishlist} onClick={addToMyListHandler}>
+          <span>
+            <FaPlus size={17} />
+          </span>{" "}
+          My List
+        </button>
         <div className={classes.details}>
-          <div className={classes.about}>
-            <h2 className={classes.title}>{title}</h2>
-            <p className={classes.rating}>{vote_average} /10</p>
-            <p>{date}</p>
-            <p>{runtime} mins</p>
+          <div>
+            <div className={classes.about}>
+              <h2 className={classes.title}>{title}</h2>
+              <div className={classes.about__extra}>
+                <p className={classes.rating}>{vote_average} /10</p>
+                <p>{date}</p>
+                <p>{runtime} mins</p>
+              </div>
+            </div>
             <h3 className={classes.summary}>{overview}</h3>
           </div>
           <div className={classes.crew}>
@@ -110,7 +125,11 @@ const MovieDetails = () => {
               })}
             </h4>
           </div>
-        </div>{" "}
+        </div>
+        <div className={classes.load}>
+          <FaChevronDown size={30} />
+        </div>
+
         {/* <h4>{director.name}</h4>
                 <h4>{writer.name}</h4> */}
       </div>
