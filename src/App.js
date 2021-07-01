@@ -6,6 +6,7 @@ import AllGenre from "./components/Browse/AllGenre";
 import Banner from "./components/Browse/Banner/Banner";
 import MovieDetails from "./components/Browse/MovieDetails/MovieDetails";
 import MyList from "./pages/MyList";
+import SearchResults from "./pages/SearchResults";
 
 const App = () => {
   return (
@@ -21,6 +22,9 @@ const App = () => {
         </Route>
         <Route path="/:movie" exact>
           <MovieDetails />
+        </Route>
+        <Route path="/results/:query">
+          <SearchResults />
         </Route>
         <Route path="*">
           <Redirect to="/" />
