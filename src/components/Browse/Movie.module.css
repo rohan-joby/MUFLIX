@@ -3,17 +3,20 @@
   height: 14.5rem;
   width: 17.5rem;
   margin-right: 10px;
+  flex-shrink: 0;
+  border-radius: 10px;
   transition: transform 750ms ease;
 }
 img.poster {
   width: 100%;
   display: block;
   object-fit: cover;
+  border-radius: 10px;
 }
 .details {
   color: rgb(255, 255, 255);
   display: none;
-  letter-spacing:.9px;
+  letter-spacing: 0.9px;
 }
 .title {
   margin: 0;
@@ -36,15 +39,15 @@ img.poster {
 }
 .info h4 {
   font-size: 0.6rem;
-  padding-top:4px;
+  padding-top: 4px;
   margin-top: 0;
 }
-.average{
-    font-weight: 700;
-    color:rgb(236, 220, 220);
-    background-color:#016638;
-    padding:4px 4px;
-    border-radius: 3px;
+.average {
+  font-weight: 700;
+  color: rgb(236, 220, 220);
+  background-color: #016638;
+  padding: 4px 4px;
+  border-radius: 3px;
 }
 .movie:hover,
 .movie:focus {
@@ -56,4 +59,18 @@ img.poster {
 .movie:hover > .details,
 .movie:focus > .details {
   display: unset;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .movie:hover,
+  .movie:focus {
+    transform: scale(1.25);
+    z-index: 1;
+    background: #141414;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  .movie:hover > .details,
+  .movie:focus > .details {
+    display: unset;
+  }
 }

@@ -34,10 +34,10 @@ export const ENDPOINTS = {
     //   title: 'Crime',
     //   endpoint: `/discover/movie?api_key=${API_KEY}&with_genres=80&with_watch_providers=8&watch_region=IN`,
     // },
-    // {
-    //   title: 'Mystery',
-    //   endpoint: `/discover/movie?api_key=${API_KEY}&with_genres=9648&with_watch_providers=8&watch_region=IN`,
-    // },
+    {
+      title: 'Mystery',
+      endpoint: `/discover/movie?api_key=${API_KEY}&with_genres=9648&with_watch_providers=8&watch_region=IN`,
+    },
     {
       title: 'Action',
       endpoint: `/discover/movie?api_key=${API_KEY}&with_genres=28&with_watch_providers=8&watch_region=IN`,

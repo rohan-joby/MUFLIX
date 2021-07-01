@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import useHttp from "../../../hooks/use-http";
 import { getMyList } from "../../../lib/api";
@@ -28,6 +29,9 @@ const ListPage = () => {
     <div>
       <h2>MY LIST</h2>
       <div className={classes.list}>{movieList}</div>
+      <Link to="/">
+        <button className={classes.return}>Return to Home</button>
+      </Link>
     </div>
   );
 };

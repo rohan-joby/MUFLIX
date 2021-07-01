@@ -1,9 +1,13 @@
 export const GENRE = [
   {
+    id: 9648,
+    name: "Mystery",
+  },
+  {
     id: 28,
     name: "Action",
-  }
-]
+  },
+];
 
 export const GENRE_ID = [
   // {

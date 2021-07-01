@@ -1,5 +1,18 @@
+::-webkit-scrollbar {
+  width: 0px;
+}
+.genre {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 1.3rem;
+  padding-left: 30px;
+  margin:0;
+}
+
 .browse {
   display: flex;
-  flex-wrap: wrap;
-  padding-left:30px;
+  width: 100%;
+  overflow-x: scroll;
+  padding: 30px;
+  padding-right: 0;
 }

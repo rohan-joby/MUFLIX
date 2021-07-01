@@ -22,7 +22,7 @@ const Banner = () => {
     return <LoadingSpinner />;
   }
   if (status === "completed" && banner) {
-    const { id, backdrop_path, title, overview, vote_average, genre_ids } =
+    const { id, backdrop_path, title, overview } =
       banner;
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
 
@@ -30,16 +30,16 @@ const Banner = () => {
       history.push(`/${id}`);
     };
 
-    const addToMyListHandler = () => {
-      const details = {
-        id: id,
-        title: title,
-        backdrop: backdrop_path,
-        genre: genre_ids,
-        rating: vote_average,
-      };
-      addToMyList(details);
-    };
+    // const addToMyListHandler = () => {
+    //   const details = {
+    //     id: id,
+    //     title: title,
+    //     backdrop: backdrop_path,
+    //     genre: genre_ids,
+    //     rating: vote_average,
+    //   };
+    //   addToMyList(details);
+    // };
 
     return (
       <div className={classes.banner}>

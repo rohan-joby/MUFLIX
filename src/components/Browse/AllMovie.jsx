@@ -4,18 +4,16 @@ import useHttp from "../../hooks/use-http";
 import { fetchAllMovies } from "../../lib/api";
 import { GENRE } from "../../data/genre";
 
-import classes from './AllMovie.module.css';
+import classes from "./AllMovie.module.css";
 import Movie from "./Movie";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-const AllMovie = () => {
-  const genre = GENRE;
+const AllMovie = (props) => {
+  const genre = props.type;
   const { sendRequest, status, data: loadedMovies } = useHttp(fetchAllMovies);
-
+  console.log(genre);
   useEffect(() => {
-    for (const data of genre) {
-      sendRequest(data.name);
-    }
+    sendRequest(genre);
   }, [genre, sendRequest]);
 
   let movieList;
@@ -28,9 +26,13 @@ const AllMovie = () => {
       <Movie key={movie.id} data={movie} />
     ));
     console.log("completed");
-
   }
 
-  return <div className={classes.browse}>{movieList}</div>;
+  return (
+    <div>
+      <h3 className={classes.genre}>{genre}</h3>
+      <div className={classes.browse}>{movieList}</div>
+    </div>
+  );
 };
 export default AllMovie;
