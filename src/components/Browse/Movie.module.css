@@ -89,3 +89,25 @@ img.poster {
     display: unset;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .movie {
+    height: 10rem;
+    width: 12rem;
+    transition: transform 500ms ease;
+  }
+  .movie:hover,
+  .movie:focus {
+    transform: scale(1.1);
+    z-index: 20;
+  }
+  .details h3 {
+    display: block;
+    margin: 8px 0 5px 8px;
+  }
+  .details > button,
+  .info h4:nth-child(1) {
+    display: none;
+    /* visibility: hidden; */
+  }
+}

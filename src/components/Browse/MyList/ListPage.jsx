@@ -28,9 +28,6 @@ const ListPage = () => {
     <div>
       <h2 className={classes.header}>My list</h2>
       <div className={classes.list}>{movieList}</div>
-      {/* <Link to="/">
-        <button className={classes.return}>Return to Home</button>
-      </Link> */}
     </div>
   );
 };

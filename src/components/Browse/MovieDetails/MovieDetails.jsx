@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { FaPlus, FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -19,9 +19,20 @@ import classes from "./MovieDetails.module.css";
 const MovieDetails = () => {
   const history = useHistory();
   const params = useParams();
-  const loadMoreRef = useRef(null);
 
   const [loadMore, setLoadMore] = useState(false);
+
+  useEffect(() => {
+    if (loadMore) {
+      const scrollOptions = { left: 0, top: window.pageYOffset, behavior: "smooth" };
+      window.scroll(scrollOptions);
+    }
+    if (!loadMore) {
+      const scrollOptions = { left: 0, top: 0, behavior: "smooth" };
+      window.scroll(scrollOptions);
+    }
+  }, [loadMore]);
+
   const {
     sendRequest: getDetails,
     status: detailsStatus,
@@ -68,9 +79,12 @@ const MovieDetails = () => {
       ? new Date(release_date).getFullYear()
       : "unavailable";
 
-    const actors = cast.length > 0 ? cast.slice(0, 4).map((actor, index) => {
-      return index === 3 ? actor.name : `${actor.name},  `;
-    }): "unavailable";
+    const actors =
+      cast.length > 0
+        ? cast.slice(0, 4).map((actor, index) => {
+            return index === 3 ? actor.name : `${actor.name},  `;
+          })
+        : "unavailable";
 
     const addToMyListHandler = () => {
       const details = {
@@ -82,13 +96,12 @@ const MovieDetails = () => {
       };
       addToMyList(details);
     };
-    
-    const scrollToBottom = (ref) => window.scrollTo(0, ref.current.offsetTop) 
-    // const scrollToRef = (ref) => (ref.current.offsetTop) 
-    
+
+    //const scrollToBottom = (ref) => window.scrollTo(0, ref.current.offsetTop)
+    // const scrollToRef = (ref) => (ref.current.offsetTop)
+
     const loadMoreHandler = () => {
       setLoadMore((prev) => !prev);
-      loadMore && scrollToTop(); 
       // !loadMore && scrollToBottom(loadMoreRef);
       // !loadMore && (loadMoreRef.current.offsetTop=100);
       // console.log(scrollToRef(loadMoreRef))
@@ -121,7 +134,7 @@ const MovieDetails = () => {
               <div className={classes.about__extra}>
                 <p className={classes.rating}>{vote_average} /10</p>
                 {date && <p>{date}</p>}
-                {runtime>0 && <p>{runtime} mins</p>}
+                {runtime > 0 && <p>{runtime} mins</p>}
               </div>
             </div>
             <h3 className={classes.summary}>{overview}</h3>
@@ -145,7 +158,6 @@ const MovieDetails = () => {
           type="button"
           className={classes.load}
           onClick={loadMoreHandler}
-          ref={loadMoreRef}
         >
           {!loadMore ? (
             <FaChevronDown size={30} style={{ fill: "white" }} />

@@ -125,3 +125,48 @@
   background: #c7bebf88;
   border-color: #c7bebf88;
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 87%;
+  }
+  .poster {
+    width: 100%;
+    height: 15rem;
+  }
+  .wishlist {
+    padding: 7px 0;
+  }
+  .details {
+    flex-direction: column;
+    width: 100%;
+  }
+  .about {
+    flex-direction: column;
+    align-items: start;
+  }
+  .about__extra {
+    margin-bottom: 16px;
+  }
+  .about__extra > p {
+    margin: 5px 14px 5px 0;
+  }
+  .title {
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+  .summary {
+    font-size: 1.1rem;
+    font-weight: 400;
+    max-width: 85%;
+  }
+  .crew,
+  .crew > h4 {
+    margin-top: 0;
+    margin-left:0;
+    width:100%;
+  }
+  .load{
+  margin: 0.5rem 45%;
+  }
+}

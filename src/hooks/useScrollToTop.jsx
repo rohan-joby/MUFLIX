@@ -1,15 +1,25 @@
 export const scrollToTop = () => {
-  window.scrollTo(0,0);
+  const el = document.querySelector("#root");
+  const scrollOptions = { left: 0, top: 0, behavior: "smooth" };
+  console.log(scrollOptions);
+  if(!el === null){el.scroll(scrollOptions);}
+  if(el === null){window.scroll(scrollOptions);}
+  
 };
 
 export const scrollToBottom = () => {
-//   const element = document.querySelector(".MovieDetails_load__3zHfu");
-//   console.log(element);
-//   const el=element.clientHeight;
-//   console.log(el*5);
-//   console.log(element.scrollTop);
-//   element.scrollTop = 1000;
-    window.scrollTo(0,document.body.scrollHeight);
+  const el = document.querySelector("#root");
+  const scrollOptions = { left: 0, top: 850, behavior: "smooth" };
+  console.log(scrollOptions);
+  console.log(el);
+  if(!el === null){el.scroll(scrollOptions);}
+  if(el === null){window.scroll(scrollOptions);}
 };
 
 //element.scrollHeight() - element.clientHeight();
+
+
+//.MovieDetails_container__215Fl
+
+const scrollOptions = { left: 0, top: 850, behavior: "smooth" };
+window.scroll(scrollOptions);

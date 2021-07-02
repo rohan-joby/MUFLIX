@@ -5,4 +5,9 @@
     padding: 30px;
     margin-top:6rem;
   }
+  @media screen and (max-width: 480px) {
+    .browse {
+      padding-left: 5px;
+    }
+  }
   
