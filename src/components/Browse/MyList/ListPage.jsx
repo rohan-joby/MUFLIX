@@ -27,11 +27,11 @@ const ListPage = () => {
   }
   return (
     <div>
-      {/* <h2>MY LIST</h2> */}
+      <h2 className={classes.header}>My list</h2>
       <div className={classes.list}>{movieList}</div>
-      <Link to="/">
+      {/* <Link to="/">
         <button className={classes.return}>Return to Home</button>
-      </Link>
+      </Link> */}
     </div>
   );
 };

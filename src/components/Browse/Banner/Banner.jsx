@@ -46,9 +46,10 @@ const Banner = () => {
     return (
       <div className={classes.banner}>
         <div>
-          <div className={classes.shadow} />
+          <div className={classes.shadow}/>
           <img src={imagePath} alt={title} />
         </div>
+        <h2 className={classes.header}>Movies</h2>
         <h1 className={classes.title}>{title}</h1>
         <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>

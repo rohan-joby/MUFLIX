@@ -1,7 +1,7 @@
 .nav {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: white;
-  height: 100px;
+  height: 70px;
   width: 100%;
   background-image: linear-gradient(
     to bottom,
@@ -12,6 +12,7 @@
   top:0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   z-index: 10;
 }
 .primary__nav{
@@ -33,22 +34,26 @@
     justify-content: space-between;
     z-index: 10;
 }
+.logo {
+  color: #e50914;
+  height:3rem;
+  padding-left:30px;
+  padding-right:75px;
+}
 a {
   text-decoration: none;
 }
 
 a h2 {
-  font-size: 1.33rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 300;
   letter-spacing: 1.2px;
-  margin: 0 1rem 0 1.875rem;
+  /* margin: 0 1rem 0 1.875rem;
+  padding-top: 1.6rem; */
+  padding-right:15px;
   cursor: pointer;
-  padding-top: 1.6rem;
 }
-.logo {
-  color: #e50914;
-}
-.active {
-  font-weight: 800;
-  text-decoration: underline #e50914;
+
+a.active h2{
+  font-weight: 700;
 }
