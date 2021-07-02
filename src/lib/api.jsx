@@ -18,6 +18,16 @@ export function getGenres(genre_ids) {
   return genres;
 }
 
+export function getGenreObjects(genre_ids) {
+  const genres = [];
+
+  for (const id of genre_ids) {
+    const { name } = GENRE_ID.find((genre) => id === genre.id);
+    genres.push({ id, name });
+  }
+  return genres;
+}
+
 export async function fetchBanner() {
   const url = BASE_URL + ENDPOINTS.sections[0].endpoint;
   const response = await fetch(url);
@@ -94,7 +104,6 @@ export async function searchMovies(query) {
   return searchData;
 }
 
-
 export async function addToMyList({ id, title, backdrop, genre, rating }) {
   fetch(FIREBASE_URL + "/movies.json", {
     method: "POST",
@@ -132,20 +141,20 @@ export async function getMyList() {
       vote_average: data[key].rating,
     });
   }
+  //remove duplicates
 
-  const seen = new Set();
-  const uniqueMovies = loadedMovies.filter((el) => {
-    const duplicate = seen.has(el.id);
-    seen.add(el.id);
-    return !duplicate;
-  });
+  // const seen = new Set();
+  // const uniqueMovies = loadedMovies.filter((el) => {
+  //   const duplicate = seen.has(el.id);
+  //   seen.add(el.id);
+  //   return !duplicate;
+  // });
+  const uniqueMovies = Array.from(new Set(loadedMovies.map(a => a.id)))
+  .map(id => {
+    return loadedMovies.find(a => a.id === id)
+  })
 
   console.log(uniqueMovies);
   return uniqueMovies;
 }
-
-// const uniqueMovies = Array.from(new Set(loadedMovies.map(a => a.id)))
-//   .map(id => {
-//     return loadedMovies.find(a => a.id === id)
-//   })
 

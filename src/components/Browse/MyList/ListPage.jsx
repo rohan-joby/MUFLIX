@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import useHttp from "../../../hooks/use-http";
 import { getMyList } from "../../../lib/api";

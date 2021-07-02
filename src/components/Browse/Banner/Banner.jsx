@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { FaPlus } from "react-icons/fa";
 
 import Header from "../../Layout/Header";
 import useHttp from "../../../hooks/use-http";
-import { fetchBanner, addToMyList } from "../../../lib/api";
+import { fetchBanner, getGenreObjects, addToMyList } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
@@ -24,52 +25,57 @@ const Banner = () => {
     return <LoadingSpinner />;
   }
   if (status === "completed" && banner) {
-    const { id, backdrop_path, title, overview } = banner;
+    const { id, backdrop_path, title, genre_ids, overview, vote_average } =
+      banner;
 
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
     const shortOverview = overview.slice(0, 180) + "...";
 
+    const genreObjects = getGenreObjects(genre_ids);
+
     const clickHandler = () => {
       history.push(`/${id}`);
     };
-
-    // const addToMyListHandler = () => {
-    //   const details = {
-    //     id: id,
-    //     title: title,
-    //     backdrop: backdrop_path,
-    //     genre: genre_ids,
-    //     rating: vote_average,
-    //   };
-    //   addToMyList(details);
-    // };
+    const addToMyListHandler = () => {
+      console.log("in add handle");
+      const details = {
+        id: id,
+        title: title,
+        backdrop: backdrop_path,
+        genre: genreObjects,
+        rating: vote_average,
+      };
+      addToMyList(details);
+    };
 
     return (
       <div className={classes.banner}>
         <div>
-          <div className={classes.shadow}/>
+          <div className={classes.shadow} />
           <img src={imagePath} alt={title} />
         </div>
         <Header />
         <h1 className={classes.title}>{title}</h1>
         <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>
-          {/* <button
-            type="button"
-            disabled
-            className={`${classes.btn} ${classes["btn-primary"]}`}
-            onClick={addToMyListHandler}
-          >
-            ➕ My List
-          </button> */}
           <button
             type="button"
             className={`${classes.btn} ${classes["btn-primary"]}`}
+            onClick={addToMyListHandler}
+          >
+            <span><FaPlus size={18}/></span> My List
+          </button>
+        </div>
+
+        <div className={classes.actions}>
+          <button
+            type="button"
+            className={`${classes.btn} ${classes["btn-secondary"]}`}
             onClick={clickHandler}
           >
             <span>
               <IoMdInformationCircleOutline size={23} />
-            </span>{" "}
+            </span>
             More info
           </button>
         </div>

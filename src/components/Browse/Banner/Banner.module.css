@@ -16,7 +16,7 @@
   position: relative;
   font-size: 3rem;
   font-weight: 900;
-  padding-top: 3.5vw;
+  padding-top: 2.5vw;
   padding-left: 30px;
   margin-top:0;
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
@@ -38,18 +38,19 @@
   font-weight: 700;
   margin-left: 2rem;
   margin-right: 0.4rem;
-  margin-bottom: calc(4rem + 40px);
+  margin-bottom: 4.5rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  display: inline-block;
   display: flex;
   align-items: center;
 }
 button span {
   margin-right: 5px;
 }
-.btn:hover,
-.btn:focus {
+.btn-primary:hover,
+.btn-primary:focus {
   color: white;
   background: #be0811;
 }
@@ -58,10 +59,17 @@ button span {
   background-color: #e50914;
 }
 .btn-secondary {
-  color: white;
-  background-color: #3c2d2e;
-  padding: 13px 15px;
-  margin-left: 0;
+  color: #f2f2f2;
+  background-color: rgba(37, 40, 42, 0.7);
+  padding: 11.5px 50px;
+}
+.btn-secondary:hover,
+.btn-secondary:focus{
+  color:white;
+  background-color: rgba(69, 70, 71, 0.8);
+}
+.actions{
+  display:inline-block;
 }
 
 .shadow {
