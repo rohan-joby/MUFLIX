@@ -11,19 +11,6 @@
   object-fit: cover;
 }
 
-.header {
-  text-align: start;
-  font-weight: 700;
-  font-size: 2.2rem;
-  padding-top: 85px;
-  padding-left: 40px;
-  text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.7) 10%,
-    rgba(0, 0, 0, 0)
-  );
-}
 .title {
   color: rgb(255, 255, 255);
   position: relative;

@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-top: 85px;
+  padding-left: 40px;
+  text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
+}
+.heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  text-align: start;
+  padding-left: 40px;
+  padding-right: 15px;
+  
+}
+.genre {
+  font-size: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1px 8px;
+  height:2.1rem;
+  border-radius: 5px;
+}

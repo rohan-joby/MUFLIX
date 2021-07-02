@@ -37,7 +37,7 @@ export async function fetchAllMovies(genre) {
 
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   if (!response.ok) {
     throw new Error(data.message || "Movies not found!");

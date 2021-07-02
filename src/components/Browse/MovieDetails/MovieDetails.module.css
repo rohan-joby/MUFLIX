@@ -1,7 +1,7 @@
 .container {
   font-family: "Roboto", sans-serif;
   color: white;
-  width: 75%;
+  width: 62%;
   max-height: 90vh;
   overflow-y: scroll;
   background: #141414;
@@ -9,7 +9,7 @@
   border-bottom-right-radius: 10px;
   position: relative;
   z-index: 10;
-  margin: 1rem auto;
+  margin: 3rem auto 1rem auto;
 }
 .poster {
   width: 100%;

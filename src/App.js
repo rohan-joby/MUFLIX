@@ -6,6 +6,7 @@ import AllGenre from "./components/Browse/AllGenre";
 import Banner from "./components/Browse/Banner/Banner";
 import MovieDetails from "./components/Browse/MovieDetails/MovieDetails";
 import MyList from "./pages/MyList";
+import GenreResults from "./pages/GenreResults";
 import SearchResults from "./pages/SearchResults";
 
 const App = () => {
@@ -22,6 +23,9 @@ const App = () => {
         </Route>
         <Route path="/:movie" exact>
           <MovieDetails />
+        </Route>
+        <Route path="/genre/:genre">
+          <GenreResults />
         </Route>
         <Route path="/results/:query">
           <SearchResults />

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
+import Header from "../../Layout/Header";
 import useHttp from "../../../hooks/use-http";
 import { fetchBanner, addToMyList } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
@@ -49,7 +50,7 @@ const Banner = () => {
           <div className={classes.shadow}/>
           <img src={imagePath} alt={title} />
         </div>
-        <h2 className={classes.header}>Movies</h2>
+        <Header />
         <h1 className={classes.title}>{title}</h1>
         <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>
