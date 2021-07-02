@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 import { FaPlus, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
@@ -8,6 +8,7 @@ import useHttp from "../../../hooks/use-http";
 import { addToMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
+import { scrollToBottom, scrollToTop } from "../../../hooks/useScrollToTop";
 
 import ExtraMovieDetails from "./ExtraMovieDetails";
 
@@ -17,8 +18,8 @@ import classes from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
   const history = useHistory();
-  const location = useLocation();
   const params = useParams();
+  const loadMoreRef = useRef(null);
 
   const [loadMore, setLoadMore] = useState(false);
   const {
@@ -48,7 +49,7 @@ const MovieDetails = () => {
     loadedDetails &&
     loadedCredits
   ) {
-    console.log(loadedCredits);
+    //console.log(loadedCredits);
     const {
       backdrop_path,
       title,
@@ -67,9 +68,9 @@ const MovieDetails = () => {
       ? new Date(release_date).getFullYear()
       : "unavailable";
 
-    const actors = cast.slice(0, 4).map((actor, index) => {
+    const actors = cast.length > 0 ? cast.slice(0, 4).map((actor, index) => {
       return index === 3 ? actor.name : `${actor.name},  `;
-    });
+    }): "unavailable";
 
     const addToMyListHandler = () => {
       const details = {
@@ -81,9 +82,17 @@ const MovieDetails = () => {
       };
       addToMyList(details);
     };
-
+    
+    const scrollToBottom = (ref) => window.scrollTo(0, ref.current.offsetTop) 
+    // const scrollToRef = (ref) => (ref.current.offsetTop) 
+    
     const loadMoreHandler = () => {
       setLoadMore((prev) => !prev);
+      loadMore && scrollToTop(); 
+      // !loadMore && scrollToBottom(loadMoreRef);
+      // !loadMore && (loadMoreRef.current.offsetTop=100);
+      // console.log(scrollToRef(loadMoreRef))
+      // !loadMore && scrollToBottom();
     };
 
     const closePageHandler = () => {
@@ -111,8 +120,8 @@ const MovieDetails = () => {
               <h2 className={classes.title}>{title}</h2>
               <div className={classes.about__extra}>
                 <p className={classes.rating}>{vote_average} /10</p>
-                <p>{date}</p>
-                <p>{runtime} mins</p>
+                {date && <p>{date}</p>}
+                {runtime>0 && <p>{runtime} mins</p>}
               </div>
             </div>
             <h3 className={classes.summary}>{overview}</h3>
@@ -120,7 +129,7 @@ const MovieDetails = () => {
           <div className={classes.crew}>
             <h4>
               <span>Cast: </span>
-              {actors} <em>more</em>
+              {actors} {cast.length > 0 ? <em>more</em> : ""}
             </h4>
             <h4>
               <span>Genres: </span>
@@ -136,6 +145,7 @@ const MovieDetails = () => {
           type="button"
           className={classes.load}
           onClick={loadMoreHandler}
+          ref={loadMoreRef}
         >
           {!loadMore ? (
             <FaChevronDown size={30} style={{ fill: "white" }} />
@@ -151,9 +161,6 @@ const MovieDetails = () => {
             genre={genres}
           />
         )}
-
-        {/* <h4>{director.name}</h4>
-                <h4>{writer.name}</h4> */}
       </div>
     );
   }

@@ -9,9 +9,9 @@ const ExtraMovieDetails = ({ title, cast, crew, genre }) => {
   const writer = crew.find((member) =>(member.job === "Screenplay"|| member.job ==="Writer"));
   const writerName = writer ? writer.name: "unavailable :(";
   
-  let actors = cast.slice(0,15).map((actor, index) => {
+  let actors = cast.length > 0 ? cast.slice(0,15).map((actor, index) => {
     return index === 14 ? actor.name : `${actor.name},  `;
-  });
+  }): "unavailable :(";
   const genreList = genre.map((element, index) => {
     return index === genre.length - 1 ? element.name : `${element.name},  `;
   });

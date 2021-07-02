@@ -1,7 +1,7 @@
 .container {
   font-family: "Roboto", sans-serif;
   color: white;
-  width: 62%;
+  width: 67%;
   max-height: 90vh;
   overflow-y: scroll;
   background: #141414;
@@ -81,14 +81,14 @@
 .title {
   font-size: 1.8rem;
   letter-spacing: 1.3px;
-  max-width: 24rem;
+  width: 20rem;
   text-align: start;
   margin-bottom: 1.3rem;
 }
 .rating {
   color: rgb(236, 220, 220);
   background-color: #027716;
-  padding: 3px 8px 1px 8px;
+  padding: 3px 8px 1px 5px;
   border-radius: 5px;
 }
 .summary {
@@ -117,7 +117,7 @@
   border: 1px solid white;
   border-radius: 50%;
   padding: 5px 6px 4px 6px;
-  margin: 1.5rem 48%;
+  margin: 0.5rem 48%;
   cursor: pointer;
 }
 .load:hover,

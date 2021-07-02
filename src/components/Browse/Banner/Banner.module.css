@@ -18,6 +18,7 @@
   font-weight: 900;
   padding-top: 3.5vw;
   padding-left: 30px;
+  margin-top:0;
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
 }
 .summary {
