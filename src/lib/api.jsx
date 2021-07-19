@@ -28,6 +28,28 @@ export function getGenreObjects(genre_ids) {
   return genres;
 }
 
+export async function signIn(userInfo) {
+  const { username, email, password } = userInfo;
+  const url = process.env.REACT_APP_DB_AUTH_URL + "/register";
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "could not register user");
+  }
+
+  const token = data.token;
+  const expiresAt= data.expiresAt;
+
+  return { token, expiresAt };
+}
+
 export async function fetchBanner() {
   const url = BASE_URL + ENDPOINTS.sections[0].endpoint;
   const response = await fetch(url);
@@ -149,12 +171,12 @@ export async function getMyList() {
   //   seen.add(el.id);
   //   return !duplicate;
   // });
-  const uniqueMovies = Array.from(new Set(loadedMovies.map(a => a.id)))
-  .map(id => {
-    return loadedMovies.find(a => a.id === id)
-  })
+  const uniqueMovies = Array.from(new Set(loadedMovies.map((a) => a.id))).map(
+    (id) => {
+      return loadedMovies.find((a) => a.id === id);
+    }
+  );
 
   console.log(uniqueMovies);
   return uniqueMovies;
 }
-

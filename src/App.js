@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import Auth from "./pages/Auth";
+import Register from "./pages/Register";
 import Header from "./pages/Header";
 import AllGenre from "./components/Browse/AllGenre";
 import Banner from "./components/Browse/Banner/Banner";
@@ -15,8 +15,8 @@ const App = () => {
     <Fragment>
       {/* <Header /> */}
       <Switch>
-        <Route path="/signup" exact>
-          <Auth />
+        <Route path="/register" exact>
+          <Register />
         </Route>
         <Route path="/" exact>
           <Banner />
