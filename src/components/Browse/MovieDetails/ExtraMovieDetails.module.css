@@ -1,9 +1,10 @@
 .container {
   font-family: "Roboto", sans-serif;
   color: white;
-  letter-spacing: 1.1px;
+  letter-spacing: 1px;
   width: 92%;
   margin: 0 auto;
+  line-height: 1.5;
 }
 .container > * {
   font-weight: 400;
@@ -24,6 +25,8 @@
 }
 .container h3 {
   font-size: 1.1rem;
+  font-weight: 400;
+
 }
 
 @media screen and (max-width: 480px) {

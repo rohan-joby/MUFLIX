@@ -12,7 +12,7 @@ img.poster {
   display: block;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: -5px;
+  margin-bottom: 5px;
 }
 .details {
   color: rgb(255, 255, 255);

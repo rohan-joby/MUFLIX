@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import AuthContext from "./auth-context";
 
 export const AuthContextProvider = (props) => {
-  const [token, setToken] = useState(null);
-  const userLoggedIn = !!token;
+  const [userToken, setUserToken] = useState(null);
+  const userLoggedIn = !!userToken;
 
   const loginHandler = (details) => {
     const {token,expiresAt} = details;
-    setToken(token);
+    setUserToken(token);
     localStorage.setItem("authToken",token);
     localStorage.setItem("expiresAt",expiresAt);
+    console.log(token);
+    console.log(userToken);
   };
 
   const logoutHandler = () => {
-    setToken(null);
+    setUserToken(null);
     localStorage.removeItem("authToken");
     localStorage.removeItem("expiresAt");
   };
 
   const contextValue = {
-      token: token,
+      token: userToken,
       isLoggedIn: userLoggedIn,
       login: loginHandler,
       logout: logoutHandler

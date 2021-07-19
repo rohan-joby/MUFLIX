@@ -16,6 +16,7 @@ import AuthContext from "./store/auth-context";
 const App = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
+  console.log(isLoggedIn);
 
   return (
     <Fragment>
@@ -35,6 +36,7 @@ const App = () => {
         </Route>
 
         <Route path="/mylist" exact>
+          {console.log(isLoggedIn)};
           {isLoggedIn ? (
             <Fragment>
               <Header />

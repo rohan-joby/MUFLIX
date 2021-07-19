@@ -3,7 +3,7 @@ import { useCallback, useReducer } from "react";
 const httpReducer = (state, action) => {
   switch (action.type) {
     case "SEND": {
-      console.log("sending")
+      // console.log("sending")
       return {
         status: "pending",
         data: null,
@@ -11,7 +11,7 @@ const httpReducer = (state, action) => {
       };
     }
     case "SUCCESS": {
-      console.log("success")
+      // console.log("success")
       return {
         status: "completed",
         data: action.responseData,

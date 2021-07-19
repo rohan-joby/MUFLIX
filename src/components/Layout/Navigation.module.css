@@ -29,12 +29,13 @@
 .navprofile img {
   display: inline-block;
   height: 2.5rem;
-  margin: 20px 10px 0 8px;
+  margin: 20px 13px 0 8px;
   border-radius: 3px;
 }
 .navprofile svg {
   cursor: pointer;
   transition: all 300ms ease;
+  margin-bottom: 10px;
 }
 .navprofile__active svg {
   transform: rotate(180deg);
@@ -49,10 +50,10 @@
   border: 1px solid hsl(240, 1%, 39%);
   border-radius: 5px;
 }
-.signout__button a{
-  font-size:1rem;
+.signout__button a {
+  font-size: 1rem;
   letter-spacing: 1.3px;
-  color:white;
+  color: white;
 }
 
 .nav__fixed {

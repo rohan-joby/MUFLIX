@@ -26,7 +26,7 @@ const AllMovie = (props) => {
     movieList = loadedMovies.results.map((movie) => (
       <Movie key={movie.id} data={movie} />
     ));
-    console.log("completed");
+    // console.log("completed");
   }
   const link = `/genre/${genre}`;
   return (

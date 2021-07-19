@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { FaPlus, FaChevronDown } from "react-icons/fa";
 
@@ -6,11 +6,15 @@ import Muflix from "../../assets/muflix.PNG";
 import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
 import { addToMyList } from "../../lib/api";
+import AuthContext from "../../store/auth-context";
 
 import { getGenres, getGenreObjects } from "../../lib/api";
 
 const Movie = (props) => {
   const history = useHistory();
+  const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
+
   const { id, backdrop_path, genre_ids, title, vote_average } = props.data;
   const isInValid = backdrop_path === null;
   const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
@@ -32,8 +36,9 @@ const Movie = (props) => {
       backdrop: backdrop_path,
       genre: genreObjects,
       rating: vote_average,
+      token:token
     };
-    // addToMyList(details);
+    addToMyList(details);
   };
 
   return (

@@ -4,7 +4,7 @@ import { GENRE } from "../../data/genre";
 import AllMovie from "./AllMovie";
 
 const AllGenre = () => {
-  console.log(GENRE);
+  // console.log(GENRE);
 
   return (
     <Fragment>

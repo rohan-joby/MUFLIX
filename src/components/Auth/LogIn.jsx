@@ -21,11 +21,13 @@ const LogIn = () => {
     const password = passwordRef.current.value;
     //error handling
 
-    const details = logIn({ email, password });
-    if (details){
-      authCtx.login(details);
-      history.push("/");
-    }
+
+    logIn({ email, password }).then(details => {
+      if (details){
+          authCtx.login(details);
+          history.push("/");
+        }
+    })
   };
   return (
     <div

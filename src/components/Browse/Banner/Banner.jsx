@@ -52,8 +52,8 @@ const Banner = () => {
     };
 
     return (
-      <div className={classes.banner}>
-        <div>
+      <div className={classes.banner} >
+        <div className={classes.banner__image}>
           <div className={classes.shadow} />
           <img src={imagePath} alt={title} />
         </div>
