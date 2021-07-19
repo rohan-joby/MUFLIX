@@ -28,7 +28,7 @@ export function getGenreObjects(genre_ids) {
   return genres;
 }
 
-export async function signIn(userInfo) {
+export async function signUp(userInfo) {
   const { username, email, password } = userInfo;
   const url = process.env.REACT_APP_DB_AUTH_URL + "/register";
   const response = await fetch(url, {
@@ -42,6 +42,28 @@ export async function signIn(userInfo) {
 
   if (!response.ok) {
     throw new Error(data.message || "could not register user");
+  }
+
+  const token = data.token;
+  const expiresAt= data.expiresAt;
+
+  return { token, expiresAt };
+}
+
+export async function logIn(userInfo){
+  const {email, password} = userInfo;
+  const url = process.env.REACT_APP_DB_AUTH_URL + "/login";
+  const response = await fetch(url,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Invalid credentials!");
   }
 
   const token = data.token;

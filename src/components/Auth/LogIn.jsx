@@ -1,19 +1,50 @@
-import React from "react";
+import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
 import Background from "../../assets/Register-bg.jpg";
+
+import { logIn } from "../../lib/api";
+import AuthContext from "../../store/auth-context";
 import classes from "./LogIn.module.css";
 
 const LogIn = () => {
+  const authCtx = useContext(AuthContext);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    //error handling
+
+    const details = logIn({ email, password });
+    authCtx.login(details);
+  };
   return (
-    <div className={classes.container} style={{backgroundImage:`url(${Background})`}}>
+    <div
+      className={classes.container}
+      style={{ backgroundImage: `url(${Background})` }}
+    >
       <img src={Muflix} alt="logo" className={classes.logo} />
-      <form className={classes.input__form}>
+      <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Log In</h1>
-        <input type="email" className={classes.input} name="email" placeholder="Email" />
-        <input type="text" className={classes.input} name="password" placeholder="Password" />
-      
+        <input
+          type="email"
+          ref={emailRef}
+          className={classes.input}
+          name="email"
+          placeholder="Email"
+        />
+        <input
+          type="text"
+          ref={passwordRef}
+          className={classes.input}
+          name="password"
+          placeholder="Password"
+        />
+
         <button type="submit" className={classes.btn__primary}>
           Log In
         </button>
@@ -21,7 +52,7 @@ const LogIn = () => {
           Log In anonymously
         </button>
         <h2 className={classes.signIn__link}>
-        Haven't you registered yet? <Link>Sign Up</Link>
+          Haven't you registered yet? <Link>Sign Up</Link>
         </h2>
       </form>
     </div>

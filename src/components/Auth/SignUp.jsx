@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import Background from "../../assets/Register-bg.jpg";
 
-import { signIn } from "../../lib/api";
+import { signUp } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
 import classes from "./SignUp.module.css";
 
@@ -13,14 +13,14 @@ const SignUp = () => {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-//error handling
+  //error handling
   const submitHandler = (event) => {
     event.preventDefault();
     const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const registerDetails = signIn({username,email,password});
+    const registerDetails = signUp({ username, email, password });
     authCtx.login(registerDetails);
   };
 
