@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { FaPlus, FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -15,11 +15,14 @@ import ExtraMovieDetails from "./ExtraMovieDetails";
 import Muflix from "../../../assets/muflix.PNG";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
+import AuthContext from "../../../store/auth-context";
 
 const MovieDetails = () => {
   const history = useHistory();
   const params = useParams();
 
+  const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
   const [loadMore, setLoadMore] = useState(false);
 
   useEffect(() => {
@@ -93,6 +96,7 @@ const MovieDetails = () => {
         backdrop: backdrop_path,
         genre: genres,
         rating: vote_average,
+        token:token
       };
       addToMyList(details);
     };

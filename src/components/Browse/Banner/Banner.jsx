@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
@@ -10,11 +10,13 @@ import { IMAGE_URL } from "../../../data/endpoints";
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./Banner.module.css";
+import AuthContext from "../../../store/auth-context";
 
 const Banner = () => {
   const history = useHistory();
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
-
+  const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -44,6 +46,7 @@ const Banner = () => {
         backdrop: backdrop_path,
         genre: genreObjects,
         rating: vote_average,
+        token:token
       };
       addToMyList(details);
     };

@@ -45,15 +45,15 @@ export async function signUp(userInfo) {
   }
 
   const token = data.token;
-  const expiresAt= data.expiresAt;
+  const expiresAt = data.expiresAt;
 
   return { token, expiresAt };
 }
 
-export async function logIn(userInfo){
-  const {email, password} = userInfo;
+export async function logIn(userInfo) {
+  const { email, password } = userInfo;
   const url = process.env.REACT_APP_DB_AUTH_URL + "/login";
-  const response = await fetch(url,{
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export async function logIn(userInfo){
   }
 
   const token = data.token;
-  const expiresAt= data.expiresAt;
+  const expiresAt = data.expiresAt;
 
   return { token, expiresAt };
 }
@@ -148,8 +148,9 @@ export async function searchMovies(query) {
   return searchData;
 }
 
-export async function addToMyList({ id, title, backdrop, genre, rating }) {
-  fetch(FIREBASE_URL + "/movies.json", {
+export async function addToMyList({ id, title, backdrop, genre, rating, token }) {
+  const url = process.env.REACT_APP_DB_MYLIST_URL +"/addMovie"
+  fetch(url, {
     method: "POST",
     body: JSON.stringify({
       id: id,
@@ -160,12 +161,20 @@ export async function addToMyList({ id, title, backdrop, genre, rating }) {
     }),
     headers: {
       "Content-Type": "application/json",
+      Authentication: `${token}`,
     },
   });
 }
 
-export async function getMyList() {
-  const response = await fetch(FIREBASE_URL + "/movies.json");
+export async function getMyList(token) {
+  const url = process.env.REACT_APP_DB_MYLIST_URL +"/getMovies"
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authentication: `${token}`,
+    },
+  });
   const data = await response.json();
 
   if (!response.ok) {

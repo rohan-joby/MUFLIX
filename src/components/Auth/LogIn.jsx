@@ -52,7 +52,7 @@ const LogIn = () => {
           Log In anonymously
         </button>
         <h2 className={classes.signIn__link}>
-          Haven't you registered yet? <Link>Sign Up</Link>
+          Haven't you registered yet? <Link to="/register">Sign Up</Link>
         </h2>
       </form>
     </div>
