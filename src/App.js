@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+import Auth from "./pages/Auth";
 import Header from "./pages/Header";
 import AllGenre from "./components/Browse/AllGenre";
 import Banner from "./components/Browse/Banner/Banner";
@@ -12,8 +13,11 @@ import SearchResults from "./pages/SearchResults";
 const App = () => {
   return (
     <Fragment>
-      <Header />
+      {/* <Header /> */}
       <Switch>
+        <Route path="/signup" exact>
+          <Auth />
+        </Route>
         <Route path="/" exact>
           <Banner />
           <AllGenre />
