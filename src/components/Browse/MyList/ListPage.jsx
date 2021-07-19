@@ -11,20 +11,19 @@ import classes from "./ListPage.module.css";
 const ListPage = () => {
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
-  const { sendRequest, status, data: loadedMovies } = useHttp(getMyList(token));
+  const { sendRequest, status, data: loadedMovies } = useHttp(getMyList);
 
   useEffect(() => {
     sendRequest();
-  }, [sendRequest]);
-
+  },[] );
+//[sendRequest]
   let movieList;
   if (status === "pending") {
     return <LoadingSpinner />;
   }
   if (status === "completed" && loadedMovies) {
-    console.log(loadedMovies);
     movieList = loadedMovies.map((movie) => (
-      <Movie key={movie.id} data={movie} />
+      <Movie key={movie.id} data={movie} mylist={true}/>
     ));
   }
   return (

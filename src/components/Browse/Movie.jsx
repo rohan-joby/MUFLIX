@@ -8,7 +8,12 @@ import { IMAGE_URL } from "../../data/endpoints";
 import { addToMyList } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
 
-import { getGenres, getGenreObjects } from "../../lib/api";
+import {
+  getGenres,
+  getMyListGenres,
+  getGenreObjects,
+  getMyListGenreObjects,
+} from "../../lib/api";
 
 const Movie = (props) => {
   const history = useHistory();
@@ -19,9 +24,15 @@ const Movie = (props) => {
   const isInValid = backdrop_path === null;
   const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
 
-  const genres = getGenres(genre_ids);
+  let genres, genreObjects;
+  if (props.mylist) {
+    genres = getMyListGenres(genre_ids);
+    genreObjects = getMyListGenreObjects(genre_ids);
+  } else {
+    genres = getGenres(genre_ids);
+    genreObjects = getGenreObjects(genre_ids);
+  }
   const reducedGenres = genres.slice(0, 3);
-  const genreObjects = getGenreObjects(genre_ids);
 
   const shortTitle = title.length < 18 ? title : title.slice(0, 18) + "...";
 
@@ -36,20 +47,20 @@ const Movie = (props) => {
       backdrop: backdrop_path,
       genre: genreObjects,
       rating: vote_average,
-      token:token
+      token: token,
     };
     addToMyList(details);
   };
 
   return (
-    <div className={classes.movie} onClick={clickHandler}>
-      <img className={classes.poster} src={imagePath} alt={title} />
+    <div className={classes.movie} >
+      <img className={classes.poster} onClick={clickHandler} src={imagePath} alt={title} />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
         <button onClick={addToListHandler}>
           <FaPlus style={{ fill: "white" }} />
         </button>
-        <button>
+        <button onClick={clickHandler}>
           <FaChevronDown style={{ fill: "white" }} />
         </button>
         <div className={classes.info}>

@@ -1,18 +1,26 @@
 import { BASE_URL, ENDPOINTS } from "../data/endpoints";
 import { GENRE_ID } from "../data/genre";
 
-const FIREBASE_URL =
-  "https://muflix-db-default-rtdb.asia-southeast1.firebasedatabase.app/";
-
 function getRandomItem(length) {
   return Math.floor(Math.random() * length);
 }
 
 export function getGenres(genre_ids) {
   const genres = [];
-
   for (const id of genre_ids) {
     const { name } = GENRE_ID.find((genre) => id === genre.id);
+    // const name = items.map((item) => item.name);
+    genres.push(name);
+  }
+  return genres;
+}
+
+export function getMyListGenres(genre_ids) {
+  const genres = [];
+  for (const genreItem in genre_ids) {
+    const { name } = GENRE_ID.find(
+      (genre) => genre_ids[genreItem].id === genre.id
+    );
     genres.push(name);
   }
   return genres;
@@ -20,9 +28,20 @@ export function getGenres(genre_ids) {
 
 export function getGenreObjects(genre_ids) {
   const genres = [];
-
   for (const id of genre_ids) {
     const { name } = GENRE_ID.find((genre) => id === genre.id);
+    genres.push({ id, name });
+  }
+  return genres;
+}
+
+export function getMyListGenreObjects(genre_ids) {
+  const genres = [];
+  for (const genreItem in genre_ids) {
+    const { name } = GENRE_ID.find(
+      (genre) => genre_ids[genreItem].id === genre.id
+    );
+    const id = genre_ids[genreItem].id;
     genres.push({ id, name });
   }
   return genres;
@@ -148,8 +167,15 @@ export async function searchMovies(query) {
   return searchData;
 }
 
-export async function addToMyList({ id, title, backdrop, genre, rating, token }) {
-  const url = process.env.REACT_APP_DB_MYLIST_URL +"/addMovie"
+export async function addToMyList({
+  id,
+  title,
+  backdrop,
+  genre,
+  rating,
+  token,
+}) {
+  const url = process.env.REACT_APP_DB_MYLIST_URL + "/addMovie";
   fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -161,18 +187,20 @@ export async function addToMyList({ id, title, backdrop, genre, rating, token })
     }),
     headers: {
       "Content-Type": "application/json",
-      Authentication: `${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 }
 
-export async function getMyList(token) {
-  const url = process.env.REACT_APP_DB_MYLIST_URL +"/getMovies"
+export async function getMyList() {
+  const token = localStorage.getItem("authToken");
+  const url = process.env.REACT_APP_DB_MYLIST_URL + "/getMovies";
+
   const response = await fetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authentication: `${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   const data = await response.json();
@@ -181,17 +209,17 @@ export async function getMyList(token) {
     throw new Error(data.message || "Movies not found!");
   }
   const loadedMovies = [];
-  for (const key in data) {
-    const genreList = data[key].genre;
+  for (const key in data.movies) {
+    const genreList = data.movies[key].genre;
     const genres = genreList.map((genre) => genre.id);
     console.log(genres);
 
     loadedMovies.push({
-      id: data[key].id,
-      title: data[key].title,
-      backdrop_path: data[key].backdrop,
-      genre_ids: genres,
-      vote_average: data[key].rating,
+      id: data.movies[key].id,
+      title: data.movies[key].title,
+      backdrop_path: data.movies[key].backdrop,
+      genre_ids: genreList,
+      vote_average: data.movies[key].rating,
     });
   }
   //remove duplicates
