@@ -9,36 +9,69 @@
     rgba(0, 0, 0, 0)
   );
   position: fixed;
-  top:0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 10;
 }
-.primary__nav{
+.primary__nav {
   display: flex;
   align-items: center;
 }
-.secondary__nav{
-  margin-right:50px;
+.secondary__nav {
+  margin-right: 50px;
+  display: flex;
 }
-.nav__fixed{
-    background: #0a0a0a;
-    color:white;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-    height: 4.5rem;
-    width: 100%;
-    position: fixed;
-    top:0;
-    display: flex;
-    justify-content: space-between;
-    z-index: 10;
+.navprofile {
+  position: relative;
+}
+.navprofile img {
+  display: inline-block;
+  height: 2.5rem;
+  margin: 20px 10px 0 8px;
+  border-radius: 3px;
+}
+.navprofile svg {
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+.navprofile__active svg {
+  transform: rotate(180deg);
+}
+.signout__button {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  height: 2.5rem;
+  width: 8.5rem;
+  background: hsla(0, 0%, 0%, 0.7);
+  border: 1px solid hsl(240, 1%, 39%);
+  border-radius: 5px;
+}
+.signout__button a{
+  font-size:1rem;
+  letter-spacing: 1.3px;
+  color:white;
+}
+
+.nav__fixed {
+  background: hsla(0, 0%, 4%, 0.7);
+  color: white;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  height: 4.5rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
 }
 .logo {
   color: #e50914;
-  height:3rem;
-  padding-left:30px;
-  padding-right:75px;
+  height: 3rem;
+  padding-left: 30px;
+  padding-right: 75px;
 }
 a {
   text-decoration: none;
@@ -50,10 +83,10 @@ a h2 {
   letter-spacing: 1.2px;
   /* margin: 0 1rem 0 1.875rem;
   padding-top: 1.6rem; */
-  padding-right:15px;
+  padding-right: 15px;
   cursor: pointer;
 }
 
-a.active h2{
+a.active h2 {
   font-weight: 700;
 }

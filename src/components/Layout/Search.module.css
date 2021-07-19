@@ -1,16 +1,14 @@
 .search {
   padding-top: 1.6rem;
-  padding-right: 85px;
+  padding-right: 35px;
 }
 .search__btn{
-    position: absolute;
-    right:43px;
-    top:30px;
     background: transparent;
     border:none;
     cursor: pointer;
+    margin-left:14px;
 }
-input{
+.input{
     font-size: 1.15rem;
     height: 2.2rem;
     width:18rem;
@@ -22,8 +20,8 @@ input{
     padding-left:10px;
 
 }
-input:hover,
-input:focus{
+.input:hover,
+.input:focus{
     color:white;
     background: rgba(212, 211, 211, 0.61);
     outline:none;
@@ -32,7 +30,7 @@ input:focus{
 ::placeholder{
     color:rgb(70, 70, 70);
 }
-input:hover::placeholder,
-input:focus::placeholder{
+.input:hover::placeholder,
+.input:focus::placeholder{
     color:black;
 }
