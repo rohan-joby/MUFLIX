@@ -1,5 +1,6 @@
 import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
 import Background from "../../assets/Register-bg.jpg";
@@ -9,6 +10,7 @@ import AuthContext from "../../store/auth-context";
 import classes from "./LogIn.module.css";
 
 const LogIn = () => {
+  const history = useHistory();
   const authCtx = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -20,7 +22,10 @@ const LogIn = () => {
     //error handling
 
     const details = logIn({ email, password });
-    authCtx.login(details);
+    if (details){
+      authCtx.login(details);
+      history.push("/");
+    }
   };
   return (
     <div

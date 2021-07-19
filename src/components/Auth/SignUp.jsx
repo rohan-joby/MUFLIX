@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
 import Background from "../../assets/Register-bg.jpg";
@@ -9,6 +9,7 @@ import AuthContext from "../../store/auth-context";
 import classes from "./SignUp.module.css";
 
 const SignUp = () => {
+  const history = useHistory();
   const authCtx = useContext(AuthContext);
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -21,7 +22,10 @@ const SignUp = () => {
     const password = passwordRef.current.value;
 
     const registerDetails = signUp({ username, email, password });
-    authCtx.login(registerDetails);
+    if (registerDetails) {
+      authCtx.login(registerDetails);
+      history.pushState("/");
+    }
   };
 
   return (

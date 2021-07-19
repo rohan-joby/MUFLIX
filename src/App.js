@@ -23,37 +23,56 @@ const App = () => {
         <Route path="/register" exact>
           <Register />
         </Route>
+
         <Route path="/login" exact>
           <Login />
         </Route>
+
         <Route path="/" exact>
           <Header />
           <Banner />
           <AllGenre />
         </Route>
-        {isLoggedIn && (
-          <Route path="/mylist" exact>
-            <Header />
-            <MyList />
-          </Route>
-        )}
-        {isLoggedIn && (
-          <Route path="/:movie" exact>
-            <MovieDetails />
-          </Route>
-        )}
+
+        <Route path="/mylist" exact>
+          {isLoggedIn ? (
+            <Fragment>
+              <Header />
+              <MyList />
+            </Fragment>
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Route>
+
+        <Route path="/:movie" exact>
+          {isLoggedIn ? <MovieDetails /> : <Redirect to="/login" />}
+        </Route>
+
         {isLoggedIn && (
           <Route path="/genre/:genre">
-            <Header />
-            <GenreResults />
+            {isLoggedIn ? (
+              <Fragment>
+                <Header />
+                <GenreResults />
+              </Fragment>
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
         )}
-        {isLoggedIn && (
-          <Route path="/results/:query">
-            <Header />
-            <SearchResults />
-          </Route>
-        )}
+
+        <Route path="/results/:query">
+          {isLoggedIn ? (
+            <Fragment>
+              <Header />
+              <SearchResults />
+            </Fragment>
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Route>
+
         <Route path="*">
           <Redirect to="/" />
         </Route>
