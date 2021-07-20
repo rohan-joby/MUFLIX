@@ -1,16 +1,15 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect } from "react";
 
 import useHttp from "../../../hooks/use-http";
 import { getMyList } from "../../../lib/api";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import Movie from "../Movie";
 
-import AuthContext from "../../../store/auth-context";
 import classes from "./ListPage.module.css";
 
 const ListPage = () => {
-  const authCtx = useContext(AuthContext);
-  const token = authCtx.token;
+  // const authCtx = useContext(AuthContext);
+  // const token = authCtx.token;
   const { sendRequest, status, data: loadedMovies } = useHttp(getMyList);
 
   useEffect(() => {

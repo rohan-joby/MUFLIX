@@ -176,7 +176,7 @@ export async function addToMyList({
   token,
 }) {
   const url = process.env.REACT_APP_DB_MYLIST_URL + "/addMovie";
-  fetch(url, {
+  const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
       id: id,
@@ -190,6 +190,11 @@ export async function addToMyList({
       Authorization: `Bearer ${token}`,
     },
   });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Movie could not be added!");
+  }
 }
 
 export async function getMyList() {
@@ -222,14 +227,7 @@ export async function getMyList() {
       vote_average: data.movies[key].rating,
     });
   }
-  //remove duplicates
 
-  // const seen = new Set();
-  // const uniqueMovies = loadedMovies.filter((el) => {
-  //   const duplicate = seen.has(el.id);
-  //   seen.add(el.id);
-  //   return !duplicate;
-  // });
   const uniqueMovies = Array.from(new Set(loadedMovies.map((a) => a.id))).map(
     (id) => {
       return loadedMovies.find((a) => a.id === id);
@@ -238,4 +236,23 @@ export async function getMyList() {
 
   console.log(uniqueMovies);
   return uniqueMovies;
+}
+
+export async function removeFromMyList(id){
+  const token = localStorage.getItem("authToken");
+  const url = process.env.REACT_APP_DB_MYLIST_URL + `/removeMovie/${id}`;
+
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not delete movie!");
+  }
+
 }
