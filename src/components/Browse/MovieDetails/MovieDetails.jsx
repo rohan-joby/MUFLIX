@@ -1,40 +1,42 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import { FaPlus, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaPlus, FaChevronDown, FaChevronUp, FaMinus } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
 
 import useHttp from "../../../hooks/use-http";
-import { addToMyList } from "../../../lib/api";
+import { addToMyList, removeFromMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
 import { scrollToBottom, scrollToTop } from "../../../hooks/useScrollToTop";
+import AuthContext from "../../../store/auth-context";
+import MylistContext from "../../../store/mylist-context";
 
 import ExtraMovieDetails from "./ExtraMovieDetails";
 
 import Muflix from "../../../assets/muflix.PNG";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
-import AuthContext from "../../../store/auth-context";
 
 const MovieDetails = () => {
   const history = useHistory();
   const params = useParams();
 
   const authCtx = useContext(AuthContext);
+  const mylistCtx = useContext(MylistContext);
   const token = authCtx.token;
   const [loadMore, setLoadMore] = useState(false);
 
-  useEffect(() => {
-    if (loadMore) {
-      const scrollOptions = { left: 0, top: window.pageYOffset, behavior: "smooth" };
-      window.scroll(scrollOptions);
-    }
-    if (!loadMore) {
-      const scrollOptions = { left: 0, top: 0, behavior: "smooth" };
-      window.scroll(scrollOptions);
-    }
-  }, [loadMore]);
+  // useEffect(() => {
+  //   if (loadMore) {
+  //     const scrollOptions = { left: 0, top: window.pageYOffset, behavior: "smooth" };
+  //     window.scroll(scrollOptions);
+  //   }
+  //   if (!loadMore) {
+  //     const scrollOptions = { left: 0, top: 0, behavior: "smooth" };
+  //     window.scroll(scrollOptions);
+  //   }
+  // }, [loadMore]);
 
   const {
     sendRequest: getDetails,
@@ -65,6 +67,7 @@ const MovieDetails = () => {
   ) {
     //console.log(loadedCredits);
     const {
+      id,
       backdrop_path,
       title,
       overview,
@@ -74,6 +77,7 @@ const MovieDetails = () => {
       vote_average,
     } = loadedDetails;
     const { cast, crew } = loadedCredits;
+    const movieInList = mylistCtx.isInList(id);
 
     const isInValid = backdrop_path === null;
     const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
@@ -96,11 +100,15 @@ const MovieDetails = () => {
         backdrop: backdrop_path,
         genre: genres,
         rating: vote_average,
-        token:token
+        token: token,
       };
       addToMyList(details);
+      mylistCtx.addToList(id);
     };
-
+    const removeFromMyListHandler = () => {
+      removeFromMyList(id);
+      mylistCtx.removeFromList(id);
+    };
     //const scrollToBottom = (ref) => window.scrollTo(0, ref.current.offsetTop)
     // const scrollToRef = (ref) => (ref.current.offsetTop)
 
@@ -125,11 +133,14 @@ const MovieDetails = () => {
         >
           <VscChromeClose size={20} style={{ fill: "white" }} />
         </button>
-        <button className={classes.wishlist} onClick={addToMyListHandler}>
+        <button
+          className={classes.wishlist}
+          onClick={movieInList ? removeFromMyListHandler : addToMyListHandler}
+        >
           <span>
-            <FaPlus size={17} />
+            {movieInList ? <FaMinus size={17} /> : <FaPlus size={17} />}
           </span>{" "}
-          My List
+          {movieInList ? `From My List` : `My List`}
         </button>
         <div className={classes.details}>
           <div>

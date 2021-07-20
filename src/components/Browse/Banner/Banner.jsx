@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
@@ -11,12 +11,16 @@ import { IMAGE_URL } from "../../../data/endpoints";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./Banner.module.css";
 import AuthContext from "../../../store/auth-context";
+import MylistContext from "../../../store/mylist-context";
 
 const Banner = () => {
   const history = useHistory();
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
   const authCtx = useContext(AuthContext);
+  const mylistCtx = useContext(MylistContext);
+
   const token = authCtx.token;
+
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -30,6 +34,7 @@ const Banner = () => {
     const { id, backdrop_path, title, genre_ids, overview, vote_average } =
       banner;
 
+    const movieInList = mylistCtx.isInList(id);
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
     const shortOverview = overview.slice(0, 180) + "...";
 
@@ -46,13 +51,14 @@ const Banner = () => {
         backdrop: backdrop_path,
         genre: genreObjects,
         rating: vote_average,
-        token:token
+        token: token,
       };
       addToMyList(details);
+      mylistCtx.addToList(id);
     };
 
     return (
-      <div className={classes.banner} >
+      <div className={classes.banner}>
         <div className={classes.banner__image}>
           <div className={classes.shadow} />
           <img src={imagePath} alt={title} />
@@ -63,10 +69,12 @@ const Banner = () => {
         <div className={classes.actions}>
           <button
             type="button"
+            disabled={movieInList ? true : false}
             className={`${classes.btn} ${classes["btn-primary"]}`}
-            onClick={addToMyListHandler}
+            onClick={movieInList ? null : addToMyListHandler}
           >
-            <span><FaPlus size={18}/></span> My List
+            <span>{movieInList ? "" : <FaPlus size={18} />}</span>{" "}
+            {movieInList ? `Added to List` : `My List`}
           </button>
         </div>
 

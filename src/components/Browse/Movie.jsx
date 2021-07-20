@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { FaPlus, FaChevronDown } from "react-icons/fa";
+import { FaPlus, FaMinus, FaChevronDown } from "react-icons/fa";
 
 import Muflix from "../../assets/muflix.PNG";
 import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
-import { addToMyList } from "../../lib/api";
+import { addToMyList, removeFromMyList } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
+import MylistContext from "../../store/mylist-context";
 
 import {
   getGenres,
@@ -18,11 +19,13 @@ import {
 const Movie = (props) => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
+  const mylistCtx = useContext(MylistContext);
   const token = authCtx.token;
 
   const { id, backdrop_path, genre_ids, title, vote_average } = props.data;
   const isInValid = backdrop_path === null;
   const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
+  const movieInList = mylistCtx.isInList(id);
 
   let genres, genreObjects;
   if (props.mylist) {
@@ -50,15 +53,20 @@ const Movie = (props) => {
       token: token,
     };
     addToMyList(details);
+    mylistCtx.addToList(id);
   };
 
+  const removeFromListHandler = () => {
+    removeFromMyList(id);
+    mylistCtx.removeFromList(id);
+  }
   return (
     <div className={classes.movie} >
       <img className={classes.poster} onClick={clickHandler} src={imagePath} alt={title} />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
-        <button onClick={addToListHandler}>
-          <FaPlus style={{ fill: "white" }} />
+        <button onClick={movieInList? removeFromListHandler : addToListHandler}>
+          {movieInList ? <FaMinus style={{ fill: "white" }} />: <FaPlus style={{ fill: "white" }} />}
         </button>
         <button onClick={clickHandler}>
           <FaChevronDown style={{ fill: "white" }} />

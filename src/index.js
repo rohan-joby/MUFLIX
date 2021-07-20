@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "./store/AuthProvider";
+import AuthProvider from "./store/AuthProvider";
+import MylistProvider from "./store/MylistProvider";
 import App from "./App";
 
 ReactDOM.render(
-  <AuthContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </AuthContextProvider>,
+  <AuthProvider>
+    <MylistProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MylistProvider>
+  </AuthProvider>,
   document.querySelector("#root")
 );
