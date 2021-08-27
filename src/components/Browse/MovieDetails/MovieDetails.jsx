@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import { FaPlus, FaChevronDown, FaChevronUp, FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
 
 import useHttp from "../../../hooks/use-http";

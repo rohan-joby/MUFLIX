@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { FaPlus, FaMinus, FaChevronDown } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 import Muflix from "../../assets/muflix.PNG";
 import classes from "./Movie.module.css";

@@ -24,7 +24,7 @@ const SignUp = () => {
     const registerDetails = signUp({ username, email, password });
     if (registerDetails) {
       authCtx.login(registerDetails);
-      history.pushState("/");
+      history.push("/");
     }
   };
 

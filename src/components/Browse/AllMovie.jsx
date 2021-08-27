@@ -14,7 +14,7 @@ const AllMovie = (props) => {
   //console.log(genre);
 
   useEffect(() => {
-    sendRequest(genre);
+    sendRequest({genre});
   }, [genre, sendRequest]);
 
   let movieList;

@@ -9,7 +9,6 @@ export function getGenres(genre_ids) {
   const genres = [];
   for (const id of genre_ids) {
     const { name } = GENRE_ID.find((genre) => id === genre.id);
-    // const name = items.map((item) => item.name);
     genres.push(name);
   }
   return genres;
@@ -104,9 +103,9 @@ export async function fetchBanner() {
   return data.results[randomNumber];
 }
 
-export async function fetchAllMovies(genre) {
+export async function fetchAllMovies({genre,page=1}) {
   const endpoint = ENDPOINTS.sections.find((gen) => gen.title === genre);
-  const url = BASE_URL + endpoint.endpoint;
+  const url = BASE_URL + endpoint.endpoint + `&page=${page}`;
 
   const response = await fetch(url);
   const data = await response.json();
@@ -175,7 +174,7 @@ export async function addToMyList({
   rating,
   token,
 }) {
-  const url = process.env.REACT_APP_DB_MYLIST_URL + "/addMovie";
+  const url = process.env.REACT_APP_DB_MYLIST_URL;
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -199,7 +198,7 @@ export async function addToMyList({
 
 export async function getMyList() {
   const token = localStorage.getItem("authToken");
-  const url = process.env.REACT_APP_DB_MYLIST_URL + "/getMovies";
+  const url = process.env.REACT_APP_DB_MYLIST_URL;
 
   const response = await fetch(url, {
     method: "GET",
@@ -240,7 +239,7 @@ export async function getMyList() {
 
 export async function removeFromMyList(id){
   const token = localStorage.getItem("authToken");
-  const url = process.env.REACT_APP_DB_MYLIST_URL + `/removeMovie/${id}`;
+  const url = process.env.REACT_APP_DB_MYLIST_URL + `/${id}`;
 
   const response = await fetch(url, {
     method: "DELETE",
