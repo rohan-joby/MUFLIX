@@ -1,4 +1,6 @@
-import { BASE_URL, ENDPOINTS } from "../data/endpoints";
+import { useState } from "react";
+
+import { BASE_URL, ENDPOINTS, oneMovie } from "../data/endpoints";
 import { GENRE_ID } from "../data/genre";
 
 function getRandomItem(length) {
@@ -109,13 +111,28 @@ export async function fetchAllMovies({genre,page=1}) {
 
   const response = await fetch(url);
   const data = await response.json();
-  // console.log(data);
 
   if (!response.ok) {
     throw new Error(data.message || "Movies not found!");
   }
-
   return data;
+}
+
+export async function useFetchGenreMoviePages({genre,page=1}) {
+  const endpoint = ENDPOINTS.sections.find((gen) => gen.title === genre);
+  const url = BASE_URL + endpoint.endpoint + `&page=${page}`;
+  const [movieData, setMovieData] = useState([oneMovie]);
+  console.log("movieData:" + movieData);
+
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+//data.results
+  if (!response.ok) {
+    throw new Error(data.message || "Movies not found!");
+  }
+  //await setMovieData(prev=>[...prev,...data.results])
+  return data.results;
 }
 
 export async function fetchOneMovieDetails(id) {
@@ -131,7 +148,6 @@ export async function fetchOneMovieDetails(id) {
   if (!detailsResponse.ok) {
     throw new Error("Details not found!");
   }
-  console.log(detailsData);
   return detailsData;
 }
 

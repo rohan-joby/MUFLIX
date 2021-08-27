@@ -92,3 +92,19 @@ export const ENDPOINTS = {
     fetchMovieCredits: `/movie/_id/credits?api_key=${API_KEY}`,
   },
 }
+
+
+export const oneMovie = {
+  adult: false,
+  backdrop_path: "/x5EUEv1N9g4BCX9GQXKvv3nqMVo.jpg",
+  genre_ids: [10752, 18, 28, 36],
+  id: 429351,
+  original_language: "en",
+  original_title: "12 Strong",
+  overview: "A team of CIA agents and special forces head into Afghanistan in the aftermath of the September 11th attacks in an attempt to dismantle the Taliban.",
+  popularity: 57.836,
+  poster_path: "/j18021qCeRi3yUBtqd2UFj1c0RQ.jpg",
+  release_date: "2018-01-16",
+  title: "12 Strong",
+  vote_average: 6.1,
+  }
