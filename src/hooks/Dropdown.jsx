@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-// import onClickOutside from "react-onclickoutside";
 import classes from "./Dropdown.module.css";
 import { BiCaretDown } from "react-icons/bi";
 import { BiCaretUp } from "react-icons/bi";
@@ -10,7 +9,6 @@ const Dropdown = ({ title, items, onClick }) => {
   const dropdownRef = useRef(null);
 
   const toggle = () => setOpen((prev) => !prev);
-  // Dropdown.handleClickOutside = () => setOpen(false);
 
   const handleOnClick = (item) => {
     setSelection(item);
@@ -25,7 +23,7 @@ const Dropdown = ({ title, items, onClick }) => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
+      // Unbind the event listener
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -49,7 +47,6 @@ const Dropdown = ({ title, items, onClick }) => {
               {open ? <BiCaretUp size={14} /> : <BiCaretDown size={14} />}
             </span>
           </p>
-          {/* <p>{title}</p> */}
         </div>
       </div>
       {open && (
@@ -75,9 +72,5 @@ const Dropdown = ({ title, items, onClick }) => {
   );
 };
 
-// const clickOutsideConfig = {
-//   handleClickOutside: () => Dropdown.handleClickOutside,
-// };
-
 export default Dropdown;
-// export default onClickOutside(Dropdown, clickOutsideConfig);
+
