@@ -12,20 +12,26 @@ const Header = () => {
   const handleClick = (name) => {
     setGenre(name);
     console.log(genre);
-  }
+  };
 
   const changeHandler = (event) => {
     !(event.target.value === "All") && setGenre(event.target.value);
     console.log(event.target.value);
     console.log(genre);
   };
-  useEffect(()=>{!(genre=== "All") && history.push(`/genre/${genre}`)
-})
+  useEffect(() => {
+    !(genre === "All") && history.push(`/genre/${genre}`);
+  }, [genre, history]);
 
   return (
     <header>
       <h2 className={classes.heading}>Movies</h2>
-      <Dropdown items={[{id:0, name:"All"},...GENRE_ID]} title="Choose a genre" onClick={handleClick}/>
+      <Dropdown
+        items={[...GENRE_ID]}
+        title="Choose a genre"
+        onClick={handleClick}
+      />
+      {/* {id:0, name:"All"}, */}
       {/* <select
         value={genre}
         onChange={changeHandler}
