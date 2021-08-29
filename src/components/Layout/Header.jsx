@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Dropdown from "../../hooks/Dropdown";
+import { GENRE_ID } from "../../data/genre";
 
 import classes from "./Header.module.css";
 
@@ -7,6 +9,10 @@ const Header = () => {
   const [genre, setGenre] = useState("All");
   const history = useHistory();
 
+  const handleClick = (name) => {
+    setGenre(name);
+    console.log(genre);
+  }
 
   const changeHandler = (event) => {
     !(event.target.value === "All") && setGenre(event.target.value);
@@ -19,7 +25,8 @@ const Header = () => {
   return (
     <header>
       <h2 className={classes.heading}>Movies</h2>
-      <select
+      <Dropdown items={[{id:0, name:"All"},...GENRE_ID]} title="Choose a genre" onClick={handleClick}/>
+      {/* <select
         value={genre}
         onChange={changeHandler}
         name="genre"
@@ -46,7 +53,7 @@ const Header = () => {
         <option value="Fantasy">Fantasy</option>
         <option value=">War">War</option>
         <option value="Western">Western</option>
-      </select>
+      </select> */}
     </header>
   );
 };
