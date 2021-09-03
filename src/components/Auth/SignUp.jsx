@@ -1,32 +1,98 @@
-import React, { useRef, useContext } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
 import Background from "../../assets/Register-bg.jpg";
 
 import { signUp } from "../../lib/api";
-import AuthContext from "../../store/auth-context";
+import useHttp from "../../hooks/use-http";
+import useInput from "../../hooks/use-input";
+
+import { useAuth } from "../../store/auth-context";
 import classes from "./SignUp.module.css";
+
+const emailValidation = (value) => {
+  const regexp =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regexp.test(value);
+};
+const passwordValidation = (value) => {
+  const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+  return regexp.test(value);
+};
+
+const usernameValidation = (value) => {
+  const regexp = /^(?!\s*$).+/;
+  return regexp.test(value);
+};
 
 const SignUp = () => {
   const history = useHistory();
-  const authCtx = useContext(AuthContext);
-  const usernameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  //error handling
-  const submitHandler = (event) => {
-    event.preventDefault();
-    const username = usernameRef.current.value;
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+  const { login } = useAuth();
 
-    const registerDetails = signUp({ username, email, password });
-    if (registerDetails) {
-      authCtx.login(registerDetails);
+  const { sendRequest, status, data, error } = useHttp(signUp);
+
+  const {
+    value: usernameInput,
+    isValid: usernameIsValid,
+    hasError: usernameHasError,
+    updateValue: updateUsernameValue,
+    updateTouch: updateUsernameTouch,
+    reset: resetUsername,
+  } = useInput(usernameValidation);
+
+  const {
+    value: emailInput,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    updateValue: updateEmailValue,
+    updateTouch: updateEmailTouch,
+    reset: resetEmail,
+  } = useInput(emailValidation);
+
+  const {
+    value: passwordInput,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    updateValue: updatePasswordValue,
+    updateTouch: updatePasswordTouch,
+    reset: resetPassword,
+  } = useInput(passwordValidation);
+
+  let formIsValid = false;
+  if (usernameIsValid && emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+
+  useEffect(()=>{
+    if (status==="completed" && error === null){
       history.push("/");
     }
-  };
+  },[history, error, status])
+
+  useEffect(()=>{
+    if (status==="completed" && error === null && data !== null){
+      const {token, expiresAt} = data;
+      login({token, expiresAt});
+    }
+  },[status, error, data, login])
+
+  const submitHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!formIsValid) {
+        return;
+      }
+
+      const details = { username: usernameInput, email: emailInput, password: passwordInput };
+      sendRequest(details);
+
+      resetUsername();
+      resetEmail();
+      resetPassword();
+    },
+    [usernameInput, emailInput, passwordInput, formIsValid, resetPassword, resetEmail, resetUsername, sendRequest]
+  );
 
   return (
     <div
@@ -38,32 +104,44 @@ const SignUp = () => {
         <h1 className={classes.heading}>Sign Up</h1>
         <input
           type="text"
-          className={classes.input}
+          className={`${classes.input} ${usernameHasError ? classes.invalid : ""}`}
           name="username"
           placeholder="Your name"
-          ref={usernameRef}
+          value={usernameInput}
+          onChange={updateUsernameValue}
+          onBlur={updateUsernameTouch}
         />
+        {usernameHasError && (
+          <p className={classes.error}>Please provide a valid username</p>
+        )}
         <input
           type="email"
-          className={classes.input}
+          className={`${classes.input} ${emailHasError ? classes.invalid : ""}`}
           name="email"
           placeholder="Email"
-          ref={emailRef}
+          value={emailInput}
+          onChange={updateEmailValue}
+          onBlur={updateEmailTouch}
         />
+        {emailHasError && (
+          <p className={classes.error}>Please provide a valid email</p>
+        )}
         <input
           type="text"
-          className={classes.input}
+          className={`${classes.input} ${passwordHasError ? classes.invalid : ""}`}
           name="password"
           placeholder="Password"
-          ref={passwordRef}
+          value={passwordInput}
+          onChange={updatePasswordValue}
+          onBlur={updatePasswordTouch}
         />
-        <input
-          type="text"
-          className={classes.input}
-          name="password-repeat"
-          placeholder="Repeat your password"
-        />
-        <button type="submit" className={classes.btn__primary}>
+        {passwordHasError && (
+          <p className={classes.error}>
+            Password must contain minimum six characters, at least one uppercase
+            letter, one lowercase letter and one number
+          </p>
+        )}
+        <button type="submit" disabled={!formIsValid} className={classes.btn__primary}>
           Sign Up
         </button>
         <h2 className={classes.signIn__link}>
