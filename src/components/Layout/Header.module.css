@@ -7,7 +7,7 @@ header {
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
 }
 .heading {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   display: inline-block;
   position: relative;
@@ -24,10 +24,15 @@ header {
   height: 2.1rem;
   border-radius: 5px;
 }
-
+@media screen and (max-width: 900px) {
+  .heading {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+}
 @media screen and (max-width: 480px) {
   .heading {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   .genre{
     font-size: 0.9rem;

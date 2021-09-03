@@ -1,5 +1,5 @@
 .search {
-  padding-top: 1.6rem;
+  padding-top: 1rem;
   padding-right: 35px;
 }
 .search__btn{
@@ -33,4 +33,11 @@
 .input:hover::placeholder,
 .input:focus::placeholder{
     color:black;
+}
+
+
+@media screen and (max-width: 900px) {
+    .input{
+        width:10rem;
+    }
 }

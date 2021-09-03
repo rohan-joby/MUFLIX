@@ -71,8 +71,8 @@
 .logo {
   color: #e50914;
   height: 3rem;
-  padding-left: 30px;
-  padding-right: 75px;
+  padding-left: 3vw;
+  padding-right: 5vw;
 }
 a {
   text-decoration: none;
@@ -90,4 +90,17 @@ a h2 {
 
 a.active h2 {
   font-weight: 700;
+}
+
+@media screen and (max-width: 900px) {
+  .navprofile img {
+    height: 2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo {
+    color: #e50914;
+    height: 4rem;
+    padding: 5px 20px 0 25px;
+  }
 }

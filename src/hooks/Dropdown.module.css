@@ -2,10 +2,9 @@
   color: hsl(0, 0%, 100%);
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
   position: relative;
-  left:30px;
+  left: 30px;
 }
 .dropdown-title {
-  display: inline-block;
   width: 165px;
   border-radius: 8px;
   border: 1px solid hsla(0, 0%, 100%, 0.5);
@@ -18,12 +17,12 @@
 }
 .button {
   position: absolute;
-  right:10px;
+  right: 10px;
 }
 .dropdown-list {
   list-style: none;
   position: absolute;
-  z-index:20;
+  z-index: 20;
 }
 .dropdown-list_button {
   font-size: 1rem;
@@ -42,4 +41,16 @@
 .dropdown-list_button:focus {
   font-weight: 600;
   background-color: hsla(0, 0%, 0%, 0.95);
+}
+
+@media screen and (max-width: 900px) {
+  .dropdown-list_button {
+    border-radius: 4px;
+    position: relative;
+    left: -8vw;
+    width: 40vw;
+    font-size: 1.05rem;
+    padding: 10px 0;
+    background: hsla(0, 0%, 0%, 0.8);
+  }
 }
