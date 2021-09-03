@@ -7,6 +7,7 @@ import Background from "../../assets/Register-bg.jpg";
 import { signUp } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
+import InputPasswordField from "../UI/InputPasswordField";
 
 import { useAuth } from "../../store/auth-context";
 import classes from "./SignUp.module.css";
@@ -126,10 +127,8 @@ const SignUp = () => {
         {emailHasError && (
           <p className={classes.error}>Please provide a valid email</p>
         )}
-        <input
-          type="text"
-          className={`${classes.input} ${passwordHasError ? classes.invalid : ""}`}
-          name="password"
+        <InputPasswordField
+          error={passwordHasError}
           placeholder="Password"
           value={passwordInput}
           onChange={updatePasswordValue}

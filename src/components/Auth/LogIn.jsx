@@ -8,6 +8,7 @@ import Background from "../../assets/Register-bg.jpg";
 import { logIn } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
+import InputPasswordField from "../UI/InputPasswordField";
 
 import { useAuth } from "../../store/auth-context";
 import classes from "./LogIn.module.css";
@@ -53,18 +54,18 @@ const LogIn = () => {
     formIsValid = true;
   }
 
-  useEffect(()=>{
-    if (status==="completed" && error === null){
+  useEffect(() => {
+    if (status === "completed" && error === null) {
       history.push("/");
     }
-  },[history, error, status])
+  }, [history, error, status]);
 
-  useEffect(()=>{
-    if (status==="completed" && error === null && data !== null){
-      const {token, expiresAt} = data;
-      login({token, expiresAt});
+  useEffect(() => {
+    if (status === "completed" && error === null && data !== null) {
+      const { token, expiresAt } = data;
+      login({ token, expiresAt });
     }
-  },[status, error, data, login])
+  }, [status, error, data, login]);
 
   const submitHandler = useCallback(
     (event) => {
@@ -75,11 +76,18 @@ const LogIn = () => {
 
       const details = { email: emailInput, password: passwordInput };
       sendRequest(details);
- 
+
       resetEmail();
       resetPassword();
     },
-    [ emailInput, passwordInput, formIsValid, resetPassword,resetEmail, sendRequest]
+    [
+      emailInput,
+      passwordInput,
+      formIsValid,
+      resetPassword,
+      resetEmail,
+      sendRequest,
+    ]
   );
   const handleGuestLogin = () => {
     const details = { email: "test1@test.com", password: "Password123" };
@@ -111,12 +119,8 @@ const LogIn = () => {
         {emailHasError && (
           <p className={classes.error}>Please provide a valid email</p>
         )}
-        <input
-          type="text"
-          className={`${classes.input} ${
-            passwordHasError ? classes.invalid : ""
-          }`}
-          name="password"
+        <InputPasswordField
+          error={passwordHasError}
           placeholder="Password"
           value={passwordInput}
           onChange={updatePasswordValue}
