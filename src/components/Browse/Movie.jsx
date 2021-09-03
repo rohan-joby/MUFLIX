@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+//import MovieDetails from "./MovieDetails/MovieDetails";
+
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
@@ -24,6 +26,19 @@ const Movie = (props) => {
   const mylistCtx = useContext(MylistContext);
   const token = authCtx.token;
 
+  // const [detailsIsOpen, setDetailsIsOpen] = useState(false);
+
+  const handleOpenDetails = () => {
+    //setDetailsIsOpen(true);
+    history.push(`/${id}`);
+    //console.log("detailsIsOpen",detailsIsOpen);
+  };
+  // const handleCloseDetails = () => {
+  //   setDetailsIsOpen(false);
+  //   history.goBack();
+  //   console.log("detailsIsOpen",detailsIsOpen);
+
+  // };
   const { id, backdrop_path, genre_ids, title, vote_average } = props.data;
   const isInValid = backdrop_path === null;
   const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
@@ -61,16 +76,29 @@ const Movie = (props) => {
   const removeFromListHandler = () => {
     removeFromMyList(id);
     mylistCtx.removeFromList(id);
-  }
+  };
   return (
-    <div className={classes.movie} >
-      <img className={classes.poster} onClick={clickHandler} src={imagePath} alt={title} />
+    <div className={classes.movie}>
+      {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
+      <img
+        className={classes.poster}
+        onClick={clickHandler}
+        src={imagePath}
+        alt={title}
+      />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
-        <button onClick={movieInList? removeFromListHandler : addToListHandler}>
-          {movieInList ? <FaMinus style={{ fill: "white" }} />: <FaPlus style={{ fill: "white" }} />}
+        <button
+          onClick={movieInList ? removeFromListHandler : addToListHandler}
+        >
+          {movieInList ? (
+            <FaMinus style={{ fill: "white" }} />
+          ) : (
+            <FaPlus style={{ fill: "white" }} />
+          )}
         </button>
-        <button onClick={clickHandler}>
+        {/* <button onClick={clickHandler}> */}
+        <button onClick={handleOpenDetails}>
           <FaChevronDown style={{ fill: "white" }} />
         </button>
         <div className={classes.info}>

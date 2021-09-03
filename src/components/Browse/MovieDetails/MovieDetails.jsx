@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import Modal from "../../UI/Modal";
 
 import { FaPlus } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
@@ -11,7 +12,6 @@ import useHttp from "../../../hooks/use-http";
 import { addToMyList, removeFromMyList } from "../../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
 import { IMAGE_URL } from "../../../data/endpoints";
-import { scrollToBottom, scrollToTop } from "../../../hooks/useScrollToTop";
 import AuthContext from "../../../store/auth-context";
 import MylistContext from "../../../store/mylist-context";
 
@@ -21,7 +21,7 @@ import Muflix from "../../../assets/muflix.PNG";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
-const MovieDetails = () => {
+const MovieDetails = (props) => {
   const history = useHistory();
   const params = useParams();
 
@@ -29,17 +29,6 @@ const MovieDetails = () => {
   const mylistCtx = useContext(MylistContext);
   const token = authCtx.token;
   const [loadMore, setLoadMore] = useState(false);
-
-  // useEffect(() => {
-  //   if (loadMore) {
-  //     const scrollOptions = { left: 0, top: window.pageYOffset, behavior: "smooth" };
-  //     window.scroll(scrollOptions);
-  //   }
-  //   if (!loadMore) {
-  //     const scrollOptions = { left: 0, top: 0, behavior: "smooth" };
-  //     window.scroll(scrollOptions);
-  //   }
-  // }, [loadMore]);
 
   const {
     sendRequest: getDetails,
@@ -112,30 +101,15 @@ const MovieDetails = () => {
       removeFromMyList(id);
       mylistCtx.removeFromList(id);
     };
-    //const scrollToBottom = (ref) => window.scrollTo(0, ref.current.offsetTop)
-    // const scrollToRef = (ref) => (ref.current.offsetTop)
 
     const loadMoreHandler = () => {
       setLoadMore((prev) => !prev);
-      // !loadMore && scrollToBottom(loadMoreRef);
-      // !loadMore && (loadMoreRef.current.offsetTop=100);
-      // console.log(scrollToRef(loadMoreRef))
-      // !loadMore && scrollToBottom();
-    };
-
-    const closePageHandler = () => {
-      history.goBack();
     };
 
     return (
+      <Modal>
       <div className={classes.container}>
         <img className={classes.poster} src={imagePath} alt={title} />
-        <button
-          className={`${classes[`close-button`]}`}
-          onClick={closePageHandler}
-        >
-          <VscChromeClose size={20} style={{ fill: "white" }} />
-        </button>
         <button
           className={classes.wishlist}
           onClick={movieInList ? removeFromMyListHandler : addToMyListHandler}
@@ -192,6 +166,7 @@ const MovieDetails = () => {
           />
         )}
       </div>
+      </Modal>
     );
   }
   return <div></div>;

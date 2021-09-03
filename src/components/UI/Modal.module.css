@@ -1,0 +1,31 @@
+.backdrop{
+    position: absolute;
+    inset:0;
+    z-index:30;
+    background-color: hsla(0, 0%, 0%, 0.4);
+    cursor: pointer;
+}
+.overlay{
+    position: absolute;
+    top:1vw;
+    left:15vw;
+    width:70vw;
+    height:95%;
+    z-index:35;
+    overflow-y:scroll;
+}
+
+.close-button {
+  background: #3c2d2e9c;
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 8px 10px;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 37;
+  cursor: pointer;
+}
+.close-button:hover {
+  background: #c7bebf88;
+}

@@ -48,7 +48,16 @@ const App = () => {
         </Route>
 
         <Route path="/:movie" exact>
-          {isLoggedIn ? <MovieDetails /> : <Redirect to="/login" />}
+          {isLoggedIn ? (
+            <Fragment>
+              {/* <Header />
+              <Banner />
+              <AllGenre /> */}
+              <MovieDetails />
+            </Fragment>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
 
         {isLoggedIn && (

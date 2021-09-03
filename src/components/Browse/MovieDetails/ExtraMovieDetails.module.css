@@ -5,6 +5,7 @@
   width: 92%;
   margin: 0 auto;
   line-height: 1.5;
+  padding-bottom: 32px;
 }
 .container > * {
   font-weight: 400;

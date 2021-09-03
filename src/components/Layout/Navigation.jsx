@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
+
 import { BsCaretDownFill } from "react-icons/bs";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -10,14 +11,17 @@ import classes from "./Navigation.module.css";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
 import Avatar from "../../assets/Avatar.png";
-import AuthContext from "../../store/auth-context";
+// import AuthContext from "../../store/auth-context";
+import { useAuth } from "../../store/auth-context";
 
 const Navigation = () => {
+  const history = useHistory();
   const scrolled = useScroll(70);
   const width = useWindowWidth();
+  const {isLoggedIn, logout} = useAuth();
 
   const [profileOpen, setProfileOpen] = useState(false);
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
 
   const profileClickHandler = () => {
     setProfileOpen((prevValue) => !prevValue);
@@ -27,7 +31,10 @@ const Navigation = () => {
     : `${classes.navprofile}`;
 
   const signoutHandler = () => {
-    authCtx.logout();
+    logout();
+  };
+  const signInHandler = () => {
+    history.push("/login")
   };
 
   return (
@@ -51,15 +58,14 @@ const Navigation = () => {
         <Search />
         <div className={classList} onClick={profileClickHandler}>
           <img src={Avatar} alt="user profile" />
-          {/* <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>*/}
           <BsCaretDownFill />
           {profileOpen && (
             <button
               type="button"
-              onClick={signoutHandler}
+              onClick={isLoggedIn ? signoutHandler: signInHandler}
               className={classes.signout__button}
             >
-              <Link to="/login">Sign Out</Link>
+              <Link to="/login">{isLoggedIn? "Sign Out" : "Log In"}</Link>
             </button>
           )}
         </div>
