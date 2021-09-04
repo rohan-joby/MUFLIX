@@ -1,23 +1,52 @@
 .movie {
   font-family: "Roboto", sans-serif;
-  height: 14.5rem;
-  width: 17.5rem;
+  height: 10.6rem;
+  width: 19rem;
   margin-right: 10px;
   flex-shrink: 0;
   border-radius: 10px;
   transition: transform 750ms ease;
+
+  background-color: #141414;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
 }
-img.poster {
-  width: 100%;
-  display: block;
-  object-fit: cover;
+.movie:hover,
+.movie:focus {
+  transform: scale(1.15);
+  z-index: 1;
+}
+.movie::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index:3;
+  opacity:0;
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.79) 25%,
+    rgba(0, 0, 0, 0.49) 50%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
   border-radius: 10px;
-  margin-bottom: 5px;
+  /* box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); */
 }
+.movie:hover::after{
+  opacity: 1;
+}
+
 .details {
   color: rgb(255, 255, 255);
-  display: none;
+  opacity:0;
   letter-spacing: 0.9px;
+  position: absolute;
+  left:0;
+  bottom:0;
+  width: 100%;
+  height:4rem;
+  z-index:5;
 }
 .title {
   margin: 0;
@@ -64,22 +93,16 @@ img.poster {
   padding: 4px 4px;
   border-radius: 3px;
 }
-.movie:hover,
-.movie:focus {
-  transform: scale(1.25);
-  z-index: 1;
-  background: #141414;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
+
 .movie:hover > .details,
 .movie:focus > .details {
-  display: unset;
+  opacity:1;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .movie:hover,
   .movie:focus {
-    transform: scale(1.25);
+    transform: scale(1.15);
     z-index: 1;
     background: #141414;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -103,7 +126,7 @@ img.poster {
   }
   .details h3 {
     display: block;
-    margin: 8px 0 5px 8px;
+    margin: 4px 0 3px 8px;
   }
   .details > button,
   .info h4:nth-child(1) {

@@ -26,13 +26,11 @@ const retrieveStoredTokens = () => {
 const AuthProvider = (props) => {
   let initialToken;
   const tokenData = retrieveStoredTokens();
-  console.log(tokenData);
   if (tokenData){
     initialToken = tokenData.token;
   }
 
   const [userToken, setUserToken] = useState(initialToken);
-  console.log(userToken);
   const userLoggedIn = !!userToken;
 
   const logoutHandler = useCallback(() => {

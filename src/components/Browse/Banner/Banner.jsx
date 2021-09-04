@@ -15,6 +15,7 @@ import MylistContext from "../../../store/mylist-context";
 
 const Banner = () => {
   const history = useHistory();
+  
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
   const authCtx = useContext(AuthContext);
   const mylistCtx = useContext(MylistContext);

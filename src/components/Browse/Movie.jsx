@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
+import useWindowWidth from "../../hooks/useWindowWidth";
 import Muflix from "../../assets/muflix.PNG";
 import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
@@ -25,6 +26,7 @@ const Movie = (props) => {
   const authCtx = useContext(AuthContext);
   const mylistCtx = useContext(MylistContext);
   const token = authCtx.token;
+  const windowWidth = useWindowWidth();
 
   // const [detailsIsOpen, setDetailsIsOpen] = useState(false);
 
@@ -54,8 +56,13 @@ const Movie = (props) => {
   }
   const reducedGenres = genres.slice(0, 3);
 
-  const shortTitle = title.length < 18 ? title : title.slice(0, 18) + "...";
-
+  let shortTitle;
+  if (windowWidth <480){
+    shortTitle = title.length < 15 ? title : title.slice(0, 15) + "...";
+  }
+  else{
+    shortTitle = title.length < 18 ? title : title.slice(0, 18) + "...";
+  }
   const clickHandler = () => {
     history.push(`/${id}`);
   };
@@ -78,14 +85,8 @@ const Movie = (props) => {
     mylistCtx.removeFromList(id);
   };
   return (
-    <div className={classes.movie}>
+    <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
       {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
-      <img
-        className={classes.poster}
-        onClick={clickHandler}
-        src={imagePath}
-        alt={title}
-      />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
         <button
