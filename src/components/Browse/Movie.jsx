@@ -85,8 +85,15 @@ const Movie = (props) => {
     mylistCtx.removeFromList(id);
   };
   return (
-    <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
+    // <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
+    <div className={classes.movie} >
       {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
+      <img
+        className={classes.poster}
+        onClick={clickHandler}
+        src={imagePath}
+        alt={title}
+      />
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
         <button

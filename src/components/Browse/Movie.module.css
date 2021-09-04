@@ -8,9 +8,10 @@
   transition: transform 750ms ease;
 
   background-color: #141414;
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
   background-size:contain;
+} */
 }
 .movie:hover,
 .movie:focus {
@@ -37,6 +38,12 @@
   opacity: 1;
 }
 
+img.poster {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
 .details {
   color: rgb(255, 255, 255);
   opacity:0;
