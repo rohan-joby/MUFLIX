@@ -1,12 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import classes from "./Dropdown.module.css";
 import { BiCaretDown } from "react-icons/bi";
 import { BiCaretUp } from "react-icons/bi";
+// import { MdClear } from 'react-icons/md';
+import { AiFillCloseCircle } from "react-icons/ai";
+import useWindowWidth from "./useWindowWidth";
+
+import classes from "./Dropdown.module.css";
 
 const Dropdown = ({ title, items, onClick }) => {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState();
   const dropdownRef = useRef(null);
+  const width = useWindowWidth();
 
   const toggle = () => setOpen((prev) => !prev);
 
@@ -14,7 +19,9 @@ const Dropdown = ({ title, items, onClick }) => {
     setSelection(item);
     onClick(item.name);
   };
-  
+  const closeDropdownHandler = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -51,6 +58,11 @@ const Dropdown = ({ title, items, onClick }) => {
       </div>
       {open && (
         <ul className={classes[`dropdown-list`]}>
+          {width < 901 && (
+            <div className={classes.close} onClick={closeDropdownHandler}>
+              <AiFillCloseCircle size={60} style={{ fill: "white" }} />
+            </div>
+          )}
           {items.map((item) => (
             <li key={item.id}>
               <button
@@ -73,4 +85,3 @@ const Dropdown = ({ title, items, onClick }) => {
 };
 
 export default Dropdown;
-
