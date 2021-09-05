@@ -161,3 +161,19 @@ a:focus {
   color: hsl(31, 96%, 49%);
   text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+  .input__form {
+    width:min(400px,70vw);
+  }
+  .input {
+    max-height: 2rem;
+    margin: 0.3rem 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .input__form {
+    width:90vw;
+  }
+}

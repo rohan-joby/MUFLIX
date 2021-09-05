@@ -18,6 +18,8 @@
   font-size:0.85rem;
   font-style: italic;
   cursor: pointer;
+  position: relative;
+  z-index: 5;
 }
 
 .browse {
@@ -25,6 +27,7 @@
   overflow-x: scroll;
   padding-right: 0;
   padding: 30px;
+  margin-bottom:10px;
 }
 
 @media screen and (max-width: 480px){

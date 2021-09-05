@@ -37,6 +37,9 @@
 
 
 @media screen and (max-width: 900px) {
+    .search{
+        padding-right: 20px;
+    }
     .input{
         width:10rem;
     }

@@ -92,15 +92,28 @@ a.active h2 {
   font-weight: 700;
 }
 
+.search{
+  margin-top: 1.6rem;
+  padding-right:12px;
+}
+
 @media screen and (max-width: 900px) {
   .navprofile img {
     height: 2rem;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .logo {
     color: #e50914;
     height: 4rem;
     padding: 5px 20px 0 25px;
   }
+  .secondary__nav {
+    margin-right: 10px;
+  }
+  .navprofile img {
+    margin-right: 6px;
+  }
+}
+@media screen and (max-width: 600px) {
 }
