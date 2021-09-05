@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 //import MovieDetails from "./MovieDetails/MovieDetails";
+import Lazyload from "react-lazyload";
 
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
@@ -86,14 +87,17 @@ const Movie = (props) => {
   };
   return (
     // <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
-    <div className={classes.movie} >
+    <div className={classes.movie} onClick={clickHandler}>
       {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
+      <Lazyload height={170} once>
       <img
         className={classes.poster}
         onClick={clickHandler}
         src={imagePath}
         alt={title}
+        loading="lazy"
       />
+      </Lazyload>
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
         <button
