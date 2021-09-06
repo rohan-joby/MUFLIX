@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
+import MuflixSmall from "../../assets/Muflix-small.png";
+
 import Background from "../../assets/Register-bg.jpg";
 
 import { logIn } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
 import InputPasswordField from "../UI/InputPasswordField";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { useAuth } from "../../store/auth-context";
 import classes from "./LogIn.module.css";
@@ -28,6 +31,7 @@ const passwordValidation = (value) => {
 const LogIn = () => {
   const history = useHistory();
   const { login } = useAuth();
+  const width = useWindowWidth();
 
   const {
     value: emailInput,
@@ -90,21 +94,22 @@ const LogIn = () => {
     ]
   );
   const handleGuestLogin = () => {
-    const details = { email: "test1@test.com", password: "Password123" };
+    const details = { email: "joby@joby.com", password: "Joby1964" };
     sendRequest(details);
-    login(details);
-    history.push("/");
+    // login(details);
+    // history.push("/");
 
     resetEmail();
     resetPassword();
   };
+  const src = width > 600 ? Muflix : MuflixSmall;
 
   return (
     <div
       className={classes.container}
       style={{ backgroundImage: `url(${Background})` }}
     >
-      <img src={Muflix} alt="logo" className={classes.logo} />
+      <img src={src} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Log In</h1>
         <input

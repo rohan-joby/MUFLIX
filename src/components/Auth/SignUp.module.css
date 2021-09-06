@@ -11,7 +11,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  min-height: 105vh;
+  height: 105vh;
   width: 100%;
   opacity: 90%;
   padding-top: 2rem;
@@ -143,4 +143,20 @@ a:focus {
   color: hsl(31, 96%, 49%);
   text-align: center;
   margin: 0 26px;
+}
+
+@media screen and (max-width: 768px) {
+  .input__form {
+    width:min(400px,70vw);
+  }
+  .input {
+    max-height: 2rem;
+    margin: 0.3rem 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .input__form {
+    width:90vw;
+  }
 }

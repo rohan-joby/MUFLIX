@@ -2,12 +2,15 @@ import React, { useEffect, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import Muflix from "../../assets/Muflix-logo.PNG";
+import MuflixSmall from "../../assets/Muflix-small.png";
+
 import Background from "../../assets/Register-bg.jpg";
 
 import { signUp } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
 import InputPasswordField from "../UI/InputPasswordField";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { useAuth } from "../../store/auth-context";
 import classes from "./SignUp.module.css";
@@ -30,6 +33,7 @@ const usernameValidation = (value) => {
 const SignUp = () => {
   const history = useHistory();
   const { login } = useAuth();
+  const width = useWindowWidth();
 
   const { sendRequest, status, data, error } = useHttp(signUp);
 
@@ -65,18 +69,19 @@ const SignUp = () => {
     formIsValid = true;
   }
 
-  useEffect(()=>{
-    if (status==="completed" && error === null){
-      history.push("/");
-    }
-  },[history, error, status])
+  // useEffect(()=>{
+  //   if (status==="completed" && error === null){
+  //     history.push("/");
+  //   }
+  // },[history, error, status])
 
   useEffect(()=>{
     if (status==="completed" && error === null && data !== null){
       const {token, expiresAt} = data;
       login({token, expiresAt});
+      history.push("/");
     }
-  },[status, error, data, login])
+  },[status, error, data, login,history])
 
   const submitHandler = useCallback(
     (event) => {
@@ -95,12 +100,13 @@ const SignUp = () => {
     [usernameInput, emailInput, passwordInput, formIsValid, resetPassword, resetEmail, resetUsername, sendRequest]
   );
 
+  const src = width > 600 ? Muflix : MuflixSmall;
   return (
     <div
       className={classes.container}
       style={{ backgroundImage: `url(${Background})` }}
     >
-      <img src={Muflix} alt="logo" className={classes.logo} />
+      <img src={src} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Sign Up</h1>
         <input
