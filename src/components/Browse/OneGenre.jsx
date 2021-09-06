@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
 
+import Navigation from "../Layout/Navigation";
 import { fetchAllMovies } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import Movie from "../Browse/Movie";
@@ -9,6 +10,7 @@ import Movie from "../Browse/Movie";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./OneGenre.module.css";
 import useLazyLoad from "../../hooks/lazyLoad";
+import Header from "../Layout/Header";
 
 const OneGenre = () => {
   const { sendRequest, status, data: loadedMovies } = useHttp(fetchAllMovies);
@@ -63,6 +65,7 @@ const OneGenre = () => {
 
   return (
     <div>
+      {/* <Header label={genre}/> */}
       <h2 className={classes.header}>{genre}</h2>
       <div className={classes.genre}>{results}</div>
       {/* <div ref={endPageRef} /> */}

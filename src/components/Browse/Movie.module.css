@@ -1,17 +1,13 @@
 .movie {
   font-family: "Roboto", sans-serif;
-  height: 10.6rem;
-  width: 19rem;
+  /* height: 10.6rem; */
+  width: min(19rem,27vw);
   margin-right: 15px;
   margin-bottom:10px;
   flex-shrink: 0;
   border-radius: 10px;
   transition: transform 750ms ease;
   background-color: #141414;
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size:contain;
-} */
 }
 .movie:hover,
 .movie:focus {
@@ -145,7 +141,7 @@ img.poster:hover::after{
   }
   .movie:hover,
   .movie:focus {
-    transform: scale(1.1);
+    transform: scale(1.15);
     z-index: 20;
   }
   .details h3 {
