@@ -74,7 +74,7 @@ img.poster {
 .details > button {
   display: inline-block;
   background: transparent;
-  border: 1px solid white;
+  border: 1px solid hsl(0, 0%, 100%);
   border-radius: 50%;
   padding: 3px 5px 1px;
   margin-right: 5px;
@@ -82,8 +82,39 @@ img.poster {
 }
 .details > button:hover,
 .details > button:focus {
-  background: #c7bebf88;
-  border-color: #c7bebf88;
+  background: rgba(255, 255, 255, 0.2);
+}
+.list-handler{
+  position: relative;
+}
+.list-handler::after,
+.load-more::after{
+  color:white;
+  position: absolute;
+  top:30px;
+  left:10px;
+  width:70px;
+  border-radius: 3px;
+  padding:3px;
+  background: hsla(0, 0%, 30%,0.8);
+  opacity:0;
+  transition: opacity 250ms ease;
+  will-change: opacity;
+}
+.list-handler::after{
+  content: "add to list";
+}
+.load-more::after{
+  content: "load details";
+}
+.load-more{
+  position: relative;
+}
+.list-handler:hover::after,
+.list-handler:focus::after,
+.load-more:hover::after,
+.load-more:focus::after{
+  opacity:1;
 }
 .info {
   display: flex;

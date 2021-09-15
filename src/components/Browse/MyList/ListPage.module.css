@@ -1,8 +1,8 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 150px;
-  padding-top: 1rem;
+  padding-left: max(100px,10vw);
+  padding-top: 0.5rem;
 }
 .movie {
   position: relative;
@@ -14,8 +14,38 @@ h2 {
 }
 .header {
   text-align: start;
-  margin-top: 120px;
+  margin-top: 70px;
   padding-left: 80px;
+}
+
+.empty-list{
+  margin-top: 8rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.empty-list h3{
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: normal;
+}
+.empty-list h4{
+  font-size: 2rem;
+  font-weight: 400;
+}
+.empty-list a{
+  color:hsl(31, 96%, 49%);
+  text-transform: uppercase;
+  padding: 6px 20px;
+  margin-left: 15px;
+  border-radius: 5px;
+  border:1px solid hsl(31, 96%, 49%);
+  background-color: hsla(31, 96%, 49%,0.1);
+  transition: all 200ms ease-in;
+}
+.empty-list a:hover{
+  color:rgb(31, 28, 26);
+  border:1px solid hsla(31, 96%, 79%,0.1);
+  background-color: hsl(31, 96%, 49%);
 }
 
 @media screen and (max-width: 480px) {
@@ -29,4 +59,11 @@ h2 {
   .list {
     padding-left: 5px;
   }
+  .empty-list h3{
+    font-size: 1.5rem;
+  }
+  .empty-list h4{
+    font-size: 1.6rem;
+  }
+
 }

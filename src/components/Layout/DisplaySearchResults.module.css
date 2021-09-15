@@ -24,11 +24,11 @@
   display: inline-block;
   color:white;
   font-size: 1.7rem;
-  margin-top: 6rem;
+  margin-top: 3.5rem;
   padding-top: 20px;
   padding-left: min(100px, 10vw);
   font-weight: 400;
-  font-style: italic;
+  transform: skew(-20deg, 0);
 }
 .query{
   display: inline-block;
