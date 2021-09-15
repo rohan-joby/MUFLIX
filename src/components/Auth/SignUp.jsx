@@ -1,6 +1,7 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
+import { GoAlert } from "react-icons/go";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
 
@@ -13,7 +14,7 @@ import InputPasswordField from "../UI/InputPasswordField";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { useAuth } from "../../store/auth-context";
-import classes from "./SignUp.module.css";
+import classes from "./LogIn.module.css";
 
 const emailValidation = (value) => {
   const regexp =
@@ -34,8 +35,9 @@ const SignUp = () => {
   const history = useHistory();
   const { login } = useAuth();
   const width = useWindowWidth();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const { sendRequest, status, data, error } = useHttp(signUp);
+  const { sendRequest, signUpStatus, data, error } = useHttp(signUp);
 
   const {
     value: usernameInput,
@@ -68,20 +70,21 @@ const SignUp = () => {
   if (usernameIsValid && emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
-
-  // useEffect(()=>{
-  //   if (status==="completed" && error === null){
-  //     history.push("/");
-  //   }
-  // },[history, error, status])
+  useEffect(() => {
+    if (signUpStatus === "completed" && error !== null) {
+      setErrorMessage(
+        "Sorry, but we can't find an account with this email address. Please try again."
+      );
+    }
+  }, [error, signUpStatus]);
 
   useEffect(()=>{
-    if (status==="completed" && error === null && data !== null){
+    if (signUpStatus==="completed" && error === null && data !== null){
       const {token, expiresAt} = data;
       login({token, expiresAt});
       history.push("/");
     }
-  },[status, error, data, login,history])
+  },[signUpStatus, error, data, login,history])
 
   const submitHandler = useCallback(
     (event) => {
@@ -109,6 +112,12 @@ const SignUp = () => {
       <img src={src} height={48} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Sign Up</h1>
+        {errorMessage && (
+          <div className={classes.alert}>
+            <GoAlert size={20}/>
+            <h4>{errorMessage}</h4>
+          </div>
+        )}
         <input
           type="text"
           className={`${classes.input} ${usernameHasError ? classes.invalid : ""}`}
@@ -141,13 +150,19 @@ const SignUp = () => {
           onBlur={updatePasswordTouch}
         />
         {passwordHasError && (
-          <p className={classes.error}>
-            Password must contain minimum six characters, at least one uppercase
-            letter, one lowercase letter and one number
-          </p>
+          <div className={classes.error}>
+          <h4>Your password must contain:</h4>
+          <ul>
+            <li>▪ &nbsp; minimum six characters</li>
+            <li>▪ &nbsp; at least one uppercase letter</li>
+            <li>▪ &nbsp; at least one lowercase letter</li>
+            <li>▪ &nbsp; at least one number</li>
+            <li>▪ &nbsp; no special characters</li>
+          </ul> 
+        </div>
         )}
         <button type="submit" disabled={!formIsValid} className={classes.btn__primary}>
-          Sign Up
+          {signUpStatus === "pending" ? <div className={classes.loader} /> :"Sign Up"}
         </button>
         <h2 className={classes.signIn__link}>
           Do you already have an account? <Link to="/login">Log In</Link>

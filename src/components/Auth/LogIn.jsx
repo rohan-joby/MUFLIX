@@ -1,7 +1,9 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
+import LoadingSpinner from "../UI/LoadingSpinner";
+import { GoAlert } from "react-icons/go";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
 
@@ -32,6 +34,7 @@ const LogIn = () => {
   const history = useHistory();
   const { login } = useAuth();
   const width = useWindowWidth();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     value: emailInput,
@@ -51,7 +54,7 @@ const LogIn = () => {
     reset: resetPassword,
   } = useInput(passwordValidation);
 
-  const { sendRequest, status, data, error } = useHttp(logIn);
+  const { sendRequest, status: loginStatus, data, error } = useHttp(logIn);
 
   let formIsValid = false;
   if (emailIsValid && passwordIsValid) {
@@ -59,17 +62,25 @@ const LogIn = () => {
   }
 
   useEffect(() => {
-    if (status === "completed" && error === null) {
+    if (loginStatus === "completed" && error === null) {
       history.push("/");
     }
-  }, [history, error, status]);
+  }, [history, error, loginStatus]);
 
   useEffect(() => {
-    if (status === "completed" && error === null && data !== null) {
+    if (loginStatus === "completed" && error !== null) {
+      setErrorMessage(
+        "Sorry, but we can't find an account with this email address. Please try again."
+      );
+    }
+  }, [error, loginStatus]);
+
+  useEffect(() => {
+    if (loginStatus === "completed" && error === null && data !== null) {
       const { token, expiresAt } = data;
       login({ token, expiresAt });
     }
-  }, [status, error, data, login]);
+  }, [loginStatus, error, data, login]);
 
   const submitHandler = useCallback(
     (event) => {
@@ -96,8 +107,6 @@ const LogIn = () => {
   const handleGuestLogin = () => {
     const details = { email: "joby@joby.com", password: "Joby1964" };
     sendRequest(details);
-    // login(details);
-    // history.push("/");
 
     resetEmail();
     resetPassword();
@@ -112,6 +121,12 @@ const LogIn = () => {
       <img src={src} height={48} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Log In</h1>
+        {errorMessage && (
+          <div className={classes.alert}>
+            <GoAlert size={20} />
+            <h4>{errorMessage}</h4>
+          </div>
+        )}
         <input
           type="email"
           className={`${classes.input} ${emailHasError ? classes.invalid : ""}`}
@@ -132,17 +147,23 @@ const LogIn = () => {
           onBlur={updatePasswordTouch}
         />
         {passwordHasError && (
-          <p className={classes.error}>
-            Password must contain minimum six characters, at least one uppercase
-            letter, one lowercase letter and one number
-          </p>
+          <div className={classes.error}>
+            <h4>Your password must contain:</h4>
+            <ul>
+              <li>▪ &nbsp; minimum six characters</li>
+              <li>▪ &nbsp; at least one uppercase letter</li>
+              <li>▪ &nbsp; at least one lowercase letter</li>
+              <li>▪ &nbsp; at least one number</li>
+              <li>▪ &nbsp; no special characters</li>
+            </ul>
+          </div>
         )}
         <button
           type="submit"
           disabled={!formIsValid}
           className={classes.btn__primary}
         >
-          Log In
+          {loginStatus === "pending" ? <div className={classes.loader} /> :"Log In"}
         </button>
         <button
           type="submit"
