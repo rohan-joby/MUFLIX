@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 
 import { BsCaretDownFill } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useScroll from "../../hooks/useScroll";
@@ -14,11 +15,11 @@ import Avatar from "../../assets/Avatar.png";
 // import AuthContext from "../../store/auth-context";
 import { useAuth } from "../../store/auth-context";
 
-const Navigation = () => {
+const Navigation = React.memo(() => {
   const history = useHistory();
   const scrolled = useScroll(70);
   const width = useWindowWidth();
-  const {isLoggedIn, logout} = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const [profileOpen, setProfileOpen] = useState(false);
   // const authCtx = useContext(AuthContext);
@@ -34,19 +35,21 @@ const Navigation = () => {
     logout();
   };
   const signInHandler = () => {
-    history.push("/login")
+    history.push("/login");
   };
 
   return (
     <nav className={classes[`${scrolled ? "nav__fixed" : "nav"}`]}>
       <div className={classes.primary__nav}>
-        <NavLink to="/" exact>
-          <img
-            className={classes.logo}
-            src={width > 600 ? Muflix : MuflixSmall}
-            alt="Logo"
-          />
-        </NavLink>
+        {width > 400 && (
+          <NavLink to="/" exact>
+            <img
+              className={classes.logo}
+              src={width > 768 ? Muflix : MuflixSmall}
+              alt="Logo"
+            />
+          </NavLink>
+        )}
         <NavLink to="/" exact activeClassName={classes.active}>
           <h2>Movies</h2>
         </NavLink>
@@ -55,26 +58,29 @@ const Navigation = () => {
         </NavLink>
       </div>
       <div className={classes.secondary__nav}>
-        <Search />
+        {width > 100 ? (
+          <Search />
+        ) : (
+          <div className={classes.search}>
+            <BsSearch size={23} />
+          </div>
+        )}
         <div className={classList} onClick={profileClickHandler}>
           <img src={Avatar} alt="user profile" />
-          <BsCaretDownFill />
+          {width > 600 && <BsCaretDownFill />}
           {profileOpen && (
             <button
               type="button"
-              onClick={isLoggedIn ? signoutHandler: signInHandler}
+              onClick={isLoggedIn ? signoutHandler : signInHandler}
               className={classes.signout__button}
             >
-              <Link to="/login">{isLoggedIn? "Sign Out" : "Log In"}</Link>
+              <Link to="/login">{isLoggedIn ? "Sign Out" : "Log In"}</Link>
             </button>
           )}
         </div>
       </div>
     </nav>
   );
-};
+});
 
 export default Navigation;
-//{` ${scrolled ? "nav nav__fixed" : "nav"}`}
-
-// `${scrolled ? "nav nav__fixed":"nav"}`

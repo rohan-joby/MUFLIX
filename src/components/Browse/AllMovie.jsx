@@ -11,7 +11,6 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const AllMovie = (props) => {
   const genre = props.type;
   const { sendRequest, status, data: loadedMovies } = useHttp(fetchAllMovies);
-  //console.log(genre);
 
   useEffect(() => {
     sendRequest({genre});
@@ -24,9 +23,8 @@ const AllMovie = (props) => {
   }
   if (status === "completed" && loadedMovies) {
     movieList = loadedMovies.results.map((movie) => (
-      <Movie key={movie.id} data={movie} />
+      <div className={classes.movie}><Movie key={movie.id} data={movie} /></div>
     ));
-    // console.log("completed");
   }
   const link = `/genre/${genre}`;
   return (
