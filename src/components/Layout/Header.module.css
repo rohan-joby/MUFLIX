@@ -1,6 +1,6 @@
 header {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding-top: 105px;
   padding-left: 40px;
@@ -31,10 +31,15 @@ header {
   }
 }
 @media screen and (max-width: 480px) {
+  header {
+    padding-top: 110px;
+    padding-left: 20px;
+  }
   .heading {
     font-size: 1.5rem;
+    padding-left: 10px;
   }
-  .genre{
+  .genre {
     font-size: 0.9rem;
     letter-spacing: 1px;
   }

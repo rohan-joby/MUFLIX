@@ -33,11 +33,11 @@
 @media screen and (max-width: 480px) {
   .container h2,
   .label__title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
   }
   .container h3 {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 400;
   }
 }
