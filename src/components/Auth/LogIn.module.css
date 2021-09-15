@@ -164,16 +164,20 @@ a:focus {
 
 @media screen and (max-width: 768px) {
   .input__form {
-    width:min(400px,70vw);
+    width: min(400px, 70vw);
   }
   .input {
-    max-height: 2rem;
+    min-height: 2rem;
     margin: 0.3rem 0;
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 480px) {
   .input__form {
-    width:90vw;
+    width: 90vw;
+  }
+  .btn__primary,
+  .btn__secondary {
+    min-height: 3.5rem;
   }
 }

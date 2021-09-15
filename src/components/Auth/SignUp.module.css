@@ -159,4 +159,7 @@ a:focus {
   .input__form {
     width:90vw;
   }
+  .btn__primary{
+    min-height: 3.5rem;
+  }
 }

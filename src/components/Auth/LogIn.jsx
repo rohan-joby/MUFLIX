@@ -109,7 +109,7 @@ const LogIn = () => {
       className={classes.container}
       style={{ backgroundImage: `url(${Background})` }}
     >
-      <img src={src} alt="logo" className={classes.logo} />
+      <img src={src} height={48} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
         <h1 className={classes.heading}>Log In</h1>
         <input

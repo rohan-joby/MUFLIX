@@ -1,94 +1,52 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Header from "./pages/Header";
-import AllGenre from "./components/Browse/AllGenre";
-import Banner from "./components/Browse/Banner/Banner";
-import MovieDetails from "./components/Browse/MovieDetails/MovieDetails";
-import MyList from "./pages/MyList";
-import GenreResults from "./pages/GenreResults";
-import SearchResults from "./pages/SearchResults";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import HomePage from "./pages/HomePage";
 
-import AuthContext from "./store/auth-context";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
+
+const Register = React.lazy(() => import("./pages/Register"));
+const Login = React.lazy(() => import("./pages/Login"));
+const MovieDetailsPage = React.lazy(() => import("./pages/MovieDetailsPage"));
+const MyListPage = React.lazy(() => import("./pages/MyListPage"));
+const SearchResultsPage = React.lazy(() => import("./pages/SearchResultsPage"));
+const SingleGenrePage = React.lazy(() => import("./pages/SingleGenrePage"));
 
 const App = () => {
-  const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
-  console.log(isLoggedIn);
-
   return (
-    <Fragment>
-      <Switch>
-        <Route path="/register" exact>
-          <Register />
-        </Route>
-
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-
-        <Route path="/" exact>
-          <Header />
-          <Banner />
-          <AllGenre />
-        </Route>
-
-        <Route path="/mylist" exact>
-          {console.log(isLoggedIn)};
-          {isLoggedIn ? (
-            <Fragment>
-              <Header />
-              <MyList />
-            </Fragment>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-
-        <Route path="/:movie" exact>
-          {isLoggedIn ? (
-            <Fragment>
-              {/* <Header />
-              <Banner />
-              <AllGenre /> */}
-              <MovieDetails />
-            </Fragment>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-
-        {isLoggedIn && (
-          <Route path="/genre/:genre">
-            {isLoggedIn ? (
-              <Fragment>
-                <Header />
-                <GenreResults />
-              </Fragment>
-            ) : (
-              <Redirect to="/login" />
-            )}
+    <Suspense fallback={<LoadingSpinner />}>
+        <Switch>
+          <Route path="/register" exact>
+            <Register />
           </Route>
-        )}
-
-        <Route path="/results/:query">
-          {isLoggedIn ? (
-            <Fragment>
-              <Header />
-              <SearchResults />
-            </Fragment>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
-    </Fragment>
+          <Route path="/login" exact>
+            <Login />
+          </Route>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <ProtectedRoute path="/mylist" exact>
+            <MyListPage />
+          </ProtectedRoute>
+          {/* <ProtectedRoute path="/movie/:movie" exact>
+            <MovieDetailsPage />
+          </ProtectedRoute> */}
+          <Route path="/movie/:movie" exact>
+            <MovieDetailsPage />
+          </Route>
+          
+          <ProtectedRoute path="/genre/:genre" exact>
+            <SingleGenrePage />
+          </ProtectedRoute>
+          <ProtectedRoute path="/results/:query" exact>
+            <SearchResultsPage />
+          </ProtectedRoute>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+    </Suspense>
   );
 };
 
