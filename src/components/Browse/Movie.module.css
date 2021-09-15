@@ -111,9 +111,7 @@ img.poster {
   position: relative;
 }
 .list-handler:hover::after,
-.list-handler:focus::after,
-.load-more:hover::after,
-.load-more:focus::after{
+.load-more:hover::after{
   opacity:1;
 }
 .info {

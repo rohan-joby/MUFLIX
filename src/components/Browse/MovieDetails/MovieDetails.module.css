@@ -102,11 +102,30 @@
   padding: 5px 6px 4px 6px;
   margin: 0.5rem 48%;
   cursor: pointer;
+  position: relative;
 }
-.load:hover,
-.load:focus {
-  background: #c7bebf88;
-  border-color: #c7bebf88;
+.load:hover{
+  background: hsla(0, 0%, 100%, 0.2);
+  border-color: rgb(255, 255, 255)
+}
+.load::after{
+  content:"load more details";
+  color:white;
+  position: absolute;
+  font-size: 0.9rem;
+  top:30px;
+  left:46px;
+  width:120px;
+  border-radius: 3px;
+  padding:3px;
+  background: hsla(0, 0%, 30%,0.8);
+  opacity:0;
+  transition: opacity 250ms ease;
+  will-change: opacity;
+}
+.load:hover::after,
+.load:focus::after{
+  opacity:1;
 }
 
 @media screen and (max-width: 930px) {
@@ -177,6 +196,7 @@
   .load {
     margin: 0.5rem 45%;
   }
+  
 }
 @media screen and (max-width: 425px) {
   .poster {
