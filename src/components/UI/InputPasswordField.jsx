@@ -26,7 +26,7 @@ const InputPasswordField = ({
           passwordHasError ? classes.invalid : ""
         }`}
       />
-      <button className={classes.eye} onClick={passwordViewChangelHandler} tabIndex={-1} >
+      <button className={classes.eye} type="button" onClick={passwordViewChangelHandler} tabIndex={-1} >
         {viewPassword ? <FaEyeSlash size={17} style={{ fill: '#fff' }}/>: <FaEye size={17} style={{ fill: '#fff' }}/>}
       </button>
     </span>

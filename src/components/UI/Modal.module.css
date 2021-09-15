@@ -1,15 +1,20 @@
 .backdrop{
     position: absolute;
-    inset:0;
+    /* inset:0; */
+    top:0;
+    left:0;
+    height: 100%;
+    width:100%;
     z-index:30;
     background-color: hsla(0, 0%, 0%, 0.4);
     cursor: pointer;
+    overflow-y: hidden;
 }
 .overlay{
     position: absolute;
     top:1vw;
-    left:15vw;
-    width:70vw;
+    left:10vw;
+    width:80vw;
     height:95%;
     z-index:35;
     overflow-y:scroll;
@@ -28,4 +33,20 @@
 }
 .close-button:hover {
   background: #c7bebf88;
+}
+@media screen and (max-width: 768px) {
+  .overlay {
+    /* width: 94vw; */
+    overflow-x: hidden;
+    display: block;
+    margin: 0 3vw;
+  }
+}
+@media screen and (max-width: 480px){
+  .overlay{
+    left:0;
+    width:97vw;
+    padding-left: 2px;
+    margin-left: 0;
+  }
 }

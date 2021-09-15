@@ -3,15 +3,17 @@
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
   position: relative;
   left: 30px;
-  position: relative;
   z-index: 15;
+}
+.dropdown p{
+  margin: 0;
+  padding:5px 0;
 }
 .dropdown-title {
   width: 165px;
   border-radius: 8px;
   border: 1px solid hsla(0, 0%, 100%, 0.5);
   background-color: hsla(0, 0%, 0%, 0.6);
-  margin: 3px;
   padding: 3px 10px;
 }
 .label {
@@ -24,7 +26,7 @@
 .dropdown-list {
   list-style: none;
   position: absolute;
-  z-index: 20;
+  z-index: 10;
 }
 .dropdown-list_button {
   font-size: 1rem;
@@ -47,7 +49,7 @@
 .close{
   margin:2rem auto 10px;
   position: sticky;
-  top:90vh;
+  top:75vh;
   z-index:35;
   border-radius: 100%;
   background: rgba(7, 7, 7, 0.5);
@@ -61,10 +63,10 @@
   .dropdown-list {
     position: fixed;
     z-index: 30;
-    top: 0;
+    top: -20px;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,5 +94,16 @@
     font-weight: 700;
     letter-spacing: 1.4px;
     transform: scaleX(3);
+  }
+}
+@media screen and (max-width: 480px) {
+  .dropdown{
+    left: 5px;
+  }
+  .dropdown-title{
+    width: 130px;
+  }
+  .label{
+    font-size: 1rem;
   }
 }
