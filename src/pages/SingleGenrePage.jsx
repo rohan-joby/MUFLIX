@@ -1,9 +1,15 @@
 import React from "react";
 
+import Navigation from "../components/Layout/Navigation";
 import OneGenre from "../components/Browse/OneGenre";
 
 const GenreResults = () => {
-  return <OneGenre />;
+  return (
+    <>
+      <Navigation />
+      <OneGenre />
+    </>
+  );
 };
 
 export default GenreResults;
