@@ -44,3 +44,17 @@
         width:10rem;
     }
 }
+
+@media screen and (max-width: 540px) {
+    .search{
+        padding-right: 4px;
+        padding-left: 0;
+    }
+    .search__btn{
+        margin-left: 4px;
+    }
+    .input{
+        width:7rem;
+        font-size: 1rem;
+    }
+}

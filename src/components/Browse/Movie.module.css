@@ -9,6 +9,7 @@
   border-radius: 10px;
   transition: transform 750ms ease;
   background-color: #141414;
+  display:inline-block;
 }
 .movie:hover,
 .movie:focus {
@@ -52,9 +53,10 @@ img.poster {
   left:0;
   bottom:0;
   width: 100%;
-  width: min(17rem,25vw);
+  width: max(17rem,25vw);
   height:4rem;
   z-index:5;
+  margin-bottom: 10px;
 }
 .title {
   margin: 0;
@@ -124,13 +126,20 @@ img.poster {
 @media screen and (max-width: 480px) {
   .movie {
     height: 10rem;
-    width: 12rem;
+    width: 18rem;
     transition: transform 500ms ease;
+  }
+  .movie::after {
+    height: 10rem;
+    width: 18rem;
   }
   .movie:hover,
   .movie:focus {
     transform: scale(1.15);
     z-index: 20;
+  }
+  .details{
+    width: 17.5rem;
   }
   .details h3 {
     display: block;
@@ -144,8 +153,12 @@ img.poster {
 }
 @media screen and (max-width: 425px) {
   .movie,img.poster {
-    width: 220px;
-    height: 125px;
+    width: 250px;
+    height: 145px;
+  }
+  .movie::after {
+    width: 250px;
+    height: 145px;
   }
   .details{
     width: 220px;
