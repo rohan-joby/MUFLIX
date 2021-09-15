@@ -33,7 +33,7 @@ const Movie = (props) => {
 
   const handleOpenDetails = () => {
     //setDetailsIsOpen(true);
-    history.push(`/${id}`);
+    history.push(`/movie/${id}`);
     //console.log("detailsIsOpen",detailsIsOpen);
   };
   // const handleCloseDetails = () => {
@@ -65,7 +65,7 @@ const Movie = (props) => {
     shortTitle = title.length < 18 ? title : title.slice(0, 18) + "...";
   }
   const clickHandler = () => {
-    history.push(`/${id}`);
+    history.push(`/movie/${id}`);
   };
 
   const addToListHandler = () => {
@@ -87,7 +87,7 @@ const Movie = (props) => {
   };
   return (
     // <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
-    <div className={classes.movie} onClick={clickHandler}>
+    <div className={classes.movie} onClick={windowWidth<500&& clickHandler}>
       {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
       <Lazyload height={170} once>
       <img
@@ -96,21 +96,23 @@ const Movie = (props) => {
         src={imagePath}
         alt={title}
         loading="lazy"
+        height={170}
+        width={304}
       />
       </Lazyload>
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
-        <button
+        <button className={classes[`list-handler`]}
           onClick={movieInList ? removeFromListHandler : addToListHandler}
         >
           {movieInList ? (
-            <FaMinus style={{ fill: "white" }} />
+           <div onClick={props.refetch}><FaMinus style={{ fill: "white" }} /></div>
           ) : (
             <FaPlus style={{ fill: "white" }} />
           )}
         </button>
         {/* <button onClick={clickHandler}> */}
-        <button onClick={handleOpenDetails}>
+        <button className={classes[`load-more`]} onClick={handleOpenDetails}>
           <FaChevronDown style={{ fill: "white" }} />
         </button>
         <div className={classes.info}>
