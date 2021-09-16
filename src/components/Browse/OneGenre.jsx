@@ -2,7 +2,6 @@ import React, {useEffect } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
 
-import Navigation from "../Layout/Navigation";
 import { fetchAllMovies } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import Movie from "../Browse/Movie";
@@ -34,7 +33,6 @@ const OneGenre = () => {
   }
   return (
     <div>
-      {/* <Header label={genre}/> */}
       <h2 className={classes.header}>{genre}</h2>
       <div className={classes.genre}>{results}</div>
     </div>

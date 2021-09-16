@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Modal from "../../UI/Modal";
 
 import { FaPlus } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
-import { VscChromeClose } from "react-icons/vsc";
 
 import useHttp from "../../../hooks/use-http";
 import { addToMyList, removeFromMyList } from "../../../lib/api";
@@ -22,7 +21,6 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
 const MovieDetails = (props) => {
-  const history = useHistory();
   const params = useParams();
 
   const authCtx = useContext(AuthContext);
@@ -57,7 +55,6 @@ const MovieDetails = (props) => {
     loadedDetails &&
     loadedCredits
   ) {
-    //console.log(loadedCredits);
     const {
       id,
       backdrop_path,
@@ -109,7 +106,7 @@ const MovieDetails = (props) => {
     return (
       <Modal>
       <div className={classes.container}>
-        <img className={classes.poster} src={imagePath} alt={title} />
+        <img className={classes.poster} width={600} height={450} src={imagePath} alt={title} />
         <button
           className={classes.wishlist}
           onClick={movieInList ? removeFromMyListHandler : addToMyListHandler}
@@ -120,7 +117,7 @@ const MovieDetails = (props) => {
           {movieInList ? `From My List` : `My List`}
         </button>
         <div className={classes.details}>
-          <div>
+          <div className={classes.wrapper}>
             <div className={classes.about}>
               <h2 className={classes.title}>{title}</h2>
               <div className={classes.about__extra}>

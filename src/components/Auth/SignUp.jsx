@@ -75,11 +75,12 @@ const SignUp = () => {
       setErrorMessage(
         "Sorry, but we can't find an account with this email address. Please try again."
       );
+      console.log("error");
     }
   }, [error, signUpStatus]);
 
   useEffect(()=>{
-    if (signUpStatus==="completed" && error === null && data !== null){
+    if (signUpStatus==="completed" && error === null){
       const {token, expiresAt} = data;
       login({token, expiresAt});
       history.push("/");

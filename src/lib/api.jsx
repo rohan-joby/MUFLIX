@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { BASE_URL, ENDPOINTS, oneMovie } from "../data/endpoints";
+import { BASE_URL, ENDPOINTS } from "../data/endpoints";
 import { GENRE_ID } from "../data/genre";
 
 function getRandomItem(length) {
@@ -118,23 +116,6 @@ export async function fetchAllMovies({genre,page=1}) {
   return data;
 }
 
-export async function useFetchGenreMoviePages({genre,page=1}) {
-  const endpoint = ENDPOINTS.sections.find((gen) => gen.title === genre);
-  const url = BASE_URL + endpoint.endpoint + `&page=${page}`;
-  const [movieData, setMovieData] = useState([oneMovie]);
-  console.log("movieData:" + movieData);
-
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log(data);
-//data.results
-  if (!response.ok) {
-    throw new Error(data.message || "Movies not found!");
-  }
-  //await setMovieData(prev=>[...prev,...data.results])
-  return data.results;
-}
-
 export async function fetchOneMovieDetails(id) {
   const detailsEndpoint = ENDPOINTS.helpers.fetchMovieDetails.replace(
     "_id",
@@ -231,8 +212,6 @@ export async function getMyList() {
   const loadedMovies = [];
   for (const key in data.movies) {
     const genreList = data.movies[key].genre;
-    const genres = genreList.map((genre) => genre.id);
-    console.log(genres);
 
     loadedMovies.push({
       id: data.movies[key].id,
@@ -249,7 +228,6 @@ export async function getMyList() {
     }
   );
 
-  console.log(uniqueMovies);
   return uniqueMovies;
 }
 
@@ -265,9 +243,9 @@ export async function removeFromMyList(id){
     },
   });
   const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Could not delete movie!");
-  }
+  return data;
+  // if (!response.ok) {
+  //   throw new Error(data.message || "Could not delete movie!");
+  // }
 
 }

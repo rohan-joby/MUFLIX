@@ -162,7 +162,7 @@ a:focus {
   position: absolute;
   width: 32px;
   height: 32px;
-  top: 45px;
+  top:0;
   left: 0;
   right: 0;
   bottom: 0;

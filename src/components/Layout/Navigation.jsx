@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 
 import { BsCaretDownFill } from "react-icons/bs";
@@ -12,7 +12,6 @@ import classes from "./Navigation.module.css";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
 import Avatar from "../../assets/Avatar.png";
-// import AuthContext from "../../store/auth-context";
 import { useAuth } from "../../store/auth-context";
 
 const Navigation = React.memo(() => {
@@ -22,7 +21,6 @@ const Navigation = React.memo(() => {
   const { isLoggedIn, logout } = useAuth();
 
   const [profileOpen, setProfileOpen] = useState(false);
-  // const authCtx = useContext(AuthContext);
 
   const profileClickHandler = () => {
     setProfileOpen((prevValue) => !prevValue);

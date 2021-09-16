@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 import Header from "../../Layout/Header";
 import useHttp from "../../../hooks/use-http";
@@ -26,8 +27,6 @@ const Banner = () => {
     sendRequest();
   }, [sendRequest]);
 
-  let loadedBanner;
-
   if (status === "pending") {
     return <LoadingSpinner />;
   }
@@ -42,10 +41,9 @@ const Banner = () => {
     const genreObjects = getGenreObjects(genre_ids);
 
     const clickHandler = () => {
-      history.push(`/${id}`);
+      history.push(`/movie/${id}`);
     };
     const addToMyListHandler = () => {
-      console.log("in add handle");
       const details = {
         id: id,
         title: title,
@@ -70,12 +68,12 @@ const Banner = () => {
         <div className={classes.actions}>
           <button
             type="button"
-            disabled={movieInList ? true : false}
+            disabled={movieInList}
             className={`${classes.btn} ${classes["btn-primary"]}`}
             onClick={movieInList ? null : addToMyListHandler}
           >
-            <span>{movieInList ? "" : <FaPlus size={18} />}</span>{" "}
-            {movieInList ? `Added to List` : `My List`}
+            <span>{movieInList ? <FaCheck size={18}/> : <FaPlus size={18} />}</span>{" "}
+            {movieInList ? `In My List` : `My List`}
           </button>
         </div>
 

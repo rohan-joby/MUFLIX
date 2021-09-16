@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
-import LoadingSpinner from "../UI/LoadingSpinner";
 import { GoAlert } from "react-icons/go";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
@@ -105,7 +104,7 @@ const LogIn = () => {
     ]
   );
   const handleGuestLogin = () => {
-    const details = { email: "joby@joby.com", password: "Joby1964" };
+    const details = { email: "test@test.com", password: "Test1964" };
     sendRequest(details);
 
     resetEmail();

@@ -8,7 +8,6 @@ const MylistProvider = (props) => {
   const isListEmpty = mylist.length > 0;
 
   const addToListHandler = (id) => {
-    console.log(JSON.stringify([id]))
     const newList = mylist.length > 0 ? [id,...mylist] : [id];
     setMylist((prevValue) => {
       return prevValue.length > 0 ? [id, ...prevValue] : [id];
