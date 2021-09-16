@@ -11,11 +11,13 @@ const Search = () => {
   let searchFormatted;
   const width=useWindowWidth() ;
 
+  const focusInputHandler = () => {
+    inputRef.current.focus();
+  }
   const searchHandler = (event) => {
     event.preventDefault();
     const search = inputRef.current.value;
     searchFormatted = search.toLowerCase().split(" ").join("+");
-    console.log(searchFormatted);
     inputRef.current.value = "";
     history.replace(`/results/${searchFormatted}`);
   };
@@ -24,7 +26,7 @@ const Search = () => {
     <form onSubmit={searchHandler} className={classes.search}>
       <label htmlFor="query"></label>
       <input className={classes.input} autoComplete="off" type="search" ref={inputRef} id="query" placeholder="Search movies"/>
-      <button className={classes.search__btn}>
+      <button onClick={focusInputHandler} className={classes.search__btn} type="button">
         <BsSearch size={width>425 ?21:16} style={{ fill: "white" }} />
       </button>
     </form>
