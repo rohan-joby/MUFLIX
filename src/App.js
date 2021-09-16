@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import ProtectedRoute from "./components/Authentication/ProtectedRoute";
 import HomePage from "./pages/HomePage";
 
 import LoadingSpinner from "./components/UI/LoadingSpinner";

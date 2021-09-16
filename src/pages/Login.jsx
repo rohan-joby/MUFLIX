@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import LogIn from "../components/Auth/LogIn";
+import LogIn from "../components/Authentication/LogIn";
 
 const Login = () => {
   return (

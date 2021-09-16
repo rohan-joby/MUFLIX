@@ -1,18 +1,18 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+
+import Header from "../Header/Header";
+import useHttp from "../../hooks/use-http";
+import { fetchBanner, getGenreObjects, addToMyList } from "../../lib/api";
+import AuthContext from "../../store/auth-context";
+import MylistContext from "../../store/mylist-context";
+import { IMAGE_URL } from "../../data/endpoints";
+
+import LoadingSpinner from "../UI/LoadingSpinner";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
-
-import Header from "../../Layout/Header";
-import useHttp from "../../../hooks/use-http";
-import { fetchBanner, getGenreObjects, addToMyList } from "../../../lib/api";
-import { IMAGE_URL } from "../../../data/endpoints";
-
-import LoadingSpinner from "../../UI/LoadingSpinner";
 import classes from "./Banner.module.css";
-import AuthContext from "../../../store/auth-context";
-import MylistContext from "../../../store/mylist-context";
 
 const Banner = () => {
   const history = useHistory();

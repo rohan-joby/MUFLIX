@@ -1,6 +1,6 @@
 import React from "react";
 
-import Navigation from "../components/Layout/Navigation";
+import Navigation from "../components/Header/Navigation";
 import OneGenre from "../components/Browse/OneGenre";
 
 const GenreResults = () => {

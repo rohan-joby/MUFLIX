@@ -7,12 +7,12 @@ import { BsSearch } from "react-icons/bs";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useScroll from "../../hooks/useScroll";
 import Search from "./Search";
+import { useAuth } from "../../store/auth-context";
 
 import classes from "./Navigation.module.css";
 import Muflix from "../../assets/Muflix-logo.PNG";
 import MuflixSmall from "../../assets/Muflix-small.png";
 import Avatar from "../../assets/Avatar.png";
-import { useAuth } from "../../store/auth-context";
 
 const Navigation = React.memo(() => {
   const history = useHistory();

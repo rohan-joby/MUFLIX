@@ -1,7 +1,7 @@
 import React from "react";
 
-import Navigation from "../components/Layout/Navigation";
-import ListPage from "../components/Browse/MyList/ListPage";
+import Navigation from "../components/Header/Navigation";
+import ListPage from "../components/MyList/ListPage";
 
 const MyListPage = () => {
     return (

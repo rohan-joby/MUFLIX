@@ -1,7 +1,7 @@
 import React from "react";
 
-import Navigation from "../components/Layout/Navigation";
-import DisplaySearchResults from "../components/Layout/DisplaySearchResults";
+import Navigation from "../components/Header/Navigation";
+import DisplaySearchResults from "../components/SearchMovie/DisplaySearchResults";
 
 const SearchResultsPage = () => {
     return (

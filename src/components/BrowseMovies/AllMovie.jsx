@@ -5,7 +5,7 @@ import useHttp from "../../hooks/use-http";
 import { fetchAllMovies } from "../../lib/api";
 
 import classes from "./AllMovie.module.css";
-import Movie from "./Movie";
+import Movie from "../Browse//Movie";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const AllMovie = (props) => {

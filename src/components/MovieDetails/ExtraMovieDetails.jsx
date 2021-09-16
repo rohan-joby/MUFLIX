@@ -4,17 +4,20 @@ import classes from "./ExtraMovieDetails.module.css";
 
 const ExtraMovieDetails = ({ title, cast, crew, genre }) => {
   const director = crew.find((member) => member.job === "Director");
-  const directorName = director ? director.name: "unavailable :(";
+  const directorName = director ? director.name: "unavailable";
 
   const writer = crew.find((member) =>(member.job === "Screenplay"|| member.job ==="Writer"));
-  const writerName = writer ? writer.name: "unavailable :(";
+  const writerName = writer ? writer.name: "unavailable";
   
   let actors = cast.length > 0 ? cast.slice(0,15).map((actor, index) => {
     return index === 14 ? actor.name : `${actor.name},  `;
-  }): "unavailable :(";
-  const genreList = genre.map((element, index) => {
+  }): "unavailable";
+  let genreList = genre.map((element, index) => {
     return index === genre.length - 1 ? element.name : `${element.name},  `;
   });
+  if(genreList.length === 0){
+    genreList="unavailable"
+  }; 
 
   return <div className={classes.container}>
       <h2><span className={classes.label__title}>About  </span> {title}</h2>

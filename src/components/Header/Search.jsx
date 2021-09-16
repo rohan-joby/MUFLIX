@@ -17,7 +17,6 @@ const Search = () => {
     searchFormatted = search.toLowerCase().split(" ").join("+");
     console.log(searchFormatted);
     inputRef.current.value = "";
-    // <DisplaySearchResults  query={}/>
     history.replace(`/results/${searchFormatted}`);
   };
 

@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import SignUp from "../components/Auth/SignUp";
+import SignUp from "../components/Authentication/SignUp";
+
 const Register = () => {
   return (
     <Fragment>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import useHttp from "../../../hooks/use-http";
-import { getMyList } from "../../../lib/api";
-import LoadingSpinner from "../../UI/LoadingSpinner";
-import Movie from "../Movie";
 
+import useHttp from "../../hooks/use-http";
+import { getMyList } from "../../lib/api";
+import Movie from "../Browse/Movie";
+
+import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./ListPage.module.css";
 
 const ListPage = () => {

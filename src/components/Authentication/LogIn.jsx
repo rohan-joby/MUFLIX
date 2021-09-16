@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import { GoAlert } from "react-icons/go";
 import Muflix from "../../assets/Muflix-logo.PNG";
@@ -7,10 +8,10 @@ import MuflixSmall from "../../assets/Muflix-small.png";
 
 import Background from "../../assets/Register-bg.jpg";
 
-import { signUp } from "../../lib/api";
+import { logIn } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
-import InputPasswordField from "../UI/InputPasswordField";
+import InputPasswordField from "./InputPasswordField";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { useAuth } from "../../store/auth-context";
@@ -26,27 +27,11 @@ const passwordValidation = (value) => {
   return regexp.test(value);
 };
 
-const usernameValidation = (value) => {
-  const regexp = /^(?!\s*$).+/;
-  return regexp.test(value);
-};
-
-const SignUp = () => {
+const LogIn = () => {
   const history = useHistory();
   const { login } = useAuth();
   const width = useWindowWidth();
   const [errorMessage, setErrorMessage] = useState("");
-
-  const { sendRequest, signUpStatus, data, error } = useHttp(signUp);
-
-  const {
-    value: usernameInput,
-    isValid: usernameIsValid,
-    hasError: usernameHasError,
-    updateValue: updateUsernameValue,
-    updateTouch: updateUsernameTouch,
-    reset: resetUsername,
-  } = useInput(usernameValidation);
 
   const {
     value: emailInput,
@@ -66,26 +51,33 @@ const SignUp = () => {
     reset: resetPassword,
   } = useInput(passwordValidation);
 
+  const { sendRequest, status: loginStatus, data, error } = useHttp(logIn);
+
   let formIsValid = false;
-  if (usernameIsValid && emailIsValid && passwordIsValid) {
+  if (emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
+
   useEffect(() => {
-    if (signUpStatus === "completed" && error !== null) {
+    if (loginStatus === "completed" && error === null) {
+      history.push("/");
+    }
+  }, [history, error, loginStatus]);
+
+  useEffect(() => {
+    if (loginStatus === "completed" && error !== null) {
       setErrorMessage(
         "Sorry, but we can't find an account with this email address. Please try again."
       );
-      console.log("error");
     }
-  }, [error, signUpStatus]);
+  }, [error, loginStatus]);
 
-  useEffect(()=>{
-    if (signUpStatus==="completed" && error === null){
-      const {token, expiresAt} = data;
-      login({token, expiresAt});
-      history.push("/");
+  useEffect(() => {
+    if (loginStatus === "completed" && error === null && data !== null) {
+      const { token, expiresAt } = data;
+      login({ token, expiresAt });
     }
-  },[signUpStatus, error, data, login,history])
+  }, [loginStatus, error, data, login]);
 
   const submitHandler = useCallback(
     (event) => {
@@ -94,17 +86,30 @@ const SignUp = () => {
         return;
       }
 
-      const details = { username: usernameInput, email: emailInput, password: passwordInput };
+      const details = { email: emailInput, password: passwordInput };
       sendRequest(details);
 
-      resetUsername();
       resetEmail();
       resetPassword();
     },
-    [usernameInput, emailInput, passwordInput, formIsValid, resetPassword, resetEmail, resetUsername, sendRequest]
+    [
+      emailInput,
+      passwordInput,
+      formIsValid,
+      resetPassword,
+      resetEmail,
+      sendRequest,
+    ]
   );
+  const handleGuestLogin = () => {
+    const details = { email: "test@test.com", password: "Test1964" };
+    sendRequest(details);
 
+    resetEmail();
+    resetPassword();
+  };
   const src = width > 600 ? Muflix : MuflixSmall;
+
   return (
     <div
       className={classes.container}
@@ -112,24 +117,12 @@ const SignUp = () => {
     >
       <img src={src} height={48} alt="logo" className={classes.logo} />
       <form className={classes.input__form} onSubmit={submitHandler}>
-        <h1 className={classes.heading}>Sign Up</h1>
+        <h1 className={classes.heading}>Log In</h1>
         {errorMessage && (
           <div className={classes.alert}>
-            <GoAlert size={20}/>
+            <GoAlert size={20} />
             <h4>{errorMessage}</h4>
           </div>
-        )}
-        <input
-          type="text"
-          className={`${classes.input} ${usernameHasError ? classes.invalid : ""}`}
-          name="username"
-          placeholder="Your name"
-          value={usernameInput}
-          onChange={updateUsernameValue}
-          onBlur={updateUsernameTouch}
-        />
-        {usernameHasError && (
-          <p className={classes.error}>Please provide a valid username</p>
         )}
         <input
           type="email"
@@ -152,25 +145,36 @@ const SignUp = () => {
         />
         {passwordHasError && (
           <div className={classes.error}>
-          <h4>Your password must contain:</h4>
-          <ul>
-            <li>▪ &nbsp; minimum six characters</li>
-            <li>▪ &nbsp; at least one uppercase letter</li>
-            <li>▪ &nbsp; at least one lowercase letter</li>
-            <li>▪ &nbsp; at least one number</li>
-            <li>▪ &nbsp; no special characters</li>
-          </ul> 
-        </div>
+            <h4>Your password must contain:</h4>
+            <ul>
+              <li>▪ &nbsp; minimum six characters</li>
+              <li>▪ &nbsp; at least one uppercase letter</li>
+              <li>▪ &nbsp; at least one lowercase letter</li>
+              <li>▪ &nbsp; at least one number</li>
+              <li>▪ &nbsp; no special characters</li>
+            </ul>
+          </div>
         )}
-        <button type="submit" disabled={!formIsValid} className={classes.btn__primary}>
-          {signUpStatus === "pending" ? <div className={classes.loader} /> :"Sign Up"}
+        <button
+          type="submit"
+          disabled={!formIsValid}
+          className={classes.btn__primary}
+        >
+          {loginStatus === "pending" ? <div className={classes.loader} /> :"Log In"}
+        </button>
+        <button
+          type="submit"
+          className={classes.btn__secondary}
+          onClick={handleGuestLogin}
+        >
+          Log In anonymously
         </button>
         <h2 className={classes.signIn__link}>
-          Do you already have an account? <Link to="/login">Log In</Link>
+          Haven't you registered yet? <Link to="/register">Sign Up</Link>
         </h2>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default LogIn;

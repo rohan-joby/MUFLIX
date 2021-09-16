@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+
 import classes from "./InputPasswordField.module.css";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+
 const InputPasswordField = ({
   placeholder,
   passwordHasError,

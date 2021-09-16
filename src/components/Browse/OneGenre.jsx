@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { fetchAllMovies } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
-import Movie from "../Browse/Movie";
+import Movie from "./Movie";
 
 import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./OneGenre.module.css";

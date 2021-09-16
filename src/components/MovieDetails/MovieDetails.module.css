@@ -122,8 +122,7 @@
   transition: opacity 250ms ease;
   will-change: opacity;
 }
-.load:hover::after,
-.load:focus::after{
+.load:hover::after{
   opacity:1;
 }
 

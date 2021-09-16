@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { GENRE } from "../../data/genre";
+import {GENRE } from "../../data/genre";
 import AllMovie from "./AllMovie";
 
 const AllGenre = () => {

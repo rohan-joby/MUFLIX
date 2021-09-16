@@ -1,8 +1,8 @@
 import React from "react";
 
-import Navigation from "../components/Layout/Navigation";
-import Banner from "../components/Browse/Banner/Banner";
-import AllGenre from "../components/Browse/AllGenre";
+import Navigation from "../components/Header/Navigation";
+import Banner from "../components/Banner/Banner";
+import AllGenre from "../components/BrowseMovies/AllGenre";
 
 const HomePage = () => {
     return (

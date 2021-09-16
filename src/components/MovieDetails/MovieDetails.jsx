@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Modal from "../../UI/Modal";
+import Modal from "../UI/Modal";
 
 import { FaPlus } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 
-import useHttp from "../../../hooks/use-http";
-import { addToMyList, removeFromMyList } from "../../../lib/api";
-import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../../lib/api";
-import { IMAGE_URL } from "../../../data/endpoints";
-import AuthContext from "../../../store/auth-context";
-import MylistContext from "../../../store/mylist-context";
+import useHttp from "../../hooks/use-http";
+import { addToMyList, removeFromMyList } from "../../lib/api";
+import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../lib/api";
+import { IMAGE_URL } from "../../data/endpoints";
+import AuthContext from "../../store/auth-context";
+import MylistContext from "../../store/mylist-context";
 
 import ExtraMovieDetails from "./ExtraMovieDetails";
 
-import Muflix from "../../../assets/muflix.PNG";
-import LoadingSpinner from "../../UI/LoadingSpinner";
+import Muflix from "../../assets/muflix.PNG";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./MovieDetails.module.css";
 
 const MovieDetails = (props) => {
@@ -171,4 +171,3 @@ const MovieDetails = (props) => {
 
 export default MovieDetails;
 
-//793723

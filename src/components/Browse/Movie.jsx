@@ -3,17 +3,17 @@ import { useHistory } from "react-router-dom";
 //import MovieDetails from "./MovieDetails/MovieDetails";
 import Lazyload from "react-lazyload";
 
-import { FaPlus } from "react-icons/fa";
-import { FaMinus } from "react-icons/fa";
-import { FaChevronDown } from "react-icons/fa";
-
 import useWindowWidth from "../../hooks/useWindowWidth";
 import Muflix from "../../assets/muflix.PNG";
-import classes from "./Movie.module.css";
 import { IMAGE_URL } from "../../data/endpoints";
 import { addToMyList, removeFromMyList } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
 import MylistContext from "../../store/mylist-context";
+
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
+import classes from "./Movie.module.css";
 
 import {
   getGenres,
