@@ -25,7 +25,6 @@ const DisplaySearchResults = () => {
 
   if (status === "completed" && searchResults) {
     const resultLength = searchResults.results.length;
-    console.log(resultLength);
     if (resultLength === 0){
       return <h2 className={classes.error}>Your search did not have any matches.</h2>
     }
@@ -44,7 +43,6 @@ const DisplaySearchResults = () => {
     );
   }
   return (
-    // <div className={classes.browse}>{movieList}</div>
     <div>hello</div>
   );
 };

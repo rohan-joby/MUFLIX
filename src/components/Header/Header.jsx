@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Dropdown from "../../hooks/Dropdown";
-import { GENRE_ID } from "../../data/genre";
+import { GENRE } from "../../data/genre";
 
 import classes from "./Header.module.css";
 
@@ -19,7 +19,7 @@ const Header = ({label}) => {
   return (
     <header>
       <h2 className={classes.heading}>Movies</h2>
-      <Dropdown items={[...GENRE_ID]} title={label||`Choose a genre`} onClick={handleClick}/>
+      <Dropdown items={[...GENRE]} title={label||`Choose a genre`} onClick={handleClick}/>
     </header>
   );
 };
