@@ -11,7 +11,7 @@ import { useAuth } from "../../store/auth-context";
 
 import classes from "./Navigation.module.css";
 import Muflix from "../../assets/Muflix-logo.PNG";
-import MuflixSmall from "../../assets/Muflix-small.png";
+import MuflixSmall from "../../assets/Muflix-small.PNG";
 import Avatar from "../../assets/Avatar.png";
 
 const Navigation = React.memo(() => {

@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 
 import { GoAlert } from "react-icons/go";
 import Muflix from "../../assets/Muflix-logo.PNG";
-import MuflixSmall from "../../assets/Muflix-small.png";
+import MuflixSmall from "../../assets/Muflix-small.PNG";
 
 import Background from "../../assets/Register-bg.jpg";
 
