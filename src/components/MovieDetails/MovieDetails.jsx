@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "../UI/Modal";
 
@@ -11,8 +11,8 @@ import useHttp from "../../hooks/use-http";
 import { addToMyList, removeFromMyList } from "../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../lib/api";
 import { IMAGE_URL } from "../../data/endpoints";
-import AuthContext from "../../store/auth-context";
-import MylistContext from "../../store/mylist-context";
+import { useAuth } from "../../store/auth-context";
+import { useMylist } from "../../store/mylist-context";
 
 import ExtraMovieDetails from "./ExtraMovieDetails";
 
@@ -23,9 +23,8 @@ import classes from "./MovieDetails.module.css";
 const MovieDetails = (props) => {
   const params = useParams();
 
-  const authCtx = useContext(AuthContext);
-  const mylistCtx = useContext(MylistContext);
-  const token = authCtx.token;
+  const {token} = useAuth();
+  const {addToList, removeFromList, isInList} = useMylist();
   const [loadMore, setLoadMore] = useState(false);
 
   const {
@@ -66,8 +65,9 @@ const MovieDetails = (props) => {
       vote_average,
     } = loadedDetails;
     const { cast, crew } = loadedCredits;
-    const movieInList = mylistCtx.isInList(id);
-
+    const movieInList = isInList(id);
+    console.log(loadedDetails,"loadedDetails");
+    console.log(loadedCredits,"loadedCredits");
     const isInValid = backdrop_path === null;
     const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
 
@@ -92,11 +92,11 @@ const MovieDetails = (props) => {
         token: token,
       };
       addToMyList(details);
-      mylistCtx.addToList(id);
+      addToList(id);
     };
     const removeFromMyListHandler = () => {
       removeFromMyList(id);
-      mylistCtx.removeFromList(id);
+      removeFromList(id);
     };
 
     const loadMoreHandler = () => {
@@ -114,7 +114,7 @@ const MovieDetails = (props) => {
           <span>
             {movieInList ? <FaMinus size={17} /> : <FaPlus size={17} />}
           </span>{" "}
-          {movieInList ? `From My List` : `My List`}
+          {movieInList ? `My List` : `My List`}
         </button>
         <div className={classes.details}>
           <div className={classes.wrapper}>

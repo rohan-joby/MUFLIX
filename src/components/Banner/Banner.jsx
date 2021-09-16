@@ -1,27 +1,25 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Header from "../Header/Header";
 import useHttp from "../../hooks/use-http";
-import { fetchBanner, getGenreObjects, addToMyList } from "../../lib/api";
-import AuthContext from "../../store/auth-context";
-import MylistContext from "../../store/mylist-context";
+import { fetchBanner, getGenreObjects, addToMyList, removeFromMyList } from "../../lib/api";
+import { useAuth } from "../../store/auth-context";
+import { useMylist } from "../../store/mylist-context";
 import { IMAGE_URL } from "../../data/endpoints";
 
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 import classes from "./Banner.module.css";
 
 const Banner = () => {
   const history = useHistory();
   
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
-  const authCtx = useContext(AuthContext);
-  const mylistCtx = useContext(MylistContext);
-
-  const token = authCtx.token;
+  const {token} = useAuth();
+  const {addToList, removeFromList, isInList} = useMylist();
 
   useEffect(() => {
     sendRequest();
@@ -34,7 +32,7 @@ const Banner = () => {
     const { id, backdrop_path, title, genre_ids, overview, vote_average } =
       banner;
 
-    const movieInList = mylistCtx.isInList(id);
+    const movieInList = isInList(id);
     const imagePath = IMAGE_URL + "/w1280" + backdrop_path;
     const shortOverview = overview.slice(0, 180) + "...";
 
@@ -53,7 +51,11 @@ const Banner = () => {
         token: token,
       };
       addToMyList(details);
-      mylistCtx.addToList(id);
+      addToList(id);
+    };
+    const removeFromListHandler = () => {
+      removeFromMyList(id);
+      removeFromList(id);
     };
 
     return (
@@ -68,11 +70,10 @@ const Banner = () => {
         <div className={classes.actions}>
           <button
             type="button"
-            disabled={movieInList}
             className={`${classes.btn} ${classes["btn-primary"]}`}
-            onClick={movieInList ? null : addToMyListHandler}
+            onClick={movieInList ? removeFromListHandler : addToMyListHandler}
           >
-            <span>{movieInList ? <FaCheck size={18}/> : <FaPlus size={18} />}</span>{" "}
+            <span>{movieInList ? <FaMinus size={18}/> : <FaPlus size={18} />}</span>{" "}
             {movieInList ? `In My List` : `My List`}
           </button>
         </div>

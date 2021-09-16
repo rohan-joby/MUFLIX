@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-//import MovieDetails from "./MovieDetails/MovieDetails";
 import Lazyload from "react-lazyload";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import Muflix from "../../assets/muflix.PNG";
 import { IMAGE_URL } from "../../data/endpoints";
 import { addToMyList, removeFromMyList } from "../../lib/api";
-import AuthContext from "../../store/auth-context";
-import MylistContext from "../../store/mylist-context";
+import { useAuth } from "../../store/auth-context";
+import { useMylist } from "../../store/mylist-context";
 
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
@@ -24,28 +23,17 @@ import {
 
 const Movie = (props) => {
   const history = useHistory();
-  const authCtx = useContext(AuthContext);
-  const mylistCtx = useContext(MylistContext);
-  const token = authCtx.token;
+  const {token} = useAuth();
+  const {addToList, removeFromList, isInList} = useMylist();
   const windowWidth = useWindowWidth();
 
-  // const [detailsIsOpen, setDetailsIsOpen] = useState(false);
-
   const handleOpenDetails = () => {
-    //setDetailsIsOpen(true);
     history.push(`/movie/${id}`);
-    //console.log("detailsIsOpen",detailsIsOpen);
   };
-  // const handleCloseDetails = () => {
-  //   setDetailsIsOpen(false);
-  //   history.goBack();
-  //   console.log("detailsIsOpen",detailsIsOpen);
-
-  // };
   const { id, backdrop_path, genre_ids, title, vote_average } = props.data;
   const isInValid = backdrop_path === null;
   const imagePath = isInValid ? Muflix : IMAGE_URL + "w500" + backdrop_path;
-  const movieInList = mylistCtx.isInList(id);
+  const movieInList = isInList(id);
 
   let genres, genreObjects;
   if (props.mylist) {
@@ -78,17 +66,15 @@ const Movie = (props) => {
       token: token,
     };
     addToMyList(details);
-    mylistCtx.addToList(id);
+    addToList(id);
   };
 
   const removeFromListHandler = () => {
     removeFromMyList(id);
-    mylistCtx.removeFromList(id);
+    removeFromList(id);
   };
   return (
-    // <div className={classes.movie} style={{ backgroundImage: `url(${imagePath})` }} onClick={clickHandler}>
     <div className={classes.movie} onClick={windowWidth<500&& clickHandler}>
-      {/* {detailsIsOpen && <MovieDetails onClose={handleCloseDetails}/>} */}
       <Lazyload height={170} once>
       <img
         className={classes.poster}
@@ -102,7 +88,7 @@ const Movie = (props) => {
       </Lazyload>
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
-        <button className={classes[`list-handler`]}
+        <button className={`${movieInList ? classes[`remove-handler`]:classes[`list-handler`]}`}
           onClick={movieInList ? removeFromListHandler : addToListHandler}
         >
           {movieInList ? (
@@ -111,7 +97,6 @@ const Movie = (props) => {
             <FaPlus style={{ fill: "white" }} />
           )}
         </button>
-        {/* <button onClick={clickHandler}> */}
         <button className={classes[`load-more`]} onClick={handleOpenDetails}>
           <FaChevronDown style={{ fill: "white" }} />
         </button>

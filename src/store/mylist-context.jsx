@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 const MylistContext = React.createContext({
     isEmpty:false,
@@ -9,3 +9,7 @@ const MylistContext = React.createContext({
 })
 
 export default MylistContext;
+
+export const useMylist = () => {
+    return useContext(MylistContext);
+}
