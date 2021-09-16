@@ -7,6 +7,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 
+import AboutMovie from "./AboutMovie";
 import useHttp from "../../hooks/use-http";
 import { addToMyList, removeFromMyList } from "../../lib/api";
 import { fetchOneMovieDetails, fetchOneMovieCredits } from "../../lib/api";
@@ -23,8 +24,8 @@ import classes from "./MovieDetails.module.css";
 const MovieDetails = (props) => {
   const params = useParams();
 
-  const {token} = useAuth();
-  const {addToList, removeFromList, isInList} = useMylist();
+  const { token } = useAuth();
+  const { addToList, removeFromList, isInList } = useMylist();
   const [loadMore, setLoadMore] = useState(false);
 
   const {
@@ -54,20 +55,10 @@ const MovieDetails = (props) => {
     loadedDetails &&
     loadedCredits
   ) {
-    const {
-      id,
-      backdrop_path,
-      title,
-      overview,
-      release_date,
-      genres,
-      runtime,
-      vote_average,
-    } = loadedDetails;
+    const { id, backdrop_path, title, overview, release_date, genres, runtime, vote_average} = loadedDetails;
     const { cast, crew } = loadedCredits;
+
     const movieInList = isInList(id);
-    console.log(loadedDetails,"loadedDetails");
-    console.log(loadedCredits,"loadedCredits");
     const isInValid = backdrop_path === null;
     const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;
 
@@ -83,14 +74,7 @@ const MovieDetails = (props) => {
         : "unavailable";
 
     const addToMyListHandler = () => {
-      const details = {
-        id: id,
-        title: title,
-        backdrop: backdrop_path,
-        genre: genres,
-        rating: vote_average,
-        token: token,
-      };
+      const details = { id: id, title: title, backdrop: backdrop_path, genre: genres, rating: vote_average, token: token};
       addToMyList(details);
       addToList(id);
     };
@@ -105,64 +89,41 @@ const MovieDetails = (props) => {
 
     return (
       <Modal>
-      <div className={classes.container}>
-        <img className={classes.poster} width={600} height={450} src={imagePath} alt={title} />
-        <button
-          className={classes.wishlist}
-          onClick={movieInList ? removeFromMyListHandler : addToMyListHandler}
-        >
-          <span>
-            {movieInList ? <FaMinus size={17} /> : <FaPlus size={17} />}
-          </span>{" "}
-          {movieInList ? `My List` : `My List`}
-        </button>
-        <div className={classes.details}>
-          <div className={classes.wrapper}>
-            <div className={classes.about}>
-              <h2 className={classes.title}>{title}</h2>
-              <div className={classes.about__extra}>
-                <p className={classes.rating}>{vote_average} /10</p>
-                {date && <p>{date}</p>}
-                {runtime > 0 && <p>{runtime} mins</p>}
-              </div>
-            </div>
-            <h3 className={classes.summary}>{overview}</h3>
+        <div className={classes.container}>
+          <img className={classes.poster} width={600} height={450} src={imagePath} alt={title} />
+          <button
+            className={classes.wishlist}
+            onClick={movieInList ? removeFromMyListHandler : addToMyListHandler}
+          >
+            <span>
+              {movieInList ? <FaMinus size={17} /> : <FaPlus size={17} />}
+            </span>{" "}
+            {movieInList ? `My List` : `My List`}
+          </button>
+          <div className={classes.details}>
+            <AboutMovie title={title} vote_average={vote_average} date={date} runtime={runtime} overview={overview} cast={cast} actors={actors} genres={genres}
+            />
           </div>
-          <div className={classes.crew}>
-            <h4>
-              <span>Cast: </span>
-              {actors} {cast.length > 0 ? <em>more</em> : ""}
-            </h4>
-            <h4>
-              <span>Genres: </span>
-              {genres.map((element, index) => {
-                return index === genres.length - 1
-                  ? element.name
-                  : `${element.name} ◾ `;
-              })}
-            </h4>
-          </div>
-        </div>
-        <button
-          type="button"
-          className={classes.load}
-          onClick={loadMoreHandler}
-        >
-          {!loadMore ? (
-            <FaChevronDown size={30} style={{ fill: "white" }} />
-          ) : (
-            <FaChevronUp size={30} style={{ fill: "white" }} />
+          <button
+            type="button"
+            className={classes.load}
+            onClick={loadMoreHandler}
+          >
+            {!loadMore ? (
+              <FaChevronDown size={30} style={{ fill: "white" }} />
+            ) : (
+              <FaChevronUp size={30} style={{ fill: "white" }} />
+            )}
+          </button>
+          {loadMore && (
+            <ExtraMovieDetails
+              title={title}
+              cast={cast}
+              crew={crew}
+              genre={genres}
+            />
           )}
-        </button>
-        {loadMore && (
-          <ExtraMovieDetails
-            title={title}
-            cast={cast}
-            crew={crew}
-            genre={genres}
-          />
-        )}
-      </div>
+        </div>
       </Modal>
     );
   }
@@ -170,4 +131,3 @@ const MovieDetails = (props) => {
 };
 
 export default MovieDetails;
-
