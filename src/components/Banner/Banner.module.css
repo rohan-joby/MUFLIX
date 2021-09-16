@@ -29,7 +29,7 @@
   position: relative;
   font-size: min(7vw, 3rem);
   font-weight: 900;
-  padding-top: 2.5vw;
+  padding-top: 8vh;
   padding-left: 30px;
   margin-top: 0;
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.7);
@@ -51,7 +51,7 @@
   width:10em;
   font-size: 1.1rem;
   font-weight: 700;
-  margin:0 0.4rem 4.5rem 4vw;
+  margin:0 0.4rem 3.5rem 4vw;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -108,12 +108,15 @@ button span {
 }
 @media screen and (max-width: 480px) {
   .banner img {
-    height: 100vh;
+    height: 90vh;
+  }
+  .banner__image::after {
+    height: 90vh;
   }
   .title {
     text-align: center;
     font-size: 2rem;
-    padding-top: 40vw;
+    padding-top: 5vh;
     margin-bottom: 0.2rem;
   }
   .summary {
@@ -138,11 +141,14 @@ button span {
   }
 }
 @media screen and (max-width: 425px) {
+  .banner img,.banner__image::after {
+    height: 95vh;
+  }
   .btn-primary{
     margin-left: 10vw;
   }
   .title {
-    padding-top: 30vw;
+    padding-top: 18.5vh;
     text-align: center;
     margin-left: 0;
   }

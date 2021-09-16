@@ -190,7 +190,6 @@ a:focus {
   color: hsl(31, 96%, 49%);
   text-align: left;
   line-height: 1.2;
-  margin-top: 5px;
 }
 .error ul {
   list-style: none;

@@ -194,7 +194,9 @@
   .load {
     margin: 0.5rem 45%;
   }
-  
+  .load:hover::after{
+    opacity:0;
+  }  
 }
 @media screen and (max-width: 425px) {
   .poster {

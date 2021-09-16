@@ -84,10 +84,11 @@ img.poster {
 .details > button:focus {
   background: rgba(255, 255, 255, 0.2);
 }
-.list-handler{
+.list-handler,.remove-handler{
   position: relative;
 }
 .list-handler::after,
+.remove-handler::after,
 .load-more::after{
   color:white;
   position: absolute;
@@ -104,6 +105,10 @@ img.poster {
 .list-handler::after{
   content: "add to list";
 }
+.remove-handler::after{
+  content: "remove from list";
+  width:95px;
+}
 .load-more::after{
   content: "load details";
 }
@@ -111,6 +116,7 @@ img.poster {
   position: relative;
 }
 .list-handler:hover::after,
+.remove-handler:hover::after,
 .load-more:hover::after{
   opacity:1;
 }
