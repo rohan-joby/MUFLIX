@@ -24,13 +24,29 @@ const DisplaySearchResults = () => {
   }
 
   if (status === "completed" && searchResults) {
-    //logic for displaying results
+    const resultLength = searchResults.results.length;
+    console.log(resultLength);
+    if (resultLength === 0){
+      return <h2 className={classes.error}>Your search did not have any matches.</h2>
+    }
+
     movieList = searchResults.results.map((movie) => (
-      <Movie key={movie.id} data={movie} />
+      <div className={classes.movie}><Movie key={movie.id} data={movie} /></div>
     ));
-    console.log("loading results completed");
+    return (
+      <>
+        <div>
+          <h3 className={classes.title}>search results:</h3>
+          <div className={classes.query}>{searchQuery}</div>
+        </div>
+        <div className={classes.browse}>{movieList}</div>
+      </>
+    );
   }
-  return <div className={classes.browse}>{movieList}</div>;
+  return (
+    // <div className={classes.browse}>{movieList}</div>
+    <div>hello</div>
+  );
 };
 
 export default DisplaySearchResults;
