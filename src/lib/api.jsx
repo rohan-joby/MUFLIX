@@ -194,7 +194,7 @@ export async function addToMyList({
 }
 
 export async function getMyList() {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("authTokenMUFLIX");
   const url = process.env.REACT_APP_DB_MYLIST_URL;
 
   const response = await fetch(url, {
@@ -232,7 +232,7 @@ export async function getMyList() {
 }
 
 export async function removeFromMyList(id){
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("authTokenMUFLIX");
   const url = process.env.REACT_APP_DB_MYLIST_URL + `/${id}`;
 
   const response = await fetch(url, {
@@ -244,8 +244,4 @@ export async function removeFromMyList(id){
   });
   const data = await response.json();
   return data;
-  // if (!response.ok) {
-  //   throw new Error(data.message || "Could not delete movie!");
-  // }
-
 }
