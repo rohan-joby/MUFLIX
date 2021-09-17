@@ -20,7 +20,7 @@
 }
 
 .close-button {
-  background: hsla(0, 5%, 24%, 0.8);
+  background-color: hsla(0, 5%, 24%, 0.4);
   border-radius: 50%;
   border: 1px solid hsl(0, 0%, 100%);
   padding: 8px 10px;
@@ -29,9 +29,15 @@
   right: 2%;
   z-index: 37;
   cursor: pointer;
+  will-change:background-color;
+  transition: all 200ms ease;
 }
-.close-button:hover {
-  background: hsla(0, 0%, 100%, 0.3);
+.close-button:hover svg path {
+  fill:hsl(0, 0%, 0%);
+}
+.close-button:hover,
+.close-button:focus{
+  background-color: hsl(0, 0%, 95%);
 }
 @media screen and (max-width: 768px) {
   .overlay {

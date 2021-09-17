@@ -73,16 +73,22 @@ img.poster {
 }
 .details > button {
   display: inline-block;
-  background: transparent;
+  background-color: transparent;
   border: 1px solid hsl(0, 0%, 100%);
   border-radius: 50%;
   padding: 3px 5px 1px;
   margin-right: 5px;
   cursor: pointer;
+  will-change:background-color;
+  transition: all 200ms ease;
+}
+.details > button:hover svg path,
+.details > button:focus svg path{
+  fill:black;
 }
 .details > button:hover,
 .details > button:focus {
-  background: rgba(255, 255, 255, 0.2);
+  background-color: hsl(0, 0%, 95%);
 }
 .list-handler,.remove-handler{
   position: relative;
@@ -143,7 +149,9 @@ img.poster {
 .movie:focus > .details {
   opacity:1;
 }
-
+button:disabled{
+  cursor: not-allowed;
+}
 @media (hover: hover) and (pointer: fine) {
   .movie:hover,
   .movie:focus {
