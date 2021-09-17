@@ -137,7 +137,7 @@ const LogIn = () => {
           <p className={classes.error}>Please provide a valid email</p>
         )}
         <InputPasswordField
-          error={passwordHasError}
+          passwordHasError={passwordHasError}
           placeholder="Password"
           value={passwordInput}
           onChange={updatePasswordValue}

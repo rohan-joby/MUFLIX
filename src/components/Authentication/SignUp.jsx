@@ -37,7 +37,7 @@ const SignUp = () => {
   const width = useWindowWidth();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { sendRequest, signUpStatus, data, error } = useHttp(signUp);
+  const { sendRequest, status:signUpStatus, data, error } = useHttp(signUp);
 
   const {
     value: usernameInput,
@@ -70,22 +70,27 @@ const SignUp = () => {
   if (usernameIsValid && emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
+  
   useEffect(() => {
-    if (signUpStatus === "completed" && error !== null) {
-      setErrorMessage(
-        "Sorry, but we can't find an account with this email address. Please try again."
-      );
-      console.log("error");
+    if (signUpStatus === "completed" && error === null) {
+      history.push("/");
     }
+  }, [history, error, signUpStatus]);
+
+  useEffect(() => {
+  if (signUpStatus === "completed" && error !== null) {
+    setErrorMessage(
+      "Provide valid credentials. Please try again."
+    );
+  }
   }, [error, signUpStatus]);
 
   useEffect(()=>{
-    if (signUpStatus==="completed" && error === null){
+    if (signUpStatus==="completed" && error === null && data !== null){
       const {token, expiresAt} = data;
       login({token, expiresAt});
-      history.push("/");
     }
-  },[signUpStatus, error, data, login,history])
+  },[signUpStatus, error, data, login])
 
   const submitHandler = useCallback(
     (event) => {
@@ -120,18 +125,6 @@ const SignUp = () => {
           </div>
         )}
         <input
-          type="text"
-          className={`${classes.input} ${usernameHasError ? classes.invalid : ""}`}
-          name="username"
-          placeholder="Your name"
-          value={usernameInput}
-          onChange={updateUsernameValue}
-          onBlur={updateUsernameTouch}
-        />
-        {usernameHasError && (
-          <p className={classes.error}>Please provide a valid username</p>
-        )}
-        <input
           type="email"
           className={`${classes.input} ${emailHasError ? classes.invalid : ""}`}
           name="email"
@@ -143,8 +136,20 @@ const SignUp = () => {
         {emailHasError && (
           <p className={classes.error}>Please provide a valid email</p>
         )}
+        <input
+          type="text"
+          className={`${classes.input} ${usernameHasError ? classes.invalid : ""}`}
+          name="username"
+          placeholder="Your name"
+          value={usernameInput}
+          onChange={updateUsernameValue}
+          onBlur={updateUsernameTouch}
+        />
+        {usernameHasError && (
+          <p className={classes.error}>Please provide a valid username</p>
+        )}
         <InputPasswordField
-          error={passwordHasError}
+          passwordHasError={passwordHasError}
           placeholder="Password"
           value={passwordInput}
           onChange={updatePasswordValue}
