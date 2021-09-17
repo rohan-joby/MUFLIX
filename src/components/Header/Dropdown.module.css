@@ -27,6 +27,7 @@
   list-style: none;
   position: absolute;
   z-index: 10;
+  padding-left: 10px;
 }
 .dropdown-list_button {
   font-size: 1rem;

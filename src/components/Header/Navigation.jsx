@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 
 import { BsCaretDownFill } from "react-icons/bs";
-import { BsSearch } from "react-icons/bs";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useScroll from "../../hooks/useScroll";
@@ -56,13 +55,7 @@ const Navigation = React.memo(() => {
         </NavLink>
       </div>
       <div className={classes.secondary__nav}>
-        {width > 100 ? (
-          <Search />
-        ) : (
-          <div className={classes.search}>
-            <BsSearch size={23} />
-          </div>
-        )}
+        <Search />   
         <div className={classList} onClick={profileClickHandler}>
           <img src={Avatar} alt="user profile" />
           {width > 600 && <BsCaretDownFill />}

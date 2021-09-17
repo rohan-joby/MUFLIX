@@ -7,7 +7,7 @@
     border:none;
     cursor: pointer;
     position: absolute;
-    right: 35px;
+    right: 40px;
     top: 5px;
 }
 .input{
@@ -73,6 +73,7 @@
 @media screen and (max-width: 480px) {
     .input{
         width:7rem;
+        transform: skew(0,0);
     }
     .search__btn{
         right: 3px;

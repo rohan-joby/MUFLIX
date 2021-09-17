@@ -107,7 +107,7 @@ img.poster {
 }
 .remove-handler::after{
   content: "remove from list";
-  width:95px;
+  width:105px;
 }
 .load-more::after{
   content: "load details";

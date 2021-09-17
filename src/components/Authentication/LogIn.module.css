@@ -99,6 +99,7 @@
   margin-bottom: 0.5rem;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
 }
 
 .btn__primary:hover,
@@ -236,11 +237,5 @@ a:focus {
   .btn__primary,
   .btn__secondary {
     min-height: 3.5rem;
-  }
-  .logo {
-    z-index: 13;
-    height: 2.5rem;
-    filter: saturate(0.9);
-    top: 1.5rem;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Dropdown from "../../hooks/Dropdown";
+import Dropdown from "./Dropdown";
 import { GENRE } from "../../data/genre";
 
 import classes from "./Header.module.css";
