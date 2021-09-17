@@ -7,6 +7,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 
+import Navigation from "../Header/Navigation";
 import AboutMovie from "./AboutMovie";
 import useHttp from "../../hooks/use-http";
 import { addToMyList, removeFromMyList } from "../../lib/api";
@@ -32,11 +33,13 @@ const MovieDetails = (props) => {
     sendRequest: getDetails,
     status: detailsStatus,
     data: loadedDetails,
+    error: detailsError
   } = useHttp(fetchOneMovieDetails);
   const {
     sendRequest: getCredits,
     status: creditsStatus,
     data: loadedCredits,
+    error: creditsError
   } = useHttp(fetchOneMovieCredits);
 
   const id = params.movie;
@@ -52,12 +55,28 @@ const MovieDetails = (props) => {
   if (
     detailsStatus === "completed" &&
     creditsStatus === "completed" &&
+    creditsError!==null &&  detailsError!==null
+  ) {
+    return (
+      <>
+        <Navigation/>
+        <h3 className={classes.error}>No details regarding the movie are available.Please try again!</h3>
+      </>
+    );
+  }
+
+
+  if (
+    detailsStatus === "completed" &&
+    creditsStatus === "completed" &&
     loadedDetails &&
     loadedCredits
   ) {
     const { id, backdrop_path, title, overview, release_date, genres, runtime, vote_average} = loadedDetails;
     const { cast, crew } = loadedCredits;
 
+    console.log("loadedDetails ",loadedDetails );
+    console.log("loadedCredits",loadedCredits);
     const movieInList = isInList(id);
     const isInValid = backdrop_path === null;
     const imagePath = isInValid ? Muflix : IMAGE_URL + "w780" + backdrop_path;

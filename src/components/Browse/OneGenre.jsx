@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
 
@@ -10,7 +10,12 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./OneGenre.module.css";
 
 const OneGenre = () => {
-  const { sendRequest, status, data: loadedMovies } = useHttp(fetchAllMovies);
+  const {
+    sendRequest,
+    status,
+    data: loadedMovies,
+    error,
+  } = useHttp(fetchAllMovies);
   const history = useHistory();
   const params = useParams();
   const genre = params.genre;
@@ -26,9 +31,18 @@ const OneGenre = () => {
     results = <LoadingSpinner />;
   }
 
+  if (status === "completed" && error !== null) {
+    return (
+      <>
+        <h3 className={classes.error}>{`No movies were found under the genre "${genre}"`}</h3>
+      </>
+    );
+  }
   if (status === "completed" && loadedMovies) {
     results = loadedMovies.results.map((movie) => (
-      <div className={classes.movie}><Movie key={movie.id} data={movie} /></div>
+      <div className={classes.movie}>
+        <Movie key={movie.id} data={movie} />
+      </div>
     ));
   }
   return (
