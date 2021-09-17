@@ -18,7 +18,7 @@ const Banner = () => {
   const history = useHistory();
   
   const { sendRequest, status, data: banner } = useHttp(fetchBanner);
-  const {token} = useAuth();
+  const {token, isLoggedIn} = useAuth();
   const {addToList, removeFromList, isInList} = useMylist();
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const Banner = () => {
         <p className={classes.summary}>{shortOverview}</p>
         <div className={classes.actions}>
           <button
-            type="button"
+            type="button" disabled={!isLoggedIn}
             className={`${classes.btn} ${classes["btn-primary"]}`}
             onClick={movieInList ? removeFromListHandler : addToMyListHandler}
           >
