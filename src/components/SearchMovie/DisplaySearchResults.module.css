@@ -41,6 +41,9 @@
   color:hsl(31, 96%, 49%);
 }
 @media screen and (max-width: 480px) {
+  .error{
+    font-size: 1.4rem;
+  }
   .browse {
     margin-top: 1rem;
   }
@@ -49,7 +52,7 @@
   }
   .title{
     font-size: 1.3rem;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     padding-left: 30px;
   }
   .query{

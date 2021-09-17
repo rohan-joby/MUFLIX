@@ -20,6 +20,14 @@ h2 {
 .genre>*{
   margin:20px 10px 10px 0;
 }
+.error{
+  font-size: 1.8rem;
+  color:hsl(0, 0%, 98%);
+  margin-top: 8rem;
+  padding-top: 50px;
+  font-weight: 500;
+  text-align: center;
+}
 @media screen and (max-width: 480px) {
   .header {
     text-align: start;
@@ -30,5 +38,8 @@ h2 {
   h2{
     font-size: 1.8rem;
     letter-spacing: 1px;
+  }
+  .error{
+    font-size: 1.4rem;
   }
 }

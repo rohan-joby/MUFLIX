@@ -5,7 +5,7 @@
 .section div {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 40%;
   height: 6rem;
   width: 6rem;
   border: 2px solid red;
