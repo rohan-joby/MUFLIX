@@ -6,18 +6,6 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const ENDPOINTS = {
   sections: [
-    // {
-    //   title: 'Popular on Hotflix',
-    //   endpoint: `/movie/popular?api_key=${API_KEY}&region=IN`,
-    // },
-    // {
-    //   title: 'Trending Now',
-    //   endpoint: `/trending/movie/day?api_key=${API_KEY}`,
-    // },
-    // {
-    //   title: 'Upcoming',
-    //   endpoint: `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1&region=IN`,
-    // },
     {
       title: 'Sci-Fi',
       endpoint: `/discover/movie?api_key=${API_KEY}&with_genres=878&with_watch_providers=8&watch_region=IN`,
@@ -85,26 +73,8 @@ export const ENDPOINTS = {
   ],
   helpers: {
     searchMovie: `/search/movie?api_key=${API_KEY}&query=_query`,
-    fetchMovieGenres: `genre/movie/list?api_key=${API_KEY}`,
-    fetchMovieTrailers: `/movie/_id/videos?api_key=${API_KEY}`,
     fetchMovieDetails: `/movie/_id?api_key=${API_KEY}`,
     fetchMovieRecommendations: `/movie/_id/recommendations?api_key=${API_KEY}`,
     fetchMovieCredits: `/movie/_id/credits?api_key=${API_KEY}`,
   },
 }
-
-
-export const oneMovie = {
-  adult: false,
-  backdrop_path: "/x5EUEv1N9g4BCX9GQXKvv3nqMVo.jpg",
-  genre_ids: [10752, 18, 28, 36],
-  id: 429351,
-  original_language: "en",
-  original_title: "12 Strong",
-  overview: "A team of CIA agents and special forces head into Afghanistan in the aftermath of the September 11th attacks in an attempt to dismantle the Taliban.",
-  popularity: 57.836,
-  poster_path: "/j18021qCeRi3yUBtqd2UFj1c0RQ.jpg",
-  release_date: "2018-01-16",
-  title: "12 Strong",
-  vote_average: 6.1,
-  }

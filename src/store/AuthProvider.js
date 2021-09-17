@@ -11,13 +11,13 @@ const calculateRemainingTime = (expiration) => {
 };
 
 const retrieveStoredTokens = () => {
-  const storedToken = localStorage.getItem("authToken");
-  const expiresAt = localStorage.getItem("expiresAt");
+  const storedToken = localStorage.getItem("authTokenMUFLIX");
+  const expiresAt = localStorage.getItem("expiresAtMUFLIX");
   const remainingTime = calculateRemainingTime(expiresAt);
 
   if (remainingTime < 100) {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("expiresAt");
+    localStorage.removeItem("authTokenMUFLIX");
+    localStorage.removeItem("expiresAtMUFLIX");
     return null;
   }
   return { token: storedToken, timeLeft: remainingTime };
@@ -35,8 +35,8 @@ const AuthProvider = (props) => {
 
   const logoutHandler = useCallback(() => {
     setUserToken(null);
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("expiresAt");
+    localStorage.removeItem("authTokenMUFLIX");
+    localStorage.removeItem("expiresAtMUFLIX");
 
     if (logoutTimer){
       clearTimeout(logoutTimer);
@@ -46,8 +46,8 @@ const AuthProvider = (props) => {
   const loginHandler = (details) => {
     const { token, expiresAt } = details;
     setUserToken(token);
-    localStorage.setItem("authToken", token);
-    localStorage.setItem("expiresAt", expiresAt);
+    localStorage.setItem("authTokenMUFLIX", token);
+    localStorage.setItem("expiresAtMUFLIX", expiresAt);
 
     const remainingTime = calculateRemainingTime(expiresAt);
 

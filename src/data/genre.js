@@ -40,19 +40,6 @@ export const GENRE = [
     id: 36,
     name: "History",
   },
-  // {
-  //   id: 27,
-  //   name: "Horror",
-  // },
-  // {
-  //   id: 10402,
-  //   name: "Music",
-  // },
-
-  // {
-  //   id: 10749,
-  //   name: "Romance",
-  // },
   {
     id: 878,
     name: "Sci-Fi",
@@ -80,18 +67,6 @@ export const GENRE = [
 ];
 
 export const GENRE_ID = [
-  // {
-  //   id: 999,
-  //   name: "Popular on Hotflix",
-  // },
-  // {
-  //   id: 998,
-  //   name: "Trending Now",
-  // },
-  // {
-  //   id: 997,
-  //   name: "Upcoming",
-  // },
   {
     id: 28,
     name: "Action",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MylistContext from "./mylist-context";
 
 const MylistProvider = (props) => {
-  const initialList = JSON.parse(localStorage.getItem("mylist")) || [];
+  const initialList = JSON.parse(localStorage.getItem("mylistMUFLIX")) || [];
 
   const [mylist, setMylist] = useState(initialList);
   const isListEmpty = mylist.length > 0;
@@ -12,13 +12,13 @@ const MylistProvider = (props) => {
     setMylist((prevValue) => {
       return prevValue.length > 0 ? [id, ...prevValue] : [id];
     });
-    localStorage.setItem("mylist", JSON.stringify(newList));
+    localStorage.setItem("mylistMUFLIX", JSON.stringify(newList));
   };
   const removeFromListHandler = (id) => {
     const list = mylist;
     const newList = list.filter((item) => item !== id);
     setMylist(newList);
-    localStorage.setItem("mylist", JSON.stringify(newList));
+    localStorage.setItem("mylistMUFLIX", JSON.stringify(newList));
   };
   const checkMylist = (id) => {
     const isMoviePresent = mylist.find((movie) => id === movie);
