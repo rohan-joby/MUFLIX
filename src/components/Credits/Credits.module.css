@@ -1,0 +1,31 @@
+.credits {
+  background: hsl(0, 7%, 5%);
+}
+.credits h4 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 1.4rem 0;
+  margin: 0;
+}
+.link {
+  margin-left: 10px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+.link a {
+  color: hsl(27, 91%, 46%);
+  padding-bottom: 3px;
+  border-bottom: 1px solid hsl(27, 91%, 56%);
+}
+@media screen and (max-width: 768px) {
+  .credits h4 {
+    padding: 1.25rem 0;
+    font-size: 1.15rem;
+  }
+  .link {
+    font-size: 1.25rem;
+  }
+}
+@media screen and (max-width: 480px) {
+}
