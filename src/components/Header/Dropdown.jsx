@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { BiCaretDown } from "react-icons/bi";
 import { BiCaretUp } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import useWindowWidth from "../../hooks/useWindowWidth";
+import useWindowWidth from "../../hooks/use-windowWidth";
 
 import classes from "./Dropdown.module.css";
 

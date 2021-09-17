@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Lazyload from "react-lazyload";
 
-import useWindowWidth from "../../hooks/useWindowWidth";
+import useWindowWidth from "../../hooks/use-windowWidth";
 import Muflix from "../../assets/muflix.PNG";
 import { IMAGE_URL } from "../../data/endpoints";
 import { addToMyList, removeFromMyList } from "../../lib/api";
@@ -23,7 +23,7 @@ import {
 
 const Movie = (props) => {
   const history = useHistory();
-  const {token} = useAuth();
+  const {token, isLoggedIn} = useAuth();
   const {addToList, removeFromList, isInList} = useMylist();
   const windowWidth = useWindowWidth();
 
@@ -89,10 +89,10 @@ const Movie = (props) => {
       <div className={classes.details}>
         <h3>{shortTitle}</h3>
         <button className={`${movieInList ? classes[`remove-handler`]:classes[`list-handler`]}`}
-          onClick={movieInList ? removeFromListHandler : addToListHandler}
+          onClick={movieInList ? removeFromListHandler : addToListHandler} disabled={!isLoggedIn}
         >
           {movieInList ? (
-           <div onClick={props.refetch}><FaMinus style={{ fill: "white" }} /></div>
+          <div onClick={props.refetch}><FaMinus style={{ fill: "white" }} /></div>
           ) : (
             <FaPlus style={{ fill: "white" }} />
           )}

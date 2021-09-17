@@ -12,7 +12,7 @@ import { logIn } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
 import InputPasswordField from "./InputPasswordField";
-import useWindowWidth from "../../hooks/useWindowWidth";
+import useWindowWidth from "../../hooks/use-windowWidth";
 
 import { useAuth } from "../../store/auth-context";
 import classes from "./LogIn.module.css";

@@ -1,12 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import LogIn from "../components/Authentication/LogIn";
 
 const Login = () => {
-  return (
-    <Fragment>
-      <LogIn />
-    </Fragment>
-  );
+  return <LogIn />;
 };
 
 export default Login;

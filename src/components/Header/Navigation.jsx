@@ -3,8 +3,8 @@ import { NavLink, Link, useHistory } from "react-router-dom";
 
 import { BsCaretDownFill } from "react-icons/bs";
 
-import useWindowWidth from "../../hooks/useWindowWidth";
-import useScroll from "../../hooks/useScroll";
+import useWindowWidth from "../../hooks/use-windowWidth";
+import useScroll from "../../hooks/use-scroll";
 import Search from "./Search";
 import { useAuth } from "../../store/auth-context";
 

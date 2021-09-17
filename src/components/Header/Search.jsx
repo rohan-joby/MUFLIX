@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import useWindowWidth from "../../hooks/useWindowWidth";
+import useWindowWidth from "../../hooks/use-windowWidth";
 
 import classes from "./Search.module.css";
 
