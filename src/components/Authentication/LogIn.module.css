@@ -1,4 +1,7 @@
 .container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
