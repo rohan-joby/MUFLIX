@@ -1,7 +1,4 @@
 .movie {
-  font-family: "Roboto", sans-serif;
-  /* height: 10.6rem; */
-  /* width: min(19rem,27vw); */
   width: max(17rem,25vw);
   margin-right: 25px;
   margin-bottom:10px;
@@ -86,8 +83,8 @@ img.poster {
 .details > button:focus svg path{
   fill:black;
 }
-.details > button:hover,
-.details > button:focus {
+.details > button:hover:enabled,
+.details > button:focus:enabled {
   background-color: hsl(0, 0%, 95%);
 }
 .list-handler,.remove-handler{
@@ -191,7 +188,6 @@ button:disabled{
   .details > button,
   .info h4:nth-child(1) {
     display: none;
-    /* visibility: hidden; */
   }
 }
 @media screen and (max-width: 425px) {

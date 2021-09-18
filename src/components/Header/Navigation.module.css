@@ -1,5 +1,4 @@
 .nav {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: hsl(0, 0%, 100%);
   height: 70px;
   width: 100%;
@@ -16,6 +15,7 @@
   z-index: 10;
 }
 .primary__nav {
+  font-family: 'Lato', sans-serif;
   display: flex;
   align-items: center;
 }
