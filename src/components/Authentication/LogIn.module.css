@@ -225,7 +225,7 @@ a:focus {
 
 @media screen and (max-width: 480px) {
   .input__form {
-    width: 98vw;
+    max-width: 98vw;
   }
   .btn__primary,
   .btn__secondary {
