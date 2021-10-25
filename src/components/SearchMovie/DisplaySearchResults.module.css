@@ -27,7 +27,6 @@
   margin-top: 3.5rem;
   margin-top: 70px;
   padding-top: 20px;
-  padding-left: min(100px, 10vw);
   padding-left: 80px;
   font-weight: 400;
   transform: skew(-20deg, 0);
@@ -59,12 +58,9 @@
   .error{
     font-size: 1.4rem;
   }
-  /* .browse {
+  .browse {
     margin-top: 1rem;
   }
-  .browse > * {
-    margin: 0;
-  } */
   .title{
     font-size: 1.3rem;
     margin-bottom: 10px;
