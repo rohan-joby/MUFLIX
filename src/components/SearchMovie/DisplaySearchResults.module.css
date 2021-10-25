@@ -17,8 +17,8 @@
   margin-top: 2rem;
 }
 .browse > * {
-  margin: 20px 10px 10px 0;
-}
+    margin:20px 5px 10px 0;
+  }
 
 .title{
   display: inline-block;
@@ -40,16 +40,31 @@
   font-size: 2.1rem;
   color:hsl(31, 96%, 49%);
 }
+@media screen and (max-width: 860px) {
+  .browse {
+    padding-left: min(50px,6vw);
+  }
+}
+@media screen and (max-width: 768px) {
+  .browse {
+    padding-left: min(50px,5vw);
+  }
+}
+@media screen and (max-width: 650px) {
+  .browse {
+    padding-left: min(60px,8vw);
+  }
+}
 @media screen and (max-width: 480px) {
   .error{
     font-size: 1.4rem;
   }
-  .browse {
+  /* .browse {
     margin-top: 1rem;
   }
   .browse > * {
     margin: 0;
-  }
+  } */
   .title{
     font-size: 1.3rem;
     margin-bottom: 10px;

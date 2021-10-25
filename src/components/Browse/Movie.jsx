@@ -47,10 +47,10 @@ const Movie = (props) => {
 
   let shortTitle;
   if (windowWidth <480){
-    shortTitle = title.length < 15 ? title : title.slice(0, 15) + "...";
+    shortTitle = title.length < 14 ? title : title.slice(0, 14) + "...";
   }
   else{
-    shortTitle = title.length < 18 ? title : title.slice(0, 18) + "...";
+    shortTitle = title.length < 14 ? title : title.slice(0, 14) + "...";
   }
   const clickHandler = () => {
     history.push(`/movie/${id}`);

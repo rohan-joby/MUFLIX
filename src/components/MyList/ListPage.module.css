@@ -1,7 +1,7 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  padding-left: max(100px,10vw);
+  padding-left: min(50px,2.5vw);
   padding-top: 0.5rem;
 }
 .movie {
@@ -17,7 +17,9 @@ h2 {
   margin-top: 70px;
   padding-left: 80px;
 }
-
+.list>*{
+  margin:20px 5px 10px 0;
+}
 .empty-list{
   margin-top: 8rem;
   text-align: center;
@@ -50,7 +52,21 @@ h2 {
   border:1px solid hsla(31, 96%, 79%,0.1);
   background-color: hsl(31, 96%, 49%);
 }
-
+@media screen and (max-width: 860px) {
+  .list {
+    padding-left: min(50px,6vw);
+  }
+}
+@media screen and (max-width: 768px) {
+  .list {
+    padding-left: min(50px,5vw);
+  }
+}
+@media screen and (max-width: 650px) {
+  .list {
+    padding-left: min(60px,8vw);
+  }
+}
 @media screen and (max-width: 480px) {
   .header {
     padding-left: 30px;
@@ -58,9 +74,6 @@ h2 {
   h2 {
     font-size: 1.8rem;
     letter-spacing: 1px;
-  }
-  .list {
-    padding-left: min(100px, 10vw);
   }
   .empty-list h3{
     font-size: 1.4rem;
